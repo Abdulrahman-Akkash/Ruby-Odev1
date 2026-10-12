@@ -55,6 +55,10 @@ class AutoPassFlowTest < ActionDispatch::IntegrationTest
     get agent_root_path
 
     assert_select ".flash.warn", text: /##{ticket.id} \(10 dk kaldı\)/
+
+    travel 20.minutes
+    get agent_root_path
+    assert_select ".flash.warn", text: /##{ticket.id} \(10 dk gecikti\)/
   ensure
     travel_back
   end

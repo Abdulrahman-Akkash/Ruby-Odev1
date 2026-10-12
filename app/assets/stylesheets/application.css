@@ -117,6 +117,7 @@ form.inline, .inline { display: inline-flex; gap: .4rem; align-items: center; ma
 .tabs a { padding: .5rem .9rem; text-decoration: none; color: var(--muted); border-bottom: 2px solid transparent; font-weight: 500; }
 .tabs a.active { color: var(--ink); border-color: var(--brand); }
 .tabs .count { background: var(--gray-soft); border-radius: 999px; padding: 0 7px; font-size: .78rem; }
+.table-wrap { width: 100%; overflow-x: auto; }
 table.tickets { width: 100%; border-collapse: collapse; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
 table.tickets th, table.tickets td { padding: .6rem .75rem; border-bottom: 1px solid var(--line); text-align: left; font-size: .9rem; vertical-align: top; }
 table.tickets th { background: var(--gray-soft); font-size: .78rem; text-transform: uppercase; letter-spacing: .03em; color: var(--muted); }
@@ -148,6 +149,8 @@ ol.timeline li.event-sla_breached { border-color: var(--red); }
 .danger-zone { margin-top: 1.5rem; border-color: #fcd34d; }
 
 @media (max-width: 860px) {
+  .topbar { gap: .75rem; }
+  .topbar nav { flex-wrap: wrap; gap: .75rem; }
   .ticket-layout, .grid.two { grid-template-columns: 1fr; }
   table.tickets th:nth-child(3), table.tickets td:nth-child(3) { display: none; }
 }

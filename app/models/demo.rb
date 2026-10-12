@@ -64,7 +64,7 @@ module Demo
     created = now - age
     t = Ticket.create!(subject:, priority:, description:, requester_name: name, requester_email: email, created_at: created, updated_at: created)
     t.events.update_all(created_at: created, updated_at: created)
-    backdate(t, created + 2.minutes) { t.assign_to!(assignee) } if assignee
+    backdate(t, created + 2.minutes) { t.assign_to!(assignee, actor: assignee) } if assignee
     t
   end
 

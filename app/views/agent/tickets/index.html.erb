@@ -3,8 +3,8 @@
 <div data-controller="autorefresh" data-autorefresh-interval-value="30000">
   <% if @my_risky.any? %>
     <div class="flash warn">
-      <strong>SLA hatırlatma:</strong> sana atanmış <%= @my_risky.size %> talebin ilk yanıt süresi dolmak üzere —
-      <% @my_risky.each_with_index do |t, i| %><%= ", " if i > 0 %><%= link_to "##{t.id} (#{HumanDuration.short(t.sla_remaining)} kaldı)", agent_ticket_path(t) %><% end %>
+      <strong>SLA hatırlatma:</strong> sana atanmış <%= @my_risky.size %> talep hâlâ ilk yanıt bekliyor ve SLA riskinde —
+      <% @my_risky.each_with_index do |t, i| %><%= ", " if i > 0 %><%= link_to "##{t.id} (#{HumanDuration.short(t.sla_remaining)} #{t.sla_remaining.negative? ? 'gecikti' : 'kaldı'})", agent_ticket_path(t) %><% end %>
     </div>
   <% end %>
 
@@ -19,6 +19,7 @@
   <% if @tickets.empty? %>
     <p class="empty">Bu görünümde talep yok.</p>
   <% else %>
+    <div class="table-wrap">
     <table class="tickets">
       <thead>
         <tr><th>#</th><th>Konu</th><th>Müşteri</th><th>Öncelik</th><th>Durum</th><th>Atanan</th><th>İlk yanıt SLA</th></tr>
@@ -43,5 +44,6 @@
         <% end %>
       </tbody>
     </table>
+    </div>
   <% end %>
 </div>
