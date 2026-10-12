@@ -1,0 +1,36 @@
+<% content_for :title, "Destek talebi oluştur — Asist" %>
+
+<section class="hero">
+  <h1>Size nasıl yardımcı olabiliriz?</h1>
+  <p>Talebinizi bırakın; ekibimiz öncelik sırasına göre, söz verdiğimiz süre içinde yanıt verir.</p>
+</section>
+
+<section class="card">
+  <%= form_with model: @ticket, url: requests_path, class: "stack" do |f| %>
+    <% if @ticket.errors.any? %>
+      <div class="flash alert">
+        <strong>Talep gönderilemedi:</strong>
+        <ul><% @ticket.errors.full_messages.each do |m| %><li><%= m %></li><% end %></ul>
+      </div>
+    <% end %>
+
+    <div class="grid two">
+      <label>Adınız
+        <%= f.text_field :requester_name, required: true %>
+      </label>
+      <label>E-posta
+        <%= f.email_field :requester_email, required: true %>
+      </label>
+    </div>
+    <label>Konu
+      <%= f.text_field :subject, required: true, maxlength: 200 %>
+    </label>
+    <label>Aciliyet
+      <%= f.select :priority, Ticket::PRIORITY_LABELS.map { |key, label| [ "#{label} — ilk yanıt #{HumanDuration.short(SlaPolicy.target_for(key))} içinde", key ] } %>
+    </label>
+    <label>Açıklama
+      <%= f.text_area :description, rows: 6, required: true %>
+    </label>
+    <%= f.submit "Talebi gönder", class: "button" %>
+  <% end %>
+</section>

@@ -1,0 +1,26 @@
+<% content_for :title, "Ekip — Asist" %>
+
+<h1>Ekip</h1>
+<p class="muted">Otomatik Pas, vardiyadaki ajanlar arasından <strong>aktif (yeni + açık)</strong> talebi en az olana pas verir.</p>
+
+<table class="tickets">
+  <thead><tr><th>Ajan</th><th>Vardiya</th><th>Aktif</th><th>Beklemede</th><th>SLA riskli</th></tr></thead>
+  <tbody>
+    <% @agents.each do |agent| %>
+      <tr>
+        <td><strong><%= agent.name %></strong><br><span class="muted"><%= agent.email_address %></span></td>
+        <td><span class="badge <%= agent.on_shift? ? 'on' : 'off' %>"><%= shift_label(agent) %></span></td>
+        <td><%= @load.fetch(agent.id, 0) %></td>
+        <td><%= @pending.fetch(agent.id, 0) %></td>
+        <td><%= @risky.fetch(agent.id, 0) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="card danger-zone">
+  <h3>Sunum için demo verisi</h3>
+  <p class="muted">Tüm talepleri ve ajanları silip "şimdi"ye göre yeniden kurar. Tüm oturumlar kapanır.</p>
+  <%= button_to "Demo verisini sıfırla", agent_demo_reset_path, class: "button warn",
+        form: { data: { turbo_confirm: "Tüm veriler silinip demo verisi yeniden kurulacak. Emin misin?" } } %>
+</div>

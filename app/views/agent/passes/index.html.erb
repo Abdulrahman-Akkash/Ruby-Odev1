@@ -1,0 +1,43 @@
+<% content_for :title, "Pas akışı — Asist" %>
+
+<h1>Pas akışı</h1>
+<p class="muted">
+  Asist, vardiyası biten ajanın taleplerini ve SLA'sı riske giren sahipsiz talepleri
+  vardiyadaki en az yüklü ajana <strong>kendisi</strong> pas eder. Saatte bir değil, dakikalar içinde.
+</p>
+
+<div class="grid two">
+  <section class="card">
+    <h3>Otomatik paslar</h3>
+    <% if @passes.empty? %>
+      <p class="empty">Henüz otomatik pas yok.</p>
+    <% else %>
+      <ol class="timeline">
+        <% @passes.each do |event| %>
+          <li class="event-auto_pass">
+            <span class="muted"><%= fmt_time(event.created_at) %></span>
+            <div><%= link_to "##{event.ticket.id} #{event.ticket.subject}", agent_ticket_path(event.ticket) %></div>
+            <div><%= event.message %></div>
+          </li>
+        <% end %>
+      </ol>
+    <% end %>
+  </section>
+
+  <section class="card">
+    <h3>Diğer otomatik olaylar</h3>
+    <% if @timeline.empty? %>
+      <p class="empty">Henüz yok.</p>
+    <% else %>
+      <ol class="timeline">
+        <% @timeline.each do |event| %>
+          <li class="event-<%= event.kind %>">
+            <span class="muted"><%= fmt_time(event.created_at) %> · <%= event.label %></span>
+            <div><%= link_to "##{event.ticket.id} #{event.ticket.subject}", agent_ticket_path(event.ticket) %></div>
+            <div><%= event.message %></div>
+          </li>
+        <% end %>
+      </ol>
+    <% end %>
+  </section>
+</div>

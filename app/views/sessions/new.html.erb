@@ -1,0 +1,23 @@
+<% content_for :title, "Ajan girişi — Asist" %>
+
+<section class="card auth">
+  <h1>Ajan girişi</h1>
+  <%= form_with url: session_path, class: "stack" do |form| %>
+    <label>E-posta
+      <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", value: params[:email_address] %>
+    </label>
+    <label>Şifre
+      <%= form.password_field :password, required: true, autocomplete: "current-password", maxlength: 72 %>
+    </label>
+    <%= form.submit "Giriş yap", class: "button" %>
+  <% end %>
+
+  <div class="hint">
+    <strong>Demo hesapları</strong> (şifre: <code><%= Demo::PASSWORD %></code>)
+    <ul>
+      <% Demo::AGENTS.each do |agent| %>
+        <li><code><%= agent[:email_address] %></code> — <%= agent[:name] %></li>
+      <% end %>
+    </ul>
+  </div>
+</section>

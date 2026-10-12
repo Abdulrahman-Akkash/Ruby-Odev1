@@ -1,0 +1,47 @@
+<% content_for :title, "Kuyruk — Asist" %>
+
+<div data-controller="autorefresh" data-autorefresh-interval-value="30000">
+  <% if @my_risky.any? %>
+    <div class="flash warn">
+      <strong>SLA hatırlatma:</strong> sana atanmış <%= @my_risky.size %> talebin ilk yanıt süresi dolmak üzere —
+      <% @my_risky.each_with_index do |t, i| %><%= ", " if i > 0 %><%= link_to "##{t.id} (#{HumanDuration.short(t.sla_remaining)} kaldı)", agent_ticket_path(t) %><% end %>
+    </div>
+  <% end %>
+
+  <nav class="tabs">
+    <% Agent::TicketsController::VIEWS.each do |key, label| %>
+      <%= link_to agent_tickets_path(view: key), class: ("active" if key == @view) do %>
+        <%= label %> <span class="count"><%= @counts[key] %></span>
+      <% end %>
+    <% end %>
+  </nav>
+
+  <% if @tickets.empty? %>
+    <p class="empty">Bu görünümde talep yok.</p>
+  <% else %>
+    <table class="tickets">
+      <thead>
+        <tr><th>#</th><th>Konu</th><th>Müşteri</th><th>Öncelik</th><th>Durum</th><th>Atanan</th><th>İlk yanıt SLA</th></tr>
+      </thead>
+      <tbody>
+        <% @tickets.each do |t| %>
+          <tr id="<%= dom_id(t) %>" class="row-<%= t.sla_state %>">
+            <td><%= t.id %></td>
+            <td><%= link_to t.subject, agent_ticket_path(t) %></td>
+            <td><%= t.requester_name %></td>
+            <td><%= priority_badge(t.priority) %></td>
+            <td><%= status_badge(t.status) %></td>
+            <td>
+              <% if t.assignee %>
+                <%= t.assignee.name %><% unless t.assignee.on_shift? %> <span class="badge off">vardiya dışı</span><% end %>
+              <% else %>
+                <span class="muted">—</span>
+              <% end %>
+            </td>
+            <td><%= sla_badge(t) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+</div>

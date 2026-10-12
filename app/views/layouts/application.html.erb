@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <title><%= content_for(:title) || "Asist — Destek Merkezi" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="application-name" content="Asist">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= yield :head %>
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="public">
+    <header class="topbar">
+      <%= link_to root_path, class: "brand" do %>
+        <%= asist_logo(size: 30) %><span>Asist</span><small>Destek Merkezi</small>
+      <% end %>
+      <nav>
+        <%= link_to "Yeni talep", new_request_path %>
+        <%= link_to "Ajan girişi", agent_root_path, class: "button ghost" %>
+      </nav>
+    </header>
+
+    <main class="container narrow">
+      <%= render "shared/flash" %>
+      <%= yield %>
+    </main>
+
+    <footer class="footer">Asist · tam ayağına pas veren destek masası</footer>
+  </body>
+</html>

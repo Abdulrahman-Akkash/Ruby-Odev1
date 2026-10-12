@@ -1,0 +1,13 @@
+<div class="shift <%= user.on_shift? ? 'on' : 'off' %>">
+  <span class="dot"></span>
+  <span><strong><%= user.first_name %></strong> · <%= shift_label(user) %></span>
+  <% if user.on_shift? %>
+    <%= button_to "Vardiyayı bitir", agent_shift_path, method: :delete, class: "button small warn",
+          form: { data: { turbo_confirm: "Vardiyanı bitirirsen yeni/açık taleplerin vardiyadaki ekip arkadaşlarına pas edilecek. Emin misin?" } } %>
+  <% else %>
+    <%= form_with url: agent_shift_path, method: :post, class: "inline" do |f| %>
+      <%= f.select :length, User::SHIFT_LENGTHS.keys, { selected: "8 saat" }, class: "small" %>
+      <%= f.submit "Vardiyaya başla", class: "button small" %>
+    <% end %>
+  <% end %>
+</div>

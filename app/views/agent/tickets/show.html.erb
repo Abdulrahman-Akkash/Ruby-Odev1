@@ -1,0 +1,117 @@
+<% content_for :title, "##{@ticket.id} #{@ticket.subject} — Asist" %>
+
+<div class="ticket-layout">
+  <section>
+    <div class="card">
+      <div class="ticket-head">
+        <div>
+          <p class="muted">Talep #<%= @ticket.id %> · <%= @ticket.requester_name %> &lt;<%= @ticket.requester_email %>&gt; · <%= fmt_time(@ticket.created_at) %></p>
+          <h1><%= @ticket.subject %></h1>
+        </div>
+        <div class="badges"><%= priority_badge(@ticket.priority) %> <%= status_badge(@ticket.status) %></div>
+      </div>
+    </div>
+
+    <div class="thread">
+      <article class="message customer">
+        <header><strong><%= @ticket.requester_name %></strong> <span class="muted"><%= fmt_time(@ticket.created_at) %></span></header>
+        <div class="body"><%= simple_format(@ticket.description) %></div>
+      </article>
+      <% @comments.each do |comment| %>
+        <article class="message <%= comment.from_customer? ? 'customer' : 'agent' %> <%= 'internal' if comment.internal? %>">
+          <header>
+            <strong><%= comment.author_name %></strong>
+            <% if comment.internal? %><span class="badge internal">İç not</span><% end %>
+            <span class="muted"><%= fmt_time(comment.created_at) %></span>
+          </header>
+          <div class="body"><%= simple_format(comment.body) %></div>
+        </article>
+      <% end %>
+    </div>
+
+    <div class="card">
+      <% if @ticket.status == "closed" %>
+        <p class="muted">Talep kapandı; yanıt yazılamaz.</p>
+      <% else %>
+        <%= form_with scope: :comment, url: agent_ticket_comments_path(@ticket), class: "stack" do |f| %>
+          <label>Yanıt
+            <%= f.text_area :body, rows: 5, required: true, placeholder: "Müşteriye yanıtınızı yazın…" %>
+          </label>
+          <div class="reply-actions">
+            <label class="check"><%= f.check_box :internal %> İç not (müşteri görmez)</label>
+            <label>Gönder ve durumu
+              <%= f.select :submit_as,
+                    [ [ "değiştirme", "" ] ] + Ticket::TRANSITIONS.fetch(@ticket.status).map { |s| [ Ticket::STATUS_LABELS[s], s ] } %>
+            </label>
+            <%= f.submit "Gönder", class: "button" %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </section>
+
+  <aside>
+    <div class="card">
+      <h3>İlk yanıt SLA</h3>
+      <p><%= sla_badge(@ticket) %></p>
+      <dl class="meta">
+        <dt>Hedef</dt><dd><%= fmt_time(@ticket.first_reply_due_at) %></dd>
+        <dt>Risk bölgesi</dt><dd><%= fmt_time(@ticket.first_reply_risk_at) %></dd>
+        <dt>İlk yanıt</dt><dd><%= fmt_time(@ticket.first_replied_at) || "—" %></dd>
+        <% if @ticket.auto_close_at %>
+          <dt>Otomatik kapanış</dt><dd><%= fmt_time(@ticket.auto_close_at) %></dd>
+        <% end %>
+      </dl>
+    </div>
+
+    <div class="card">
+      <h3>Atama</h3>
+      <p>
+        <% if @ticket.assignee %>
+          <strong><%= @ticket.assignee.name %></strong>
+          <span class="muted">(<%= shift_label(@ticket.assignee) %>)</span>
+        <% else %>
+          <span class="muted">Sahipsiz</span>
+        <% end %>
+      </p>
+      <% unless @ticket.assignee == current_user || @ticket.status == "closed" %>
+        <%= button_to "Bana ata", take_agent_ticket_path(@ticket), class: "button small" %>
+      <% end %>
+      <% unless @ticket.status == "closed" %>
+        <%= form_with url: assign_agent_ticket_path(@ticket), method: :patch, class: "inline" do |f| %>
+          <%= f.select :assignee_id, @agents.map { |a| [ "#{a.name}#{' (vardiya dışı)' unless a.on_shift?}", a.id ] }, { selected: @ticket.assignee_id }, class: "small" %>
+          <%= f.submit "Ata", class: "button small ghost" %>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="card">
+      <h3>Durum</h3>
+      <p><%= status_badge(@ticket.status) %></p>
+      <div class="actions">
+        <% Ticket::TRANSITIONS.fetch(@ticket.status).each do |target| %>
+          <%= button_to "→ #{Ticket::STATUS_LABELS[target]}", status_agent_ticket_path(@ticket), method: :patch, params: { status: target }, class: "button small ghost" %>
+        <% end %>
+        <% if Ticket::TRANSITIONS.fetch(@ticket.status).empty? %><span class="muted">Son durum.</span><% end %>
+      </div>
+
+      <h3>Öncelik</h3>
+      <%= form_with url: priority_agent_ticket_path(@ticket), method: :patch, class: "inline" do |f| %>
+        <%= f.select :priority, Ticket::PRIORITY_LABELS.invert, { selected: @ticket.priority }, class: "small" %>
+        <%= f.submit "Güncelle", class: "button small ghost" %>
+      <% end %>
+    </div>
+
+    <div class="card">
+      <h3>Geçmiş</h3>
+      <ol class="timeline">
+        <% @events.reverse_each do |event| %>
+          <li class="event-<%= event.kind %>">
+            <span class="muted"><%= fmt_time(event.created_at) %> · <%= event.actor_name %></span>
+            <div><strong><%= event.label %>:</strong> <%= event.message %></div>
+          </li>
+        <% end %>
+      </ol>
+    </div>
+  </aside>
+</div>

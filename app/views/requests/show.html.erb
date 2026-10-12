@@ -1,0 +1,53 @@
+<% content_for :title, "Talep ##{@ticket.id} — Asist" %>
+
+<section class="card">
+  <div class="ticket-head">
+    <div>
+      <p class="muted">Talep #<%= @ticket.id %> · <%= fmt_time(@ticket.created_at) %></p>
+      <h1><%= @ticket.subject %></h1>
+    </div>
+    <%= status_badge(@ticket.status) %>
+  </div>
+
+  <p class="muted">
+    <% if @ticket.first_replied_at %>
+      İlk yanıt <%= fmt_time(@ticket.first_replied_at) %> tarihinde verildi.
+    <% elsif @ticket.status.in?(%w[new open]) %>
+      Söz verdiğimiz ilk yanıt zamanı: <strong><%= fmt_time(@ticket.first_reply_due_at) %></strong>
+    <% end %>
+    <% if @ticket.auto_close_at %>
+      · Yanıt vermezseniz talep <strong><%= fmt_time(@ticket.auto_close_at) %></strong> tarihinde kapanır.
+    <% end %>
+  </p>
+
+  <p class="share">Bu sayfanın bağlantısı: <code><%= customer_ticket_url(@ticket.access_token) %></code></p>
+</section>
+
+<section class="thread">
+  <article class="message customer">
+    <header><strong><%= @ticket.requester_name %></strong> <span class="muted"><%= fmt_time(@ticket.created_at) %></span></header>
+    <div class="body"><%= simple_format(@ticket.description) %></div>
+  </article>
+  <% @comments.each do |comment| %>
+    <article class="message <%= comment.from_customer? ? 'customer' : 'agent' %>">
+      <header>
+        <strong><%= comment.from_customer? ? @ticket.requester_name : "#{comment.author.name} (Destek ekibi)" %></strong>
+        <span class="muted"><%= fmt_time(comment.created_at) %></span>
+      </header>
+      <div class="body"><%= simple_format(comment.body) %></div>
+    </article>
+  <% end %>
+</section>
+
+<section class="card">
+  <% if @ticket.status == "closed" %>
+    <p>Bu talep kapandı. Yeni bir sorunuz varsa <%= link_to "yeni talep oluşturun", new_request_path %>.</p>
+  <% else %>
+    <%= form_with scope: :comment, url: customer_ticket_replies_path(@ticket.access_token), class: "stack" do |f| %>
+      <label>Yanıtınız
+        <%= f.text_area :body, rows: 4, required: true %>
+      </label>
+      <%= f.submit "Yanıt gönder", class: "button" %>
+    <% end %>
+  <% end %>
+</section>

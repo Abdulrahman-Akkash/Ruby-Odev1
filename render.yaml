@@ -1,0 +1,34 @@
+# Render Blueprint: Dashboard > New > Blueprint > bu repo.
+# Ücretsiz plan: 1 web servisi (Ruby) + 1 PostgreSQL.
+databases:
+  - name: asist-db
+    plan: free
+    region: frankfurt
+    databaseName: asist
+    user: asist
+    ipAllowList: [] # yalnızca Render içinden erişim
+
+services:
+  - type: web
+    name: asist
+    runtime: ruby
+    plan: free
+    region: frankfurt
+    branch: main
+    buildCommand: ./bin/render-build.sh
+    startCommand: bundle exec puma -C config/puma.rb
+    healthCheckPath: /up
+    envVars:
+      - key: RAILS_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: asist-db
+          property: connectionString
+      - key: SECRET_KEY_BASE
+        generateValue: true
+      - key: RAILS_MAX_THREADS
+        value: 3
+      # Sunucu ayaktayken zaman kurallarını 30 sn'de bir işletir (config/initializers/sweeper_ticker.rb)
+      - key: SWEEP_INTERVAL
+        value: 30

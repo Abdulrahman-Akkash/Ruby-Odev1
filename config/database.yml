@@ -1,0 +1,19 @@
+# PostgreSQL her ortamda (geliştirme, test, CI, Render).
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  max_connections: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: asist_development
+
+# CI'da DATABASE_URL verilir; Rails onu bu ayarlarla birleştirir.
+test:
+  <<: *default
+  database: asist_test
+
+# Render: DATABASE_URL, render.yaml'daki veritabanından gelir.
+production:
+  <<: *default
+  url: <%= ENV["DATABASE_URL"] %>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <title><%= content_for(:title) || "Asist — Ajan Paneli" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="application-name" content="Asist">
+    <meta name="turbo-refresh-method" content="morph">
+    <meta name="turbo-refresh-scroll" content="preserve">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= yield :head %>
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="agent">
+    <header class="topbar">
+      <%= link_to agent_root_path, class: "brand" do %>
+        <%= asist_logo(size: 30) %><span>Asist</span><small>Ajan Paneli</small>
+      <% end %>
+      <nav>
+        <%= link_to "Kuyruk", agent_root_path, class: ("active" if controller_name == "tickets") %>
+        <%= link_to "Ekip", agent_team_path, class: ("active" if controller_name == "team") %>
+        <%= link_to "Pas akışı", agent_passes_path, class: ("active" if controller_name == "passes") %>
+        <%= link_to "Müşteri formu", root_path, target: "_blank" %>
+      </nav>
+      <div class="me">
+        <%= render "agent/shared/shift", user: current_user %>
+        <%= button_to "Çıkış", session_path, method: :delete, class: "button ghost small" %>
+      </div>
+    </header>
+
+    <main class="container">
+      <%= render "shared/flash" %>
+      <%= yield %>
+    </main>
+
+    <footer class="footer">
+      Saat: <strong><%= fmt_time(Time.current) %></strong> · Zaman kuralları her istekte ve kuyruk açıkken 30 sn'de bir işletilir.
+    </footer>
+  </body>
+</html>
