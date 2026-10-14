@@ -31,27 +31,38 @@ export function isGeminiCompat(baseURL: string): boolean {
   return /generativelanguage\.googleapis\.com|aiplatform\.googleapis\.com/.test(baseURL)
 }
 
-/** JSON Schema'dan Gemini'nin OpenAPI alt kümesinde olmayan anahtarları siler. */
+/**
+ * JSON Schema'yı Gemini'nin zorunlu tool_choice ile kabul ettiği sade alt kümeye indirir:
+ * yalnızca type / properties / items / required / enum / description kalır.
+ * (Teşhis: gemini-3.8-flash, tool_choice "required" + pattern/minLength/maxLength birlikteyken
+ * 400 INVALID_ARGUMENT döndürüyor.) Kaldırılan kısıtların hepsi deterministik doğrulayıcıda
+ * zod ile aynen uygulanır; yani güvenlik kaybı yoktur.
+ */
+const GEMINI_SCHEMA_KEYS = new Set(['type', 'properties', 'items', 'required', 'enum', 'description'])
 function stripUnsupported(node: unknown): unknown {
   if (Array.isArray(node)) return node.map(stripUnsupported)
   if (!node || typeof node !== 'object') return node
   const out: Record<string, unknown> = {}
   for (const [k, v] of Object.entries(node)) {
-    if (k === 'additionalProperties' || k === '$schema' || k === 'strict') continue
-    out[k] = stripUnsupported(v)
+    if (k === 'properties' && v && typeof v === 'object') {
+      out[k] = Object.fromEntries(Object.entries(v).map(([pk, pv]) => [pk, stripUnsupported(pv)]))
+    } else if (GEMINI_SCHEMA_KEYS.has(k)) out[k] = stripUnsupported(v)
   }
   return out
 }
 
 /**
  * Gemini'nin OpenAI uyumlu uç noktası için istek gövdesini uyarlar:
- *  - araç şemasından `additionalProperties` gibi desteklenmeyen anahtarlar çıkarılır
- *    (katılık zaten deterministik doğrulayıcıda uygulanıyor),
+ *  - araç şeması sade alt kümeye indirilir (bkz. stripUnsupported),
  *  - tek araç olduğundan isimli tool_choice, eşdeğeri olan "required"a çevrilir.
  */
 export function toGeminiCompat(body: Record<string, unknown>): Record<string, unknown> {
   const out: Record<string, unknown> = { ...body }
-  if (Array.isArray(out.tools)) out.tools = stripUnsupported(out.tools)
+  if (Array.isArray(out.tools)) {
+    out.tools = (out.tools as { function?: { parameters?: unknown } }[]).map((t) =>
+      t.function ? { ...t, function: { ...t.function, parameters: stripUnsupported(t.function.parameters) } } : t,
+    )
+  }
   if (out.tool_choice && typeof out.tool_choice === 'object') out.tool_choice = 'required'
   return out
 }

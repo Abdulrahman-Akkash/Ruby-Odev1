@@ -33,7 +33,9 @@ describe('Gemini uyumluluğu', () => {
     }) as typeof fetch
     const run = createPageAgentRunner({ baseURL: 'https://generativelanguage.googleapis.com/v1beta/openai', model: 'gemini-x', apiKey: 'k' }, fetchMock)
     await run({ system: 's', user: 'u' })
-    expect(JSON.stringify(body.tools)).not.toContain('additionalProperties')
+    const tools = JSON.stringify(body.tools)
+    for (const k of ['additionalProperties', '"pattern"', 'maxLength', 'minLength', 'maxItems']) expect(tools).not.toContain(k)
+    expect(body.tools[0].function.parameters.properties.findings.items.properties.category.enum).toContain('auto_renewal')
     expect(body.tool_choice).toBe('required')
     expect(body.tools[0].function.parameters.properties.findings.items.properties.quote).toBeTruthy()
   })
