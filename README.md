@@ -297,7 +297,7 @@ Yukarıdaki güvenlik bölümünde özetlendi. Anahtar varsa `npm run eval:injec
 
 `cypress/e2e/demo.cy.ts` üç sahneden oluşur — CI'da kaydedilen video **50 saniye** (≤ 90 sn):
 
-> 🎬 **Video:** [CI çalışması #2 → `cypress-videos` artifact'i](https://github.com/Abdulrahman-Akkash/Ruby-Odev1/actions/runs/38637425027) (`demo.cy.ts.mp4`, 8/8 Cypress testi geçti). Her yeni push'ta yeniden üretilir.
+> 🎬 **Video: [`docs/demo.mp4`](docs/demo.mp4)** — GitHub Actions'ta Cypress (Electron) ile kaydedilir ve CI tarafından depoya commit'lenir; ayrıca her çalışmada `cypress-videos` artifact'i olarak da yüklenir. İlk kayıt: [CI #2](https://github.com/Abdulrahman-Akkash/Ruby-Odev1/actions/runs/38637425027), 8/8 Cypress testi geçti.
 
 1. **Mutlu yol** — gerçek Netflix Kullanım Koşulları: rozet/tespit → analiz → skor, 8 doğrulanmış madde; spec her alıntının sayfada birebir geçtiğini doğrular; "Sayfada göster" alıntıyı orijinal sayfada seçer.
 2. **Dürüst belirsizlik** — muğlak bir üyelik metni ve katlanmış (görünmeyen) bir "Ek koşullar" bölümü: rapor güveni **Düşük**, gerekçeler ("1440 karakter gizli/katlanmış metin", "3 iddiadan 2'sinin alıntısı doğrulanamadı"), "Belirsiz — elle okuyun" listesi ve modelin sayfada **olmayan** iki alıntısının reddedilmesi.
