@@ -295,7 +295,9 @@ Yukarıdaki güvenlik bölümünde özetlendi. Anahtar varsa `npm run eval:injec
 
 ## Demo videosu (Cypress)
 
-`cypress/e2e/demo.cy.ts` üç sahneden oluşur (okunabilirlik beklemeleri dahil tahminen ~60 sn; hedef ≤ 90 sn):
+`cypress/e2e/demo.cy.ts` üç sahneden oluşur — CI'da kaydedilen video **50 saniye** (≤ 90 sn):
+
+> 🎬 **Video:** [CI çalışması #2 → `cypress-videos` artifact'i](https://github.com/Abdulrahman-Akkash/Ruby-Odev1/actions/runs/38637425027) (`demo.cy.ts.mp4`, 8/8 Cypress testi geçti). Her yeni push'ta yeniden üretilir.
 
 1. **Mutlu yol** — gerçek Netflix Kullanım Koşulları: rozet/tespit → analiz → skor, 8 doğrulanmış madde; spec her alıntının sayfada birebir geçtiğini doğrular; "Sayfada göster" alıntıyı orijinal sayfada seçer.
 2. **Dürüst belirsizlik** — muğlak bir üyelik metni ve katlanmış (görünmeyen) bir "Ek koşullar" bölümü: rapor güveni **Düşük**, gerekçeler ("1440 karakter gizli/katlanmış metin", "3 iddiadan 2'sinin alıntısı doğrulanamadı"), "Belirsiz — elle okuyun" listesi ve modelin sayfada **olmayan** iki alıntısının reddedilmesi.
@@ -325,7 +327,7 @@ Fixture'lar yalnızca LLM yanıtının yerine geçer; çıkarıcı, page-agent, 
 | `npm run typecheck` | TypeScript | ✅ |
 | `npm run smoke:extension` | **Gerçek MV3 uzantısı** Chromium'a yüklenir: dedektör rozeti, `executeScript` ile page-agent çıkarımı, yan panelde analiz, zorunlu tool-call isteği, "Sayfada göster" | ✅ geçiyor (Playwright) |
 | `npm run verify:harness` | Cypress demo senaryolarının Playwright ile kuru çalıştırması (aynı harness + fixture) | ✅ geçiyor |
-| `npm run e2e` | Cypress: `system.cy.ts` (uyarı görünürlüğü, deterministik skor, 401 hatası, serbest metin yanıtı, açıklamada link) + `demo.cy.ts` | CI'da çalışır (bu ortamda Cypress ikilisi indirilemedi) |
+| `npm run e2e` | Cypress: `system.cy.ts` (uyarı görünürlüğü, deterministik skor, 401 hatası, serbest metin yanıtı, açıklamada link) + `demo.cy.ts` | ✅ CI'da 8/8 geçti (Electron) |
 | `npm run eval:*` | yukarıdaki eval'ler | ✅ (LLM hariç) |
 
 `smoke:extension` ve `verify:harness` için önce `npm run build` ve ayrı bir terminalde `npm run harness` gerekir. Smoke testi, headless ortamda "simgeye tıklama" olmadığı için yalnızca **test kopyasının** manifest'ine `localhost` izni ekleyerek `activeTab`'i taklit eder.
