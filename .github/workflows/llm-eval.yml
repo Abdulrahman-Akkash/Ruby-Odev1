@@ -38,6 +38,8 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+      - name: LLM ön kontrolü (tek istek; hata varsa sağlayıcı mesajını gösterir)
+        run: npx tsx scripts/llm-preflight.ts
       - name: Tam sistem eval'i (6 gerçek metin)
         run: npm run eval:llm
       - name: Kayıtlı çıktılardan yeniden üretim (deterministiklik kontrolü)

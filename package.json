@@ -18,6 +18,7 @@
     "cy:open": "start-server-and-test harness http://localhost:4173 'cypress open'",
     "demo:record": "npm run build && start-server-and-test harness http://localhost:4173 'cypress run --browser electron --spec cypress/e2e/demo.cy.ts'",
     "e2e": "npm run build && start-server-and-test harness http://localhost:4173 'cypress run'",
+    "llm:preflight": "tsx scripts/llm-preflight.ts",
     "record:fixtures": "tsx scripts/record-fixtures.ts",
     "verify:harness": "node scripts/verify-harness.mjs",
     "eval:validator": "tsx eval/validator-eval.ts",

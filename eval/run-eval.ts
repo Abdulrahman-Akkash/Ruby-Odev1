@@ -166,6 +166,12 @@ async function main() {
         const res = await analyzeDocument(doc, { runner: replayRunner(trace), model, concurrency: 1 })
         report = res.report
       }
+      const failed = trace.filter((t) => !t.ok)
+      for (const t of failed) console.error(`  ! ${gold.doc} parça ${t.part}: ${t.error ?? 'geçerli çıktı yok'}`)
+      if (failed.length === trace.length) {
+        console.error(`${gold.doc}: TÜM LLM çağrıları başarısız — sonuç yazılmadı (bu bir eval sonucu değildir).`)
+        process.exit(1)
+      }
       findings = report.findings.map((f) => ({ clauseId: f.clauseId, category: f.category, severity: f.severity, quote: f.quote }))
     }
     const s = scoreDoc(doc, gold, findings)
