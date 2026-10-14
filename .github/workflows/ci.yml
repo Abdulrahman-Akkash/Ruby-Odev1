@@ -1,0 +1,57 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+        env:
+          CYPRESS_INSTALL_BINARY: 0
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+      - name: Eval (anahtar gerektirmeyen kısımlar)
+        run: |
+          npm run eval:check-gold
+          npm run eval:rules
+          npm run eval:validator
+          npm run eval:injection
+
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Cypress (sistem testleri + demo videosu)
+        uses: cypress-io/github-action@v6
+        with:
+          build: npm run build
+          start: npm run harness
+          wait-on: http://localhost:4173
+          browser: electron
+      - name: Demo videosunu yükle
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-videos
+          path: cypress/videos
+          if-no-files-found: warn
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+          if-no-files-found: ignore

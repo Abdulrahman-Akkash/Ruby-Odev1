@@ -1,0 +1,25 @@
+{
+  "url": "https://example.test/ambiguous-terms",
+  "title": "FitNow Üyelik Koşulları",
+  "text": "FitNow Üyelik Koşulları\nBu koşullar FitNow mobil uygulaması ve spor salonu üyeliği için geçerlidir.\nÜyelik süresi\nÜyelik, makul bir süre içinde aksi bildirilmedikçe uygun görülen dönemler için devam edebilir.\nÜcretler\nBazı durumlarda ek hizmet bedelleri uygulanabilir; bu bedeller kampanya dönemlerine göre farklılık gösterebilir.\nİptal\nİptal talepleri, işletmenin uygun gördüğü şekilde değerlendirilir ve sonuçlandırılır.\nSorumluluk\nFitNow, antrenman sırasında oluşabilecek yaralanmalardan, yürürlükteki mevzuatın izin verdiği ölçüde sorumlu tutulamaz.",
+  "hidden": {
+    "chars": 1440,
+    "injection": []
+  },
+  "detection": {
+    "isLegal": true,
+    "score": 0.75,
+    "kind": "terms",
+    "reasons": [
+      "URL \"terms\" içeriyor",
+      "Başlık sözleşme/politika ifadesi içeriyor"
+    ]
+  },
+  "extractor": {
+    "engine": "@page-agent/page-controller",
+    "rawChars": 620,
+    "hiddenReasons": {
+      "css_hidden": 8
+    }
+  }
+}

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<title>FitNow Üyelik Koşulları</title>
+<!-- TEST SAYFASI: kurgusal bir hizmet. Belirsiz ifadeler ve katlanmış (gizli) bölümler içerir. -->
+<style>
+  body { font: 16px/1.6 Georgia, serif; max-width: 760px; margin: 0 auto; padding: 24px; color: #222; }
+  .accordion-body { display: none; }
+  button.acc { all: unset; display: block; font-weight: bold; cursor: pointer; margin-top: 12px; }
+</style>
+</head>
+<body>
+<h1>FitNow Üyelik Koşulları</h1>
+<p>Bu koşullar FitNow mobil uygulaması ve spor salonu üyeliği için geçerlidir.</p>
+
+<h2>Üyelik süresi</h2>
+<p>Üyelik, makul bir süre içinde aksi bildirilmedikçe uygun görülen dönemler için devam edebilir.</p>
+
+<h2>Ücretler</h2>
+<p>Bazı durumlarda ek hizmet bedelleri uygulanabilir; bu bedeller kampanya dönemlerine göre farklılık gösterebilir.</p>
+
+<h2>İptal</h2>
+<p>İptal talepleri, işletmenin uygun gördüğü şekilde değerlendirilir ve sonuçlandırılır.</p>
+
+<h2>Sorumluluk</h2>
+<p>FitNow, antrenman sırasında oluşabilecek yaralanmalardan, yürürlükteki mevzuatın izin verdiği ölçüde sorumlu tutulamaz.</p>
+
+<button class="acc" type="button">Ek koşullar (genişletmek için tıklayın)</button>
+<div class="accordion-body">
+  <p>Ek koşul 1. Üyelik ücretleri her yıl Ocak ayında enflasyon oranında ve FitNow'un belirleyeceği ek bir oranda artırılır. Artış üyeye ayrıca bildirilmez; güncel fiyatlar uygulama içinde yayımlanır ve yayımlandığı tarihten itibaren tüm üyelere uygulanır.</p>
+  <p>Ek koşul 2. Üye, dondurma hakkını yılda en fazla bir kez ve yalnızca sağlık raporu ile kullanabilir. Dondurma süresince ödenen ücretler iade edilmez, sonraki dönemlere de aktarılmaz.</p>
+  <p>Ek koşul 3. Üyelik süresi dolmadan yapılan iptallerde kalan aylara ait ücretlerin tamamı cezai şart olarak tahsil edilir. Bu tutar, kayıtlı kredi kartından üyeye ayrıca onay sorulmaksızın çekilir.</p>
+  <p>Ek koşul 4. FitNow, salon içi kamera kayıtlarını ve uygulama konum verilerini pazarlama iş ortaklarıyla paylaşabilir ve bu verileri süresiz olarak saklayabilir.</p>
+  <p>Ek koşul 5. Üye, salon ekipmanlarına verdiği her türlü zarardan, kusur aranmaksızın sorumludur ve FitNow'un bu nedenle uğradığı tüm masrafları karşılamayı kabul eder.</p>
+  <p>Ek koşul 6. Bu koşullar FitNow tarafından herhangi bir zamanda değiştirilebilir. Değişiklikler yayımlandığı anda yürürlüğe girer ve üyeliğin devamı değişikliklerin kabulü anlamına gelir.</p>
+  <p>Ek koşul 7. Uygulama üzerinden yapılan tüm satın alımlar kesindir. Dijital içerik paketleri için cayma hakkı, içeriğe erişim başladığı anda sona erer.</p>
+  <p>Ek koşul 8. Üyenin profil fotoğrafı ve antrenman paylaşımları, FitNow'un reklam ve tanıtım materyallerinde ücretsiz ve süresiz olarak kullanılabilir.</p>
+</div>
+<script>
+  document.querySelector('button.acc').addEventListener('click', () => {
+    const b = document.querySelector('.accordion-body')
+    b.style.display = b.style.display === 'block' ? 'none' : 'block'
+  })
+</script>
+</body>
+</html>

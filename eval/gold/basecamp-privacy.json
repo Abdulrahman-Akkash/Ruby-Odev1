@@ -1,0 +1,41 @@
+{
+  "doc": "basecamp-privacy",
+  "items": [
+    { "id": "BP-01", "category": "tracking_advertising", "severity": "medium", "issue_tr": "Reklamlara tıklayanların tarayıcısına üçüncü taraf reklam çerezi yerleştirilir ve veri gönderilir.",
+      "anchors": ["we may load an ad-company script on their browsers that sets a third-party cookie and sends information to the ad network"] },
+    { "id": "BP-02", "category": "data_sharing", "severity": "low", "issue_tr": "E-posta adresinin tek yönlü özeti reklam şirketleriyle paylaşılabilir.",
+      "anchors": ["we may disclose a one-way hash of your email address with ad companies"] },
+    { "id": "BP-03", "category": "data_sharing", "severity": "medium", "issue_tr": "Anonimleştirilmiş/toplu veri pazarlama dahil her amaçla kullanılabilir.",
+      "anchors": ["We may use de-identified or aggregated data for any purpose, including marketing or analytics."] },
+    { "id": "BP-04", "category": "data_retention", "severity": "low", "issue_tr": "Veriler yasal yükümlülük ve uyuşmazlıklar için saklanabilir; IP kayıtları hesap süresince tutulur.",
+      "anchors": ["We may also retain and use this information as necessary to comply with our legal obligations, resolve disputes, and enforce our agreements.", "we keep this login data for as long as your product account is active"] },
+    { "id": "BP-05", "category": "data_sharing", "severity": "medium", "issue_tr": "Veriler ABD'ye aktarılır; kullanım aktarıma onay sayılır.",
+      "anchors": ["any information you provide to us will be transferred to and stored in the United States", "By using our websites or Services and/or providing us with your personal information, you consent to this transfer."] },
+    { "id": "BP-06", "category": "tracking_advertising", "severity": "low", "issue_tr": "Gezinme analitiği hesabınıza bağlanır; üçüncü taraf çerezler kullanılır.",
+      "anchors": ["these web analytics data are tied to your IP address and user account until your account is no longer active", "We also use persistent first-party cookies and some third-party cookies"] }
+  ],
+  "acceptable": [
+    { "anchor": "We use some third-party subprocessors to help run our applications", "note": "alt işleyiciler" },
+    { "anchor": "We occasionally use aggregate billing information to guide our marketing efforts.", "note": "toplu fatura verisi" },
+    { "anchor": "most data are not encrypted while they live in our database", "note": "beklemede şifreleme yok" },
+    { "anchor": "if U.S. law enforcement authorities have the necessary warrant", "note": "resmi talep" },
+    { "anchor": "the CAPTCHA service evaluates various information", "note": "CAPTCHA" },
+    { "anchor": "we need to retain certain information in order to provide our services to you", "note": "saklama" },
+    { "anchor": "a data deletion request may result in closing your account", "note": "silme talebi" },
+    { "anchor": "the exercise of certain rights may, by virtue of your exercising those rights, prevent you from using our Services", "note": "hak kullanımı" },
+    { "anchor": "We may update this policy as needed", "note": "politika değişikliği" },
+    { "anchor": "if 37signals is acquired by or merges with another company", "note": "birleşme" },
+    { "anchor": "It might also collect information such as your browser type, operating system, web pages visited", "note": "çerez açıklaması" },
+    { "anchor": "We collect information about your browsing activity for analytics and statistical purposes", "note": "analitik" },
+    { "anchor": "we log the full IP address used to sign up a product account and retain that", "note": "IP kaydı" },
+    { "anchor": "We may disclose your information at your direction if you integrate a third-party service", "note": "entegrasyon" },
+    { "anchor": "We may also access your data if required in order to respond to legal process", "note": "yasal süreç" },
+    { "anchor": "we will take action as necessary, including notifying appropriate authorities where warranted", "note": "kötüye kullanım" },
+    { "anchor": "We keep this content as long as your account is active.", "note": "içerik saklama" },
+    { "anchor": "copies of the content may be held in backups", "note": "yedek" },
+    { "anchor": "Such transfers are only occasional and data is transferred under the Article 49(1)(b) derogation", "note": "AB aktarımı" },
+    { "anchor": "we keep that correspondence, including your email address", "note": "yazışma saklama" },
+    { "anchor": "We may also send you optional surveys from time to time", "note": "anket" },
+    { "anchor": "If we are unable to verify you, we may be unable to respond to your requests.", "note": "kimlik doğrulama" }
+  ]
+}

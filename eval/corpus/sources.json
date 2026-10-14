@@ -1,0 +1,44 @@
+{
+  "netflix-tos": {
+    "title": "Netflix Terms of Use",
+    "kind": "subscription terms",
+    "url": "https://raw.githubusercontent.com/OpenTermsArchive/contrib-versions/main/Netflix/Terms%20of%20Service.md",
+    "origin": "Open Terms Archive (contrib-versions) — help.netflix.com/legal/termsofuse anlık görüntüsü",
+    "retrieved": "2026-10-14"
+  },
+  "spotify-tos": {
+    "title": "Spotify Terms of Use",
+    "kind": "subscription terms",
+    "url": "https://raw.githubusercontent.com/OpenTermsArchive/contrib-versions/main/Spotify/Terms%20of%20Service.md",
+    "origin": "Open Terms Archive (contrib-versions) — spotify.com/legal/end-user-agreement anlık görüntüsü",
+    "retrieved": "2026-10-14"
+  },
+  "tiktok-tos": {
+    "title": "TikTok Terms of Service",
+    "kind": "terms of service",
+    "url": "https://raw.githubusercontent.com/OpenTermsArchive/pga-versions/main/TikTok/Terms%20of%20Service.md",
+    "origin": "Open Terms Archive (pga-versions) — tiktok.com/legal/terms-of-service anlık görüntüsü",
+    "retrieved": "2026-10-14"
+  },
+  "github-tos": {
+    "title": "GitHub Terms of Service",
+    "kind": "terms of service",
+    "url": "https://raw.githubusercontent.com/github/site-policy/main/Policies/github-terms/github-terms-of-service.md",
+    "origin": "GitHub'ın resmi site-policy deposu",
+    "retrieved": "2026-10-14"
+  },
+  "basecamp-tos": {
+    "title": "Basecamp Terms of Service",
+    "kind": "terms of service (subscription SaaS)",
+    "url": "https://raw.githubusercontent.com/basecamp/policies/master/terms/index.md",
+    "origin": "37signals/Basecamp'ın resmi açık kaynak policies deposu",
+    "retrieved": "2026-10-14"
+  },
+  "basecamp-privacy": {
+    "title": "Basecamp Privacy Policy",
+    "kind": "privacy policy",
+    "url": "https://raw.githubusercontent.com/basecamp/policies/master/privacy/index.md",
+    "origin": "37signals/Basecamp'ın resmi açık kaynak policies deposu",
+    "retrieved": "2026-10-14"
+  }
+}

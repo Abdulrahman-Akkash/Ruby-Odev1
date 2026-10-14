@@ -1,0 +1,356 @@
+{
+  "runName": "rules-baseline",
+  "precision": 0.6625,
+  "recall": 0.6440677966101694,
+  "f1": 0.6531538835738608,
+  "totals": {
+    "gold": 59,
+    "caught": 38,
+    "strictCaught": 35,
+    "tp": 53,
+    "fp": 27,
+    "neutral": 27,
+    "rejected": 0
+  },
+  "docs": {
+    "basecamp-privacy": {
+      "gold": 6,
+      "caught": [
+        "BP-04"
+      ],
+      "strictCaught": [
+        "BP-04"
+      ],
+      "missed": [
+        "BP-01",
+        "BP-02",
+        "BP-03",
+        "BP-05",
+        "BP-06"
+      ],
+      "falseAlarms": [
+        {
+          "clauseId": "C010",
+          "category": "data_sharing",
+          "severity": "medium",
+          "quote": "sell your personal information to third part"
+        }
+      ],
+      "neutral": 3,
+      "precision": 0.6666666666666666,
+      "recall": 0.16666666666666666
+    },
+    "basecamp-tos": {
+      "gold": 7,
+      "caught": [
+        "BC-04",
+        "BC-01",
+        "BC-06",
+        "BC-03",
+        "BC-02"
+      ],
+      "strictCaught": [
+        "BC-01",
+        "BC-02",
+        "BC-03",
+        "BC-04",
+        "BC-06"
+      ],
+      "missed": [
+        "BC-05",
+        "BC-07"
+      ],
+      "falseAlarms": [
+        {
+          "clauseId": "C040",
+          "category": "data_sharing",
+          "severity": "medium",
+          "quote": "provider”, not a “business” or “third part"
+        }
+      ],
+      "neutral": 3,
+      "precision": 0.8333333333333334,
+      "recall": 0.7142857142857143
+    },
+    "github-tos": {
+      "gold": 13,
+      "caught": [
+        "GH-06",
+        "GH-05",
+        "GH-02",
+        "GH-04",
+        "GH-03",
+        "GH-07",
+        "GH-09",
+        "GH-11"
+      ],
+      "strictCaught": [
+        "GH-03",
+        "GH-04",
+        "GH-05",
+        "GH-06",
+        "GH-07",
+        "GH-09",
+        "GH-11"
+      ],
+      "missed": [
+        "GH-01",
+        "GH-08",
+        "GH-10",
+        "GH-12",
+        "GH-13"
+      ],
+      "falseAlarms": [
+        {
+          "clauseId": "C015",
+          "category": "account_termination",
+          "severity": "high",
+          "quote": "cancel this agreement and close your Account at any time"
+        },
+        {
+          "clauseId": "C127",
+          "category": "data_sharing",
+          "severity": "medium",
+          "quote": "disclose, publish, or disseminate any Confidential Information to any third part"
+        },
+        {
+          "clauseId": "C144",
+          "category": "account_termination",
+          "severity": "high",
+          "quote": "close your Account at any time"
+        },
+        {
+          "clauseId": "C145",
+          "category": "account_termination",
+          "severity": "high",
+          "quote": "cancel your Account at any time"
+        },
+        {
+          "clauseId": "C157",
+          "category": "liability_limitation",
+          "severity": "medium",
+          "quote": "as is"
+        },
+        {
+          "clauseId": "C160",
+          "category": "liability_limitation",
+          "severity": "high",
+          "quote": "Limitation of Liability"
+        },
+        {
+          "clauseId": "C161",
+          "category": "liability_limitation",
+          "severity": "high",
+          "quote": "not be liable"
+        },
+        {
+          "clauseId": "C170",
+          "category": "indemnification",
+          "severity": "medium",
+          "quote": "Indemnification"
+        }
+      ],
+      "neutral": 6,
+      "precision": 0.5789473684210527,
+      "recall": 0.6153846153846154
+    },
+    "netflix-tos": {
+      "gold": 7,
+      "caught": [
+        "NFX-02",
+        "NFX-03",
+        "NFX-07",
+        "NFX-04"
+      ],
+      "strictCaught": [
+        "NFX-02",
+        "NFX-03",
+        "NFX-04",
+        "NFX-07"
+      ],
+      "missed": [
+        "NFX-01",
+        "NFX-05",
+        "NFX-06"
+      ],
+      "falseAlarms": [],
+      "neutral": 2,
+      "precision": 1,
+      "recall": 0.5714285714285714
+    },
+    "spotify-tos": {
+      "gold": 19,
+      "caught": [
+        "SPT-01",
+        "SPT-11",
+        "SPT-13",
+        "SPT-15",
+        "SPT-08",
+        "SPT-18",
+        "SPT-14",
+        "SPT-06",
+        "SPT-05",
+        "SPT-04",
+        "SPT-07",
+        "SPT-09",
+        "SPT-19",
+        "SPT-02",
+        "SPT-03",
+        "SPT-10"
+      ],
+      "strictCaught": [
+        "SPT-01",
+        "SPT-02",
+        "SPT-03",
+        "SPT-04",
+        "SPT-05",
+        "SPT-06",
+        "SPT-07",
+        "SPT-08",
+        "SPT-09",
+        "SPT-10",
+        "SPT-11",
+        "SPT-13",
+        "SPT-14",
+        "SPT-15",
+        "SPT-19"
+      ],
+      "missed": [
+        "SPT-12",
+        "SPT-16",
+        "SPT-17"
+      ],
+      "falseAlarms": [
+        {
+          "clauseId": "C076",
+          "category": "dispute_resolution",
+          "severity": "high",
+          "quote": "arbitration"
+        },
+        {
+          "clauseId": "C079",
+          "category": "dispute_resolution",
+          "severity": "high",
+          "quote": "arbitration"
+        },
+        {
+          "clauseId": "C082",
+          "category": "dispute_resolution",
+          "severity": "high",
+          "quote": "arbitration"
+        },
+        {
+          "clauseId": "C084",
+          "category": "dispute_resolution",
+          "severity": "high",
+          "quote": "arbitration"
+        },
+        {
+          "clauseId": "C085",
+          "category": "dispute_resolution",
+          "severity": "high",
+          "quote": "arbitration"
+        },
+        {
+          "clauseId": "C086",
+          "category": "dispute_resolution",
+          "severity": "high",
+          "quote": "arbitration"
+        },
+        {
+          "clauseId": "C088",
+          "category": "dispute_resolution",
+          "severity": "high",
+          "quote": "arbitration"
+        },
+        {
+          "clauseId": "C089",
+          "category": "dispute_resolution",
+          "severity": "high",
+          "quote": "arbitration"
+        },
+        {
+          "clauseId": "C091",
+          "category": "dispute_resolution",
+          "severity": "high",
+          "quote": "arbitration"
+        },
+        {
+          "clauseId": "C092",
+          "category": "dispute_resolution",
+          "severity": "high",
+          "quote": "arbitration"
+        },
+        {
+          "clauseId": "C093",
+          "category": "dispute_resolution",
+          "severity": "high",
+          "quote": "arbitration"
+        },
+        {
+          "clauseId": "C097",
+          "category": "dispute_resolution",
+          "severity": "high",
+          "quote": "arbitration"
+        },
+        {
+          "clauseId": "C098",
+          "category": "dispute_resolution",
+          "severity": "high",
+          "quote": "arbitrator"
+        },
+        {
+          "clauseId": "C099",
+          "category": "dispute_resolution",
+          "severity": "high",
+          "quote": "arbitration"
+        }
+      ],
+      "neutral": 12,
+      "precision": 0.631578947368421,
+      "recall": 0.8421052631578947
+    },
+    "tiktok-tos": {
+      "gold": 7,
+      "caught": [
+        "TT-03",
+        "TT-01",
+        "TT-02",
+        "TT-05"
+      ],
+      "strictCaught": [
+        "TT-01",
+        "TT-02",
+        "TT-05"
+      ],
+      "missed": [
+        "TT-04",
+        "TT-06",
+        "TT-07"
+      ],
+      "falseAlarms": [
+        {
+          "clauseId": "C042",
+          "category": "data_sharing",
+          "severity": "medium",
+          "quote": "disclose it to any third part"
+        },
+        {
+          "clauseId": "C146",
+          "category": "unilateral_changes",
+          "severity": "medium",
+          "quote": "can make changes to these Terms"
+        },
+        {
+          "clauseId": "C148",
+          "category": "governing_law",
+          "severity": "low",
+          "quote": "governed by the law of"
+        }
+      ],
+      "neutral": 1,
+      "precision": 0.625,
+      "recall": 0.5714285714285714
+    }
+  }
+}

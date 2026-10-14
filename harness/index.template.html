@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Sözleşme Radarı — test düzeneği</title>
+    <link rel="stylesheet" href="ui/sidepanel.css" />
+    <style>
+      html, body { height: 100%; }
+      body.harness { display: grid; grid-template-columns: minmax(0, 1fr) 420px; margin: 0; }
+      body.harness > iframe { width: 100%; height: 100vh; border: 0; border-right: 2px solid #1f4e79; background: #fff; }
+      body.harness > .panel { height: 100vh; overflow: auto; }
+      .harness-tag { font: 11px system-ui; color: #6b6b66; padding: 4px 14px; }
+      #caption { position: fixed; left: 16px; bottom: 16px; max-width: calc(100% - 470px); z-index: 10; background: rgba(20, 20, 20, 0.86); color: #fff; font: 600 15px/1.4 system-ui; padding: 10px 14px; border-radius: 8px; }
+      #caption:empty { display: none; }
+    </style>
+  </head>
+  <body class="harness">
+    <iframe id="page" title="Analiz edilen sayfa"></iframe>
+    <div id="caption" aria-live="polite"></div>
+    <div class="panel" data-cy="panel">
+      <div class="harness-tag">Yan panel (uzantı arayüzünün aynısı) · sol: tarayıcı sekmesi</div>
+      <!--PANEL-->
+    </div>
+    <script>
+      document.getElementById('page').src = new URLSearchParams(location.search).get('page') || 'fixtures/netflix-tos.html'
+    </script>
+    <script src="harness-bridge.js"></script>
+    <script src="ui/sidepanel.js"></script>
+  </body>
+</html>

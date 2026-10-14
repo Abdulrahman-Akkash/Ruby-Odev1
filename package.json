@@ -1,0 +1,46 @@
+{
+  "name": "sozlesme-radari",
+  "version": "0.1.0",
+  "private": true,
+  "description": "ToS / gizlilik politikası / abonelik şartları için alıntı-doğrulamalı risk raporu üreten Chrome uzantısı (page-agent tabanlı).",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "eval": "tsx eval/run-eval.ts",
+    "eval:rules": "tsx eval/run-eval.ts --mode rules",
+    "eval:llm": "tsx eval/run-eval.ts --mode llm",
+    "eval:replay": "tsx eval/run-eval.ts --mode replay",
+    "eval:injection": "tsx eval/injection/run-injection.ts",
+    "harness": "node scripts/serve.mjs",
+    "smoke:extension": "node scripts/smoke-extension.mjs",
+    "cy:open": "start-server-and-test harness http://localhost:4173 'cypress open'",
+    "demo:record": "npm run build && start-server-and-test harness http://localhost:4173 'cypress run --browser electron --spec cypress/e2e/demo.cy.ts'",
+    "e2e": "npm run build && start-server-and-test harness http://localhost:4173 'cypress run'",
+    "record:fixtures": "tsx scripts/record-fixtures.ts",
+    "verify:harness": "node scripts/verify-harness.mjs",
+    "eval:validator": "tsx eval/validator-eval.ts",
+    "eval:check-gold": "tsx eval/check-gold.ts",
+    "fixtures:html": "tsx scripts/make-fixtures.ts",
+    "extract:corpus": "tsx eval/extract.ts"
+  },
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@page-agent/llms": "^1.12.4",
+    "@page-agent/page-controller": "^1.12.4",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.3.5",
+    "@types/node": "^26.6.5",
+    "cypress": "16.2.0",
+    "esbuild": "^0.28.2",
+    "jsdom": "^29.1.1",
+    "playwright-core": "^1.64.1",
+    "start-server-and-test": "^3.0.13",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.4"
+  }
+}
