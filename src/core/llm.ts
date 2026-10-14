@@ -27,6 +27,25 @@ function sleep(ms: number, signal?: AbortSignal): Promise<void> {
   })
 }
 
+/** Sağlayıcının hata gövdesindeki açıklama (ör. hangi kotanın aşıldığı). */
+export function providerMessage(err: InvokeError): string {
+  const raw = err.rawError as any
+  const body = Array.isArray(raw) ? raw[0] : raw
+  return String(body?.error?.message ?? '').replace(/\s+/g, ' ').slice(0, 300)
+}
+
+/** Google RetryInfo.retryDelay ("37s") veya mesajdaki "retry in 12.3s" bilgisinden bekleme süresi. */
+export function suggestedDelayMs(err: InvokeError): number {
+  const raw = err.rawError as any
+  const body = Array.isArray(raw) ? raw[0] : raw
+  for (const d of body?.error?.details ?? []) {
+    const m = /^(\d+(?:\.\d+)?)s$/.exec(String(d?.retryDelay ?? ''))
+    if (m) return Math.ceil(Number(m[1]) * 1000) + 500
+  }
+  const m = /retry in (\d+(?:\.\d+)?)\s*s/i.exec(providerMessage(err))
+  return m ? Math.ceil(Number(m[1]) * 1000) + 500 : 0
+}
+
 export function isGeminiCompat(baseURL: string): boolean {
   return /generativelanguage\.googleapis\.com|aiplatform\.googleapis\.com/.test(baseURL)
 }
@@ -115,14 +134,23 @@ export function createPageAgentRunner(settings: LlmSettings, customFetch?: typeo
       { role: 'system', content: call.system },
       { role: 'user', content: call.user },
     ]
-    const retries = settings.transientRetries ?? 4
+    const retries = settings.transientRetries ?? 6
     for (let attempt = 0; ; attempt++) {
       try {
         return await invokeOnce(messages, signal)
       } catch (err) {
-        // Sağlayıcı yoğunluğu (503), hız sınırı (429) ve ağ hataları geçicidir: 2s, 4s, 8s, 16s bekle.
-        if (!(err instanceof InvokeError) || !TRANSIENT.has(err.type) || attempt >= retries) throw err
-        await sleep((settings.backoffMs ?? 2000) * 2 ** attempt, signal)
+        // Sağlayıcı yoğunluğu (503), hız sınırı (429) ve ağ hataları geçicidir: üstel bekle;
+        // sağlayıcı bir bekleme süresi önerdiyse (retryDelay / Retry-After) ona uy.
+        if (!(err instanceof InvokeError) || !TRANSIENT.has(err.type) || attempt >= retries) {
+          if (err instanceof InvokeError) {
+            const detail = providerMessage(err)
+            if (detail && !err.message.includes(detail)) err.message = `${err.message} — ${detail}`
+          }
+          throw err
+        }
+        const backoff = (settings.backoffMs ?? 2000) * 2 ** attempt
+        const suggested = suggestedDelayMs(err)
+        await sleep(Math.min(Math.max(backoff, suggested), 70_000), signal)
       }
     }
   }

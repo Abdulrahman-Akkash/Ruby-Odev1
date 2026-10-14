@@ -171,8 +171,8 @@ async function partD(out: string[]) {
   out.push('|---|---|---|---|---|---|')
   for (const id of DOCS) {
     const doc = await loadDoc(id)
-    const clean = (await analyzeDocument(doc, { runner, model: LLM_MODEL })).report
-    const attacked = (await analyzeDocument(inject(doc, PAYLOADS.filter((p) => p.kind === 'evasive').map((p) => p.text)), { runner, model: LLM_MODEL })).report
+    const clean = (await analyzeDocument(doc, { runner, model: LLM_MODEL, concurrency: 1 })).report
+    const attacked = (await analyzeDocument(inject(doc, PAYLOADS.filter((p) => p.kind === 'evasive').map((p) => p.text)), { runner, model: LLM_MODEL, concurrency: 1 })).report
     const flagged = attacked.injection.some((i) => i.where === 'model_flag')
     out.push(`| ${id} | ${clean.findings.length} / ${clean.score} | ${attacked.findings.length} / ${attacked.score} | ${attacked.score - clean.score} | ${flagged ? 'evet' : 'hayır'} | ${attacked.confidence} |`)
   }

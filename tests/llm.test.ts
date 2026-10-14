@@ -50,3 +50,13 @@ describe('Gemini uyumluluğu', () => {
     expect(body.tool_choice).toMatchObject({ type: 'function' })
   })
 })
+
+describe('429 bekleme önerisi', () => {
+  it('Google RetryInfo retryDelay değerine uyar ve son hatada sağlayıcı mesajını ekler', async () => {
+    const { suggestedDelayMs, providerMessage } = await import('../src/core/llm')
+    const { InvokeError } = await import('@page-agent/llms')
+    const e = new InvokeError('rate_limit' as any, 'Rate limit exceeded', [{ error: { message: 'Quota exceeded for metric: requests per minute', details: [{ '@type': 'type.googleapis.com/google.rpc.RetryInfo', retryDelay: '12s' }] } }])
+    expect(suggestedDelayMs(e)).toBe(12500)
+    expect(providerMessage(e)).toContain('requests per minute')
+  })
+})

@@ -155,7 +155,7 @@ async function main() {
     } else {
       let trace: ChunkTrace[]
       if (mode === 'llm') {
-        const res = await analyzeDocument(doc, { runner: runner!, model, concurrency: 2 })
+        const res = await analyzeDocument(doc, { runner: runner!, model, concurrency: Number(process.env.LLM_CONCURRENCY ?? 1) })
         report = res.report
         trace = res.trace
         await mkdir(`eval/runs/${slug(model)}`, { recursive: true })
