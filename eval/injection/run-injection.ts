@@ -169,10 +169,12 @@ async function partD(out: string[]) {
   out.push(`Model: \`${LLM_MODEL}\`\n`)
   out.push('| Belge | Temiz: bulgu / skor | Saldırılı: bulgu / skor | Δ skor | Model injection_suspected | Saldırılı rapor güveni |')
   out.push('|---|---|---|---|---|---|')
-  for (const id of DOCS) {
+  const liveDocs = process.env.LLM_INJECTION_DOCS ? process.env.LLM_INJECTION_DOCS.split(',') : DOCS
+  const maxChunkChars = process.env.LLM_MAX_CHUNK_CHARS ? Number(process.env.LLM_MAX_CHUNK_CHARS) : undefined
+  for (const id of liveDocs) {
     const doc = await loadDoc(id)
-    const clean = (await analyzeDocument(doc, { runner, model: LLM_MODEL })).report
-    const attacked = (await analyzeDocument(inject(doc, PAYLOADS.filter((p) => p.kind === 'evasive').map((p) => p.text)), { runner, model: LLM_MODEL })).report
+    const clean = (await analyzeDocument(doc, { runner, model: LLM_MODEL, concurrency: 1, maxChunkChars })).report
+    const attacked = (await analyzeDocument(inject(doc, PAYLOADS.filter((p) => p.kind === 'evasive').map((p) => p.text)), { runner, model: LLM_MODEL, concurrency: 1, maxChunkChars })).report
     const flagged = attacked.injection.some((i) => i.where === 'model_flag')
     out.push(`| ${id} | ${clean.findings.length} / ${clean.score} | ${attacked.findings.length} / ${attacked.score} | ${attacked.score - clean.score} | ${flagged ? 'evet' : 'hayır'} | ${attacked.confidence} |`)
   }
