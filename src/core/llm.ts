@@ -9,6 +9,22 @@ export interface LlmSettings {
   /** Bazı modeller temperature parametresini reddeder; sadece açıkça verilirse gönderilir. */
   temperature?: number
   maxRetries?: number
+  /** Geçici hatalarda (429/5xx/ağ) üstel bekleme ile ek deneme sayısı. */
+  transientRetries?: number
+  /** İlk bekleme (ms); her denemede iki katına çıkar. */
+  backoffMs?: number
+}
+
+const TRANSIENT = new Set<string>([InvokeErrorTypes.RATE_LIMIT, InvokeErrorTypes.SERVER_ERROR, InvokeErrorTypes.NETWORK_ERROR])
+
+function sleep(ms: number, signal?: AbortSignal): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const t = setTimeout(resolve, ms)
+    signal?.addEventListener('abort', () => {
+      clearTimeout(t)
+      reject(Object.assign(new Error('aborted'), { name: 'AbortError' }))
+    })
+  })
 }
 
 export interface ChunkCall {
@@ -58,6 +74,19 @@ export function createPageAgentRunner(settings: LlmSettings, customFetch?: typeo
       { role: 'system', content: call.system },
       { role: 'user', content: call.user },
     ]
+    const retries = settings.transientRetries ?? 4
+    for (let attempt = 0; ; attempt++) {
+      try {
+        return await invokeOnce(messages, signal)
+      } catch (err) {
+        // Sağlayıcı yoğunluğu (503), hız sınırı (429) ve ağ hataları geçicidir: 2s, 4s, 8s, 16s bekle.
+        if (!(err instanceof InvokeError) || !TRANSIENT.has(err.type) || attempt >= retries) throw err
+        await sleep((settings.backoffMs ?? 2000) * 2 ** attempt, signal)
+      }
+    }
+  }
+
+  async function invokeOnce(messages: Message[], signal?: AbortSignal): Promise<ChunkCallResult> {
     try {
       const res = await llm.invoke(messages, tools, signal ?? new AbortController().signal, { toolChoiceName: TOOL_NAME })
       return {
