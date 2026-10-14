@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sözleşme Radarı</title>
+    <link rel="stylesheet" href="sidepanel.css" />
+  </head>
+  <body>
+    <header class="top">
+      <h1>Sözleşme Radarı</h1>
+      <p id="disclaimer" class="disclaimer" role="note" data-cy="disclaimer">Bu rapor hukuki tavsiye değildir.</p>
+    </header>
+
+    <main>
+      <section class="card">
+        <p id="detection" class="muted" data-cy="detection"></p>
+        <button id="analyze" type="button" data-cy="analyze">Bu sayfayı analiz et</button>
+        <p id="provider" class="consent" data-cy="provider"></p>
+        <p id="status" class="status" hidden data-cy="status"></p>
+      </section>
+
+      <div id="report" data-cy="report"></div>
+
+      <details id="settings" class="card">
+        <summary>LLM ayarları (kendi anahtarınız)</summary>
+        <form id="settings-form" autocomplete="off">
+          <label>Hazır ayar
+            <select id="preset">
+              <option value="">— seçin —</option>
+              <option value="openai">OpenAI</option>
+              <option value="openrouter">OpenRouter</option>
+              <option value="deepseek">DeepSeek</option>
+              <option value="qwen">Qwen (DashScope)</option>
+              <option value="ollama">Ollama (yerel)</option>
+            </select>
+          </label>
+          <label>Base URL (OpenAI uyumlu)<input id="baseURL" type="url" required /></label>
+          <label>Model<input id="model" type="text" required /></label>
+          <label>API anahtarı<input id="apiKey" type="password" required /></label>
+          <label>Temperature (boş bırakılabilir)<input id="temperature" type="number" step="0.1" min="0" max="2" /></label>
+          <p class="muted">Anahtar yalnızca bu tarayıcıda saklanır ve sadece yukarıdaki adrese gönderilir. page-agent'in ücretsiz demo LLM'i kullanılmaz.</p>
+          <button type="submit">Kaydet</button>
+        </form>
+      </details>
+    </main>
+
+    <script src="sidepanel.js"></script>
+  </body>
+</html>

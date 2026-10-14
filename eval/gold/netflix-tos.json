@@ -1,0 +1,35 @@
+{
+  "doc": "netflix-tos",
+  "items": [
+    { "id": "NFX-01", "category": "auto_renewal", "severity": "medium", "issue_tr": "İptal edilmedikçe her dönem otomatik ücret çekilir.",
+      "anchors": ["Unless you cancel your subscription before your billing date, you authorize us to charge the subscription fee for the next billing cycle", "Your Netflix subscription will continue until terminated."] },
+    { "id": "NFX-02", "category": "cancellation_refund", "severity": "high", "issue_tr": "Ödemeler iade edilmez; kısmi dönem için iade/kredi yok.",
+      "anchors": ["payments are non-refundable and we do not provide refunds or credits for any partial subscription periods or unused Netflix content"] },
+    { "id": "NFX-03", "category": "price_change", "severity": "medium", "issue_tr": "Fiyat ve planlar değiştirilebilir (1 ay önceden bildirim).",
+      "anchors": ["We may change our subscription plans and the price of our service from time to time"] },
+    { "id": "NFX-04", "category": "unilateral_changes", "severity": "medium", "issue_tr": "Koşullar şirket tarafından değiştirilebilir.",
+      "anchors": ["We may, from time to time, change these Terms of Use"] },
+    { "id": "NFX-05", "category": "other", "severity": "medium", "issue_tr": "Birincil ödeme yöntemi reddedilirse hesaptaki diğer ödeme yöntemlerinden çekim yapılır.",
+      "anchors": ["You authorize us to charge any Payment Method associated with your account in case your primary Payment Method is declined"] },
+    { "id": "NFX-06", "category": "account_termination", "severity": "medium", "issue_tr": "Dolandırıcılık şüphesiyle hesap kapatılabilir veya bekletilebilir.",
+      "anchors": ["We can terminate your account or place your account on hold in order to protect you, Netflix or our partners from identity theft or other fraudulent activity."] },
+    { "id": "NFX-07", "category": "governing_law", "severity": "low", "issue_tr": "Hollanda hukuku uygulanır (tüketici hakları saklı).",
+      "anchors": ["These Terms of Use shall be governed by and construed in accordance with the laws of the Netherlands."] }
+  ],
+  "acceptable": [
+    { "anchor": "Netflix reserves the right to revoke an Offer and put your account on hold", "note": "kampanya iptali" },
+    { "anchor": "we do not guarantee that particular content will be available on the Netflix service at any given time", "note": "içerik garantisi yok" },
+    { "anchor": "We may terminate or restrict your use of our service if you violate these Terms of Use", "note": "ihlal hâlinde fesih — makul" },
+    { "anchor": "You agree that you may automatically receive updated versions of the Netflix software", "note": "otomatik güncelleme" },
+    { "anchor": "We may suspend or terminate access to any Interactive Feature immediately", "note": "etkileşimli özellik askısı" },
+    { "anchor": "We may also update your Payment Methods using information provided by the payment service providers.", "note": "ödeme yönteminin üçüncü taraf bilgisiyle güncellenmesi" },
+    { "anchor": "there may be some occasions when you may see advertisements", "note": "reklamsız planda reklam" },
+    { "anchor": "is not responsible for the similarity of any of its content or programming", "note": "talep edilmemiş materyal" },
+    { "anchor": "a remote access support tool through which we have full access to your computer", "note": "uzaktan erişim (onaya bağlı)" },
+    { "anchor": "in electronic form only", "note": "yalnız elektronik bildirim" },
+    { "anchor": "You remain responsible for any uncollected amounts.", "note": "tahsil edilmemiş tutar" },
+    { "anchor": "we may suspend your access to the service until we have successfully charged a valid Payment Method", "note": "ödeme yapılmazsa askı" },
+    { "anchor": "you agree that such individuals are acting on your behalf and that you are bound by any changes", "note": "hesabı paylaşanların değişikliklerinden sorumluluk" },
+    { "anchor": "The Account Owner may also, in their sole discretion and at any time, remove the Extra Member feature", "note": "ekstra üye" }
+  ]
+}
