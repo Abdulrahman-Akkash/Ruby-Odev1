@@ -42,8 +42,8 @@ export function suggestedDelayMs(err: InvokeError): number {
     const m = /^(\d+(?:\.\d+)?)s$/.exec(String(d?.retryDelay ?? ''))
     if (m) return Math.ceil(Number(m[1]) * 1000) + 500
   }
-  const m = /retry in (\d+(?:\.\d+)?)\s*s/i.exec(providerMessage(err))
-  return m ? Math.ceil(Number(m[1]) * 1000) + 500 : 0
+  const m = /retry in (?:(\d+)h)?(?:(\d+)m)?(\d+(?:\.\d+)?)\s*s/i.exec(String(body?.error?.message ?? ''))
+  return m ? Math.ceil(((Number(m[1] ?? 0) * 60 + Number(m[2] ?? 0)) * 60 + Number(m[3])) * 1000) + 500 : 0
 }
 
 export function isGeminiCompat(baseURL: string): boolean {
@@ -150,6 +150,11 @@ export function createPageAgentRunner(settings: LlmSettings, customFetch?: typeo
         }
         const backoff = (settings.backoffMs ?? 2000) * 2 ** attempt
         const suggested = suggestedDelayMs(err)
+        if (suggested > 120_000) {
+          // Günlük kota gibi uzun beklemeler: denemeye devam etmek kotayı daha da tüketir.
+          err.message = `${err.message} — ${providerMessage(err)}`
+          throw err
+        }
         await sleep(Math.min(Math.max(backoff, suggested), 70_000), signal)
       }
     }

@@ -23,7 +23,12 @@ for (const id of ['netflix-tos', 'ambiguous-terms', 'injection-terms']) {
     parts[part - 1] = res.raw
     return res
   }
-  const { report } = await analyzeDocument(doc, { runner: recording, model: LLM_MODEL, concurrency: 1 })
+  const { report } = await analyzeDocument(doc, {
+    runner: recording,
+    model: LLM_MODEL,
+    concurrency: 1,
+    maxChunkChars: process.env.LLM_MAX_CHUNK_CHARS ? Number(process.env.LLM_MAX_CHUNK_CHARS) : undefined,
+  })
   await writeFile(
     `cypress/fixtures/llm/${id}.json`,
     JSON.stringify({ _kaynak: `KAYDEDİLMİŞ GERÇEK model çıktısı: ${LLM_MODEL} · ${new Date().toISOString()}`, parts }, null, 2),

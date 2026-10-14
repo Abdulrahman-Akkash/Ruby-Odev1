@@ -155,15 +155,25 @@ async function main() {
     } else {
       let trace: ChunkTrace[]
       if (mode === 'llm') {
-        const res = await analyzeDocument(doc, { runner: runner!, model, concurrency: Number(process.env.LLM_CONCURRENCY ?? 1) })
+        const res = await analyzeDocument(doc, {
+          runner: runner!,
+          model,
+          concurrency: Number(process.env.LLM_CONCURRENCY ?? 1),
+          maxChunkChars: process.env.LLM_MAX_CHUNK_CHARS ? Number(process.env.LLM_MAX_CHUNK_CHARS) : undefined,
+        })
         report = res.report
         trace = res.trace
         await mkdir(`eval/runs/${slug(model)}`, { recursive: true })
-        await writeFile(`eval/runs/${slug(model)}/${gold.doc}.json`, JSON.stringify({ model, createdAt: new Date().toISOString(), trace }, null, 2))
+        await writeFile(`eval/runs/${slug(model)}/${gold.doc}.json`, JSON.stringify({ model, createdAt: new Date().toISOString(), maxChunkChars: process.env.LLM_MAX_CHUNK_CHARS ? Number(process.env.LLM_MAX_CHUNK_CHARS) : undefined, trace }, null, 2))
       } else {
         const saved = JSON.parse(await readFile(`eval/runs/${slug(model)}/${gold.doc}.json`, 'utf8'))
         trace = saved.trace
-        const res = await analyzeDocument(doc, { runner: replayRunner(trace), model, concurrency: 1 })
+        const res = await analyzeDocument(doc, {
+          runner: replayRunner(trace),
+          model,
+          concurrency: 1,
+          maxChunkChars: saved.maxChunkChars,
+        })
         report = res.report
       }
       const failed = trace.filter((t) => !t.ok)

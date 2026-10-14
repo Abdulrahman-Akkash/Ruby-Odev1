@@ -13,6 +13,14 @@ on:
         description: Model adı
         default: gpt-4.1-mini
         required: true
+      max_chunk_chars:
+        description: LLM çağrısı başına en fazla karakter (büyük değer = daha az istek; ücretsiz kotalar için 60000)
+        default: '12000'
+        required: true
+      injection_docs:
+        description: Canlı injection testinde kullanılacak belgeler (virgülle)
+        default: netflix-tos,basecamp-tos
+        required: true
 
 permissions:
   contents: write
@@ -24,6 +32,8 @@ jobs:
       LLM_BASE_URL: ${{ inputs.base_url }}
       LLM_MODEL: ${{ inputs.model }}
       LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+      LLM_MAX_CHUNK_CHARS: ${{ inputs.max_chunk_chars }}
+      LLM_INJECTION_DOCS: ${{ inputs.injection_docs }}
     steps:
       - name: Anahtar kontrolü
         run: |

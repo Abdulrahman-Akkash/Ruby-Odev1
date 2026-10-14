@@ -60,3 +60,20 @@ describe('429 bekleme önerisi', () => {
     expect(providerMessage(e)).toContain('requests per minute')
   })
 })
+
+describe('günlük kota', () => {
+  it('"retry in 2h13m32s" mesajını saniyeye çevirir', async () => {
+    const { suggestedDelayMs } = await import('../src/core/llm')
+    const { InvokeError } = await import('@page-agent/llms')
+    const e = new InvokeError('rate_limit' as any, 'x', [{ error: { message: 'limit: 20. Please retry in 2h13m32.8s.' } }])
+    expect(suggestedDelayMs(e)).toBe(Math.ceil((2 * 3600 + 13 * 60 + 32.8) * 1000) + 500)
+  })
+  it('uzun kota beklemesinde yeniden denemeden hemen hata verir', async () => {
+    const { createPageAgentRunner } = await import('../src/core/llm')
+    let calls = 0
+    const fetchMock = (async () => (++calls, new Response(JSON.stringify([{ error: { code: 429, message: 'Quota exceeded. Please retry in 2h1m0s.' } }]), { status: 429 }))) as typeof fetch
+    const run = createPageAgentRunner({ baseURL: 'https://x.test/v1', model: 'm', apiKey: 'k', maxRetries: 0, backoffMs: 1 }, fetchMock)
+    await expect(run({ system: 's', user: 'u' })).rejects.toThrow(/Quota exceeded/)
+    expect(calls).toBe(1)
+  })
+})
