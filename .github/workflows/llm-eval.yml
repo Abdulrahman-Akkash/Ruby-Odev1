@@ -1,0 +1,75 @@
+name: llm-eval
+
+# Tam sistem eval'i (gerçek LLM) + gerçek model çıktılarıyla Cypress demo videosu.
+# Gerekli: Settings → Secrets and variables → Actions → New repository secret → LLM_API_KEY
+on:
+  workflow_dispatch:
+    inputs:
+      base_url:
+        description: OpenAI uyumlu uç nokta
+        default: https://api.openai.com/v1
+        required: true
+      model:
+        description: Model adı
+        default: gpt-4.1-mini
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  llm-eval:
+    runs-on: ubuntu-latest
+    env:
+      LLM_BASE_URL: ${{ inputs.base_url }}
+      LLM_MODEL: ${{ inputs.model }}
+      LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+    steps:
+      - name: Anahtar kontrolü
+        run: |
+          if [ -z "$LLM_API_KEY" ]; then
+            echo "::error::LLM_API_KEY secret'ı tanımlı değil (Settings → Secrets and variables → Actions)."
+            exit 1
+          fi
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: Tam sistem eval'i (6 gerçek metin)
+        run: npm run eval:llm
+      - name: Kayıtlı çıktılardan yeniden üretim (deterministiklik kontrolü)
+        run: npm run eval:replay -- --run "$LLM_MODEL"
+      - name: Prompt injection testi (canlı model dahil)
+        run: npm run eval:injection
+      - name: Cypress fixture'larını gerçek model çıktılarıyla yeniden yaz
+        run: npm run record:fixtures
+      - name: Demo videosunu gerçek model çıktılarıyla kaydet
+        uses: cypress-io/github-action@v6
+        with:
+          install: false
+          start: npm run harness
+          wait-on: http://localhost:4173
+          browser: electron
+          spec: cypress/e2e/demo.cy.ts
+      - name: Sonuçları depoya yaz
+        if: success()
+        run: |
+          cp cypress/videos/demo.cy.ts.mp4 docs/demo.mp4
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add eval/results eval/runs cypress/fixtures/llm docs/demo.mp4
+          git commit -m "eval: ${LLM_MODEL} ile tam sistem eval'i + gerçek çıktılarla demo videosu [skip ci]" || exit 0
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: llm-eval-results
+          path: |
+            eval/results
+            eval/runs
+            cypress/videos
+          if-no-files-found: warn

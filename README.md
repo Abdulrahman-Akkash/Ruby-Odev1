@@ -262,7 +262,9 @@ LLM_BASE_URL=https://api.openai.com/v1 LLM_MODEL=<model> LLM_API_KEY=<anahtarın
 
 Çıktı: `eval/results/llm-<model>/README.md` — her belge için **yakalanan**, **kaçırılan**, **yanlış alarm** maddeler (alıntılarıyla), doğrulayıcının **reddettiği** model iddiaları, skor ve rapor güveni. Ham tool-call çıktıları `eval/runs/<model>/` altına kaydedilir; `npm run eval:replay -- --run <model>` ile anahtar olmadan, birebir aynı metrikler yeniden üretilebilir.
 
-> **Durum:** Bu depo, LLM anahtarı olmayan ve dış LLM API'lerine ağ erişimi kapalı bir ortamda hazırlandı; bu yüzden tam sistem eval'i **henüz çalıştırılmadı** ve burada uydurma sayı yoktur. Kendi anahtarınızla yukarıdaki komutu çalıştırdığınızda tablo otomatik oluşur.
+**GitHub Actions ile (önerilen):** depo ayarlarında `LLM_API_KEY` secret'ını tanımlayın, ardından **Actions → llm-eval → Run workflow** (uç nokta ve model seçilebilir). İş; tam sistem eval'ini, kayıtlı çıktılardan yeniden üretimi, canlı modelle injection testini çalıştırır, Cypress fixture'larını gerçek model çıktılarıyla yeniden yazar, demo videosunu yeniden kaydeder ve hepsini depoya commit'ler.
+
+> **Durum:** Bu depo, LLM anahtarı olmayan ve dış LLM API'lerine ağ erişimi kapalı bir ortamda hazırlandı; tam sistem eval'i sonuçları `eval/results/llm-<model>/` altında, `llm-eval` iş akışı çalıştırıldığında oluşur. Burada uydurma sayı yoktur.
 
 ### 2. Kural taban çizgisi (LLM'siz) — [tam sonuç](eval/results/rules-baseline/README.md)
 
