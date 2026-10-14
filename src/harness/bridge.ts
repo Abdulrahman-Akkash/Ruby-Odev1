@@ -1,7 +1,7 @@
 import type { ExtractionResult } from '../content/extract'
 import { detectLegalPage } from '../core/detect'
 import type { LlmSettings } from '../core/llm'
-import type { Platform } from '../ui/platform'
+import { findInPage, type Platform } from '../ui/platform'
 
 /**
  * Cypress test düzeneği için Platform köprüsü. Uzantıdaki chrome.* çağrılarının
@@ -43,6 +43,11 @@ const platform: Platform = {
     await ensureExtractor(frame)
     const w = frame.contentWindow as Window & { __sozlesmeRadariExtract: () => Promise<ExtractionResult> }
     return w.__sozlesmeRadariExtract()
+  },
+  async revealQuote(quote) {
+    const w = pageFrame().contentWindow as Window & typeof globalThis
+    // findInPage'i iframe'in kendi bağlamında çalıştır (chrome.scripting.executeScript karşılığı)
+    return w.Function(`return (${findInPage.toString()})(arguments[0])`)(quote) as boolean
   },
   async getDetection() {
     const frame = document.getElementById('page') as HTMLIFrameElement

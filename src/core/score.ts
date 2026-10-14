@@ -76,8 +76,8 @@ export function assessConfidence(i: ConfidenceInputs): { level: ReportConfidence
   }
 
   if (i.documentType === 'not_legal') lower('low', 'Model bu sayfanın bir sözleşme/politika metni olmadığını düşünüyor.')
-  if (i.coverageRatio < 0.7) lower('low', `Metnin yalnızca %${Math.round(i.coverageRatio * 100)}'i analiz edilebildi.`)
-  else if (i.coverageRatio < 1) lower('medium', `Metnin %${Math.round(i.coverageRatio * 100)}'i analiz edildi; kalan kısım incelenmedi.`)
+  if (i.coverageRatio < 0.7) lower('low', `Metnin önemli bir kısmı analiz edilemedi (analiz edilen oran: %${Math.round(i.coverageRatio * 100)}).`)
+  else if (i.coverageRatio < 1) lower('medium', `Metnin bir kısmı analiz edilmedi (analiz edilen oran: %${Math.round(i.coverageRatio * 100)}).`)
   if (i.truncated) lower('medium', 'Metin çok uzun olduğu için kırpıldı.')
   if (i.failedChunks > 0) lower('medium', `${i.failedChunks} metin parçası için model geçerli çıktı üretemedi.`)
   if (i.hiddenTextChars > 500) lower('medium', `Sayfada analiz edilmeyen ${i.hiddenTextChars} karakter gizli/katlanmış metin var.`)
@@ -87,8 +87,9 @@ export function assessConfidence(i: ConfidenceInputs): { level: ReportConfidence
   const totalClaims = i.acceptedCount + i.rejectedCount
   if (totalClaims > 0) {
     const ratio = i.rejectedCount / totalClaims
-    if (ratio > 0.5) lower('low', `Model iddialarının %${Math.round(ratio * 100)}'inin alıntısı doğrulanamadı.`)
-    else if (ratio > 0.25) lower('medium', `Model iddialarının %${Math.round(ratio * 100)}'inin alıntısı doğrulanamadı.`)
+    const why = `Model iddialarından ${i.rejectedCount}/${totalClaims} tanesinin alıntısı sayfada doğrulanamadı.`
+    if (ratio > 0.5) lower('low', why)
+    else if (ratio > 0.25) lower('medium', why)
   }
   if (i.acceptedCount === 0 && i.ruleOnlyHighCount >= 1)
     lower('low', `Model hiç bulgu vermedi ama anahtar kelime taraması ${i.ruleOnlyHighCount} olası yüksek riskli madde buldu.`)

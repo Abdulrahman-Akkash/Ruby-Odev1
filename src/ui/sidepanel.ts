@@ -115,6 +115,16 @@ function severityChip(sev: 'low' | 'medium' | 'high') {
   return h('span', { class: `chip sev-${sev}`, 'data-cy': 'severity' }, SEVERITY_LABEL[sev])
 }
 
+function revealButton(quote: string) {
+  const b = h('button', { type: 'button', class: 'link', 'data-cy': 'reveal', title: 'Alıntıyı orijinal sayfada bul ve seç' }, 'Sayfada göster')
+  b.addEventListener('click', async () => {
+    const ok = await platform.revealQuote(quote).catch(() => false)
+    b.textContent = ok ? 'Sayfada seçildi ✓' : 'Sayfada bulunamadı (biçim farkı)'
+    setTimeout(() => (b.textContent = 'Sayfada göster'), 2500)
+  })
+  return b
+}
+
 function renderReport(r: RiskReport) {
   const root = $('report')
   root.replaceChildren()
@@ -180,6 +190,7 @@ function renderReport(r: RiskReport) {
         h(
           'footer',
           {},
+          revealButton(f.quote),
           h('span', { class: 'chip ok', title: 'Alıntı sayfa metninde birebir bulundu' }, '✓ alıntı doğrulandı'),
           f.ruleAgreement ? h('span', { class: 'chip' }, 'kural taraması da buldu') : null,
           h('span', { class: `chip conf-${f.confidence}` }, `model güveni: ${SEVERITY_LABEL[f.confidence].toLowerCase()}`),

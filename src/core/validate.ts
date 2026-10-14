@@ -84,6 +84,11 @@ export function verifyQuote(index: ClauseIndex, citedClauseId: string, quote: st
   return { ok: false, code: 'QUOTE_NOT_FOUND', reason: 'Alıntı sayfa metninde birebir bulunamadı; iddia geçersiz sayıldı.' }
 }
 
+/** Rapora alıntılanan şüpheli model metnindeki bağlantıları etkisizleştirir (kullanıcıya oltalama linki gösterme). */
+export function redactLinks(text: string): string {
+  return text.replace(/https?:\/\/\S+|www\.\S+/gi, '[bağlantı kaldırıldı]')
+}
+
 const CONTROL_CHARS = /[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F‪-‮⁦-⁩]/g
 
 export function sanitizeExplanation(text: string): { text: string; flagged: string | null } {
@@ -183,7 +188,7 @@ export function validateChunkOutput(raw: unknown, index: ClauseIndex): ChunkVali
     if (expl.flagged) {
       explanation = CATEGORIES[f.category].fallbackExplanation
       notes.push('Model açıklaması güvenlik filtresine takıldı; standart açıklama gösteriliyor.')
-      injection.push({ where: 'model_output', excerpt: expl.text.slice(0, 160), pattern: expl.flagged })
+      injection.push({ where: 'model_output', excerpt: redactLinks(expl.text).slice(0, 160), pattern: expl.flagged })
     }
     findings.push({
       clauseId: check.clauseId,

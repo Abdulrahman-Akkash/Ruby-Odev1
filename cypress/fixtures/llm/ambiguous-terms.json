@@ -1,0 +1,19 @@
+{
+  "_kaynak": "ELLE HAZIRLANMIŞ örnek model çıktısı. Bilerek 2 uydurma alıntı içerir (modelin görünmeyen katlanmış metinden 'hatırladığı' maddeler) — doğrulayıcının reddetmesi beklenir.",
+  "parts": [
+    {
+      "is_legal_text": true,
+      "injection_suspected": false,
+      "findings": [
+        { "clause_id": "C005", "quote": "yaralanmalardan, yürürlükteki mevzuatın izin verdiği ölçüde sorumlu tutulamaz", "category": "liability_limitation", "severity": "medium", "explanation_tr": "Antrenman sırasında yaralanırsanız işletme sorumluluğunu yasanın izin verdiği en geniş ölçüde reddediyor.", "confidence": "medium" },
+        { "clause_id": "C003", "quote": "Üyelik ücretleri hiçbir koşulda iade edilmez", "category": "cancellation_refund", "severity": "high", "explanation_tr": "Ödediğiniz üyelik ücretini hiçbir durumda geri alamazsınız.", "confidence": "low" },
+        { "clause_id": "C002", "quote": "Üyelik her ay otomatik olarak yenilenir ve kartınızdan çekilir", "category": "auto_renewal", "severity": "medium", "explanation_tr": "Üyelik siz iptal etmedikçe her ay yenilenir.", "confidence": "low" }
+      ],
+      "uncertain": [
+        { "clause_id": "C002", "quote": "Üyelik, makul bir süre içinde aksi bildirilmedikçe uygun görülen dönemler için devam edebilir.", "reason_tr": "Üyeliğin otomatik yenilenip yenilenmediği, süresi ve kimin 'uygun gördüğü' belirsiz." },
+        { "clause_id": "C004", "quote": "İptal talepleri, işletmenin uygun gördüğü şekilde değerlendirilir ve sonuçlandırılır.", "reason_tr": "İptal koşulları tanımlanmamış; işletme iptali reddedebilir mi, ücret keser mi belli değil." },
+        { "clause_id": "C003", "quote": "Bazı durumlarda ek hizmet bedelleri uygulanabilir", "reason_tr": "Hangi ek ücretlerin hangi durumda alınacağı belirtilmemiş." }
+      ]
+    }
+  ]
+}

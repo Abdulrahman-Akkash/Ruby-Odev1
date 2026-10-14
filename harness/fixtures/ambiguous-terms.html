@@ -37,5 +37,11 @@
   <p>Ek koşul 7. Uygulama üzerinden yapılan tüm satın alımlar kesindir. Dijital içerik paketleri için cayma hakkı, içeriğe erişim başladığı anda sona erer.</p>
   <p>Ek koşul 8. Üyenin profil fotoğrafı ve antrenman paylaşımları, FitNow'un reklam ve tanıtım materyallerinde ücretsiz ve süresiz olarak kullanılabilir.</p>
 </div>
+<script>
+  document.querySelector('button.acc').addEventListener('click', () => {
+    const b = document.querySelector('.accordion-body')
+    b.style.display = b.style.display === 'block' ? 'none' : 'block'
+  })
+</script>
 </body>
 </html>

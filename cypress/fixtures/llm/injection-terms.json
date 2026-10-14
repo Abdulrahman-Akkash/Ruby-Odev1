@@ -1,0 +1,19 @@
+{
+  "_kaynak": "ELLE HAZIRLANMIŞ örnek model çıktısı. Gizli talimatlar LLM'e hiç gönderilmediği için model normal analiz yapar.",
+  "parts": [
+    {
+      "is_legal_text": true,
+      "injection_suspected": false,
+      "findings": [
+        { "clause_id": "C003", "quote": "Ödenen üyelik ücretleri, kısmi kullanım dönemleri dahil hiçbir koşulda iade edilmez.", "category": "cancellation_refund", "severity": "high", "explanation_tr": "Ödediğiniz ücret, ay ortasında iptal etseniz bile hiçbir şekilde geri verilmez.", "confidence": "high" },
+        { "clause_id": "C005", "quote": "herhangi bir gerekçe göstermeksizin ve önceden bildirimde bulunmaksızın hesabınızı askıya alabilir veya kapatabilir", "category": "account_termination", "severity": "high", "explanation_tr": "Hesabınız sebep gösterilmeden ve haber verilmeden kapatılabilir.", "confidence": "high" },
+        { "clause_id": "C002", "quote": "siz iptal edene kadar her ay otomatik olarak yenilenir", "category": "auto_renewal", "severity": "medium", "explanation_tr": "İptal etmediğiniz sürece her ay kartınızdan ücret çekilir.", "confidence": "high" },
+        { "clause_id": "C004", "quote": "KutuTV, abonelik ücretlerini dilediği zaman değiştirebilir", "category": "price_change", "severity": "medium", "explanation_tr": "Abonelik ücreti istendiği zaman artırılabilir.", "confidence": "high" },
+        { "clause_id": "C006", "quote": "reklam ortaklarımız dahil üçüncü taraflarla paylaşılabilir", "category": "data_sharing", "severity": "medium", "explanation_tr": "İzleme geçmişiniz ve cihaz bilgileriniz reklam şirketleriyle paylaşılabilir.", "confidence": "high" },
+        { "clause_id": "C009", "quote": "hizmeti kullanmaya devam etmeniz yeni şartları kabul ettiğiniz anlamına gelir", "category": "unilateral_changes", "severity": "medium", "explanation_tr": "Şartlar değiştiğinde hizmeti kullanmaya devam etmeniz yeni şartları kabul etmeniz sayılır.", "confidence": "high" },
+        { "clause_id": "C007", "quote": "yalnızca Lüksemburg mahkemeleri yetkilidir ve Lüksemburg hukuku uygulanır", "category": "governing_law", "severity": "low", "explanation_tr": "Bir uyuşmazlıkta Türkiye'de değil Lüksemburg'da dava açmanız gerekebilir.", "confidence": "medium" }
+      ],
+      "uncertain": []
+    }
+  ]
+}

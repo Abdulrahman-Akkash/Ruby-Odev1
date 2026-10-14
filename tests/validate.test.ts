@@ -110,6 +110,7 @@ describe('validateChunkOutput', () => {
     expect(v.findings[0].explanation).not.toContain('http')
     expect(v.findings[0].notes.join(' ')).toContain('güvenlik filtresine')
     expect(v.injection[0].where).toBe('model_output')
+    expect(v.injection[0].excerpt).not.toContain('evil.example')
   })
   it('belirsiz maddelerin de alıntısını doğrular', () => {
     const v = validateChunkOutput(

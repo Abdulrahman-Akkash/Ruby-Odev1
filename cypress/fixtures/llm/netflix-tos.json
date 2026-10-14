@@ -1,0 +1,29 @@
+{
+  "_kaynak": "ELLE HAZIRLANMIŞ örnek model çıktısı (demo/CI için deterministik). Gerçek model çıktısıyla değiştirmek için: npm run record:fixtures",
+  "parts": [
+    {
+      "is_legal_text": true,
+      "injection_suspected": false,
+      "findings": [
+        { "clause_id": "C024", "quote": "Unless you cancel your subscription before your billing date, you authorize us to charge the subscription fee for the next billing cycle to your Payment Method", "category": "auto_renewal", "severity": "medium", "explanation_tr": "Fatura tarihinden önce iptal etmezseniz bir sonraki dönemin ücreti otomatik olarak çekilir.", "confidence": "high" },
+        { "clause_id": "C025", "quote": "You authorize us to charge any Payment Method associated with your account in case your primary Payment Method is declined", "category": "other", "severity": "medium", "explanation_tr": "Ana kartınız reddedilirse hesabınızdaki başka bir ödeme yönteminden de ücret alınabilir.", "confidence": "high" },
+        { "clause_id": "C005", "quote": "Netflix reserves the right to revoke an Offer and put your account on hold in the event that we determine you are not eligible.", "category": "account_termination", "severity": "low", "explanation_tr": "Kampanyaya uygun olmadığınıza karar verilirse kampanya geri alınabilir ve hesabınız bekletmeye alınabilir.", "confidence": "medium" }
+      ],
+      "uncertain": []
+    },
+    {
+      "is_legal_text": true,
+      "injection_suspected": false,
+      "findings": [
+        { "clause_id": "C029", "quote": "payments are non-refundable and we do not provide refunds or credits for any partial subscription periods or unused Netflix content", "category": "cancellation_refund", "severity": "high", "explanation_tr": "Ödediğiniz ücret iade edilmez; dönem ortasında iptal etseniz bile kalan süre için para geri alınmaz.", "confidence": "high" },
+        { "clause_id": "C030", "quote": "We may change our subscription plans and the price of our service from time to time", "category": "price_change", "severity": "medium", "explanation_tr": "Netflix abonelik fiyatını değiştirebilir; en az bir ay önce bildirim yapılır ve iptal hakkınız vardır.", "confidence": "high" },
+        { "clause_id": "C033", "quote": "We can terminate your account or place your account on hold in order to protect you, Netflix or our partners from identity theft or other fraudulent activity.", "category": "account_termination", "severity": "medium", "explanation_tr": "Dolandırıcılık şüphesi olduğunda hesabınız kapatılabilir veya askıya alınabilir.", "confidence": "medium" },
+        { "clause_id": "C038", "quote": "We may, from time to time, change these Terms of Use", "category": "unilateral_changes", "severity": "medium", "explanation_tr": "Kullanım koşulları şirket tarafından değiştirilebilir; önemli değişikliklerde bir ay önce bildirim yapılır.", "confidence": "high" },
+        { "clause_id": "C034", "quote": "These Terms of Use shall be governed by and construed in accordance with the laws of the Netherlands.", "category": "governing_law", "severity": "low", "explanation_tr": "Sözleşmeye Hollanda hukuku uygulanır; ancak ülkenizdeki zorunlu tüketici hakları saklıdır.", "confidence": "high" }
+      ],
+      "uncertain": [
+        { "clause_id": "C027", "quote": "there may be some occasions when you may see advertisements", "reason_tr": "Reklamsız planlarda bile reklam gösterilebileceği belirtiliyor; bunun ne sıklıkla olacağı metinden anlaşılmıyor." }
+      ]
+    }
+  ]
+}
