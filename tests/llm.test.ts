@@ -23,3 +23,28 @@ describe('createPageAgentRunner', () => {
     expect(calls).toBe(1)
   })
 })
+
+describe('Gemini uyumluluğu', () => {
+  it('istek gövdesinde additionalProperties olmaz ve tool_choice "required" olur', async () => {
+    let body: any
+    const fetchMock = (async (_u: unknown, init?: RequestInit) => {
+      body = JSON.parse(String(init?.body))
+      return new Response(JSON.stringify(ok), { status: 200, headers: { 'content-type': 'application/json' } })
+    }) as typeof fetch
+    const run = createPageAgentRunner({ baseURL: 'https://generativelanguage.googleapis.com/v1beta/openai', model: 'gemini-x', apiKey: 'k' }, fetchMock)
+    await run({ system: 's', user: 'u' })
+    expect(JSON.stringify(body.tools)).not.toContain('additionalProperties')
+    expect(body.tool_choice).toBe('required')
+    expect(body.tools[0].function.parameters.properties.findings.items.properties.quote).toBeTruthy()
+  })
+  it('OpenAI için gövde değişmez', async () => {
+    let body: any
+    const fetchMock = (async (_u: unknown, init?: RequestInit) => {
+      body = JSON.parse(String(init?.body))
+      return new Response(JSON.stringify(ok), { status: 200, headers: { 'content-type': 'application/json' } })
+    }) as typeof fetch
+    await createPageAgentRunner({ baseURL: 'https://api.openai.com/v1', model: 'gpt-x', apiKey: 'k' }, fetchMock)({ system: 's', user: 'u' })
+    expect(JSON.stringify(body.tools)).toContain('additionalProperties')
+    expect(body.tool_choice).toMatchObject({ type: 'function' })
+  })
+})

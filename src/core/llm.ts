@@ -27,6 +27,35 @@ function sleep(ms: number, signal?: AbortSignal): Promise<void> {
   })
 }
 
+export function isGeminiCompat(baseURL: string): boolean {
+  return /generativelanguage\.googleapis\.com|aiplatform\.googleapis\.com/.test(baseURL)
+}
+
+/** JSON Schema'dan Gemini'nin OpenAPI alt kümesinde olmayan anahtarları siler. */
+function stripUnsupported(node: unknown): unknown {
+  if (Array.isArray(node)) return node.map(stripUnsupported)
+  if (!node || typeof node !== 'object') return node
+  const out: Record<string, unknown> = {}
+  for (const [k, v] of Object.entries(node)) {
+    if (k === 'additionalProperties' || k === '$schema' || k === 'strict') continue
+    out[k] = stripUnsupported(v)
+  }
+  return out
+}
+
+/**
+ * Gemini'nin OpenAI uyumlu uç noktası için istek gövdesini uyarlar:
+ *  - araç şemasından `additionalProperties` gibi desteklenmeyen anahtarlar çıkarılır
+ *    (katılık zaten deterministik doğrulayıcıda uygulanıyor),
+ *  - tek araç olduğundan isimli tool_choice, eşdeğeri olan "required"a çevrilir.
+ */
+export function toGeminiCompat(body: Record<string, unknown>): Record<string, unknown> {
+  const out: Record<string, unknown> = { ...body }
+  if (Array.isArray(out.tools)) out.tools = stripUnsupported(out.tools)
+  if (out.tool_choice && typeof out.tool_choice === 'object') out.tool_choice = 'required'
+  return out
+}
+
 export interface ChunkCall {
   system: string
   user: string
@@ -56,10 +85,11 @@ export function createPageAgentRunner(settings: LlmSettings, customFetch?: typeo
     apiKey: settings.apiKey,
     maxRetries: settings.maxRetries ?? 1,
     customFetch: customFetch ?? ((...args: Parameters<typeof fetch>) => fetch(...args)),
-    transformRequestBody:
-      settings.temperature === undefined
-        ? undefined
-        : (body) => ({ ...body, temperature: settings.temperature }),
+    transformRequestBody: (body) => {
+      const out: Record<string, unknown> = isGeminiCompat(settings.baseURL) ? toGeminiCompat(body) : { ...body }
+      if (settings.temperature !== undefined) out.temperature = settings.temperature
+      return out
+    },
   })
   const tools: Record<string, Tool> = {
     [TOOL_NAME]: {
