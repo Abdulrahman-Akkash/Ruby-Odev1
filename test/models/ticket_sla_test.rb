@@ -106,6 +106,20 @@ class TicketSlaTest < ActiveSupport::TestCase
     end
   end
 
+  test "tarama ile müşteri yanıtı aynı talebi iki kez kapatmaz (bayat nesne)" do
+    ticket = travel_to(T0) { create_ticket }
+    travel_to(T0 + 1.hour) { ticket.reply_as_agent!(users(:ayse), body: "Çözüldü", submit_as: "solved") }
+    stale = Ticket.find(ticket.id)
+
+    travel_to(T0 + 1.hour + Ticket::AUTO_CLOSE_AFTER + 1.minute) do
+      assert_equal [ ticket ], Ticket.close_stale_solved!
+      assert_raises(Ticket::InvalidTransition) { stale.reply_as_customer!(body: "Merhaba?") }
+    end
+
+    closes = ticket.events.where(kind: "status_changed").select { |e| e.data["to"] == "closed" }
+    assert_equal 1, closes.size
+  end
+
   test "öncelik ileri geri değişince aynı SLA ihlali ikinci kez yazılmaz" do
     ticket = travel_to(T0) { create_ticket(priority: "urgent") }               # hedef 10:00
     travel_to(T0 + 61.minutes) { assert_equal [ ticket ], Ticket.notify_sla_breaches! }

@@ -44,6 +44,28 @@ class AutoPassFlowTest < ActionDispatch::IntegrationTest
     travel_back
   end
 
+  test "tarama kilidi meşgulse ve vardiyada başka ajan varsa 'kimse yok' demez" do
+    travel_to T0
+    users(:mehmet).start_shift!(8.hours)
+    ayse = users(:ayse)
+    ayse.start_shift!(8.hours)
+    create_ticket(assignee: ayse, status: "open")
+
+    # Eşzamanlı bir taramayı taklit etmek için kilidi AYRI bir PostgreSQL oturumu tutar
+    # (test bağlantısı sabitlendiği için havuzdan ikinci bağlantı alınamaz).
+    cfg = ActiveRecord::Base.connection_db_config.configuration_hash
+    other = PG.connect({ dbname: cfg[:database], host: cfg[:host], port: cfg[:port],
+                         user: cfg[:username], password: cfg[:password] }.compact)
+    other.exec("SELECT pg_advisory_lock(#{Sweeper::LOCK_KEY})")
+    sign_in_as ayse
+    delete agent_shift_path
+
+    assert_equal "Vardiyan bitti. 1 talebin birazdan vardiyadaki ekip arkadaşlarına pas edilecek.", flash[:notice]
+  ensure
+    other&.close # oturum kapanınca kilit de bırakılır
+    travel_back
+  end
+
   test "pas bildirimi yalnız ajanın kendi taleplerini sayar" do
     travel_to T0
     users(:mehmet).start_shift!(8.hours)

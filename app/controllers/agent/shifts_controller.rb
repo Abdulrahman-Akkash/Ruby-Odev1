@@ -23,7 +23,13 @@ module Agent
       kept = own_ids.size - passed
       notice = "Vardiyan bitti."
       notice += " #{passed} talebin vardiyadaki ekip arkadaşlarına pas edildi." if passed.positive?
-      notice += " Vardiyada kimse olmadığı için #{kept} talep sende kaldı; vardiyaya ilk giren ajana pas edilecek." if kept.positive?
+      if kept.positive?
+        notice += if User.on_shift.where.not(id: current_user.id).exists?
+          " #{kept} talebin birazdan vardiyadaki ekip arkadaşlarına pas edilecek."
+        else
+          " Vardiyada kimse olmadığı için #{kept} talep sende kaldı; vardiyaya ilk giren ajana pas edilecek."
+        end
+      end
       redirect_to agent_passes_path, notice:
     end
   end

@@ -1,7 +1,7 @@
 # Sunum akışı (5 dakika, canlı URL üzerinden)
 
 **Hazırlık (sunumdan ~5 dk önce):**
-1. Canlı URL'yi aç (ücretsiz plan uyuyorsa ilk istek ~1 dk sürer).
+1. Canlı URL'yi aç (README'nin başındaki "Canlı URL" satırı; ücretsiz plan uyuyorsa ilk istek ~1 dk sürer).
 2. `ayse@asist.dev` / `asist2026` ile giriş → **Ekip → Demo verisini sıfırla** → tekrar giriş.
 3. En az 2 dk bekle; **Kuyruk → Çözülen / kapanan** sekmesinde *"API anahtarı nasıl yenilenir?"* talebi **Kapandı** görünmeli
    (4 gün kuralı sıfırlamadan 2 dk sonra kendiliğinden işler — zaman kuralının canlı kanıtı).
@@ -23,7 +23,7 @@ Aort dilimi: talep gelir, atanır, yanıtlanır, çözülür, kapanır; hepsi bi
 ## 3. Kod (1 dk)
 - **Zaman kuralı:** [`app/models/sla_policy.rb:6-28`](../app/models/sla_policy.rb#L6) (hedefler, `first_reply_due_at`, `warning_at`) →
   [`app/models/ticket.rb:144-156`](../app/models/ticket.rb#L144) `sla_state` →
-  [`ticket.rb:35`](../app/models/ticket.rb#L35) `AUTO_CLOSE_AFTER` + [`ticket.rb:197-202`](../app/models/ticket.rb#L197) `close_stale_solved!`.
+  [`ticket.rb:35`](../app/models/ticket.rb#L35) `AUTO_CLOSE_AFTER` + [`ticket.rb:201-205`](../app/models/ticket.rb#L201) `close_stale_solved!`.
   Kim çalıştırır: [`app/models/sweeper.rb:19-32`](../app/models/sweeper.rb#L19).
 - **Durum geçişi:** [`ticket.rb:22-28`](../app/models/ticket.rb#L22) `TRANSITIONS` tablosu + [`ticket.rb:67-87`](../app/models/ticket.rb#L67) `transition_to!`.
 - **Testler (`travel_to`):**
@@ -53,7 +53,7 @@ Tam liste README → **Kod haritası** (17 satır, yan etkileriyle). En olası s
 |---|---|
 | SLA hafta sonunu saymasın | [`sla_policy.rb:21-23`](../app/models/sla_policy.rb#L21) `first_reply_due_at` **ve** [`sla_policy.rb:26-28`](../app/models/sla_policy.rb#L26) `warning_at` — ikisi de iş takvimiyle sarılır |
 | Acil SLA 30 dk olsun | [`sla_policy.rb:7`](../app/models/sla_policy.rb#L7) `"urgent" => 1.hour` |
-| `pending`'de SLA dursun | [`ticket.rb:147`](../app/models/ticket.rb#L147) `sla_state` + [`ticket.rb:59`](../app/models/ticket.rb#L59) / [`ticket.rb:188`](../app/models/ticket.rb#L188) sorgular |
+| `pending`'de SLA dursun | [`ticket.rb:147`](../app/models/ticket.rb#L147) `sla_state` + [`ticket.rb:59`](../app/models/ticket.rb#L59) / [`ticket.rb:192`](../app/models/ticket.rb#L192) sorgular |
 | Çözülen talep 7 günde kapansın | [`ticket.rb:35`](../app/models/ticket.rb#L35) `AUTO_CLOSE_AFTER` |
 | Beklemedeki talep doğrudan kapanabilsin | [`ticket.rb:25`](../app/models/ticket.rb#L25) `"pending"` satırına `closed` |
 | Müşteri yanıtı çözülmüş talebi açmasın | [`ticket.rb:124`](../app/models/ticket.rb#L124) |

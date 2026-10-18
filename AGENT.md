@@ -10,8 +10,8 @@ karşılaştığımız gerçek bir duruma karşılık gelir (bkz. en alttaki "Ne
   talep gelir → atanır → yanıtlanır → çözülür → kapanır, bir **SLA saatine** karşı.
 - Farkı **Otomatik Pas**: vardiyası biten ajanın talepleri ve SLA'sı riske giren sahipsiz
   talepler vardiyadaki en az yüklü ajana kendiliğinden devredilir.
-- **Marka kuralı (kesin):** uygulama içinde (view, layout, flash, seed, test verisi, `public/`)
-  ilham kaynağı markanın adı veya logosu **asla** geçmez. Yalnızca `README.md`'de "ilham kaynağı" olarak geçebilir.
+- **Marka kuralı (kesin):** uygulama içinde (kod ve yorumları, view, layout, flash, seed, test verisi, `public/`)
+  ilham kaynağı markanın adı veya logosu **asla** geçmez. Yalnızca dokümanlarda (`README.md`, `AGENT.md`, `docs/`) "ilham kaynağı" olarak geçebilir.
   Her değişiklikten sonra kontrol: `grep -ri zendesk app config public db test lib` → boş olmalı.
 
 ## 2. Komutlar
@@ -104,7 +104,7 @@ Teslimden önce bağımsız bir denetim yapılır (ajan workflow'u veya öğrenc
   istek başındaki tarama yüzünden o daha "vardiya dışı" görünürken başkasına pas ediliyordu.
   Çözüm: `Agent::ShiftsController` taramayı vardiya güncellendikten sonra çalıştırır. Bu tür sıralama hatalarını
   ancak HTTP seviyesindeki testler yakalar; bu yüzden 5. bölümdeki entegrasyon testi kuralı var.
-- **Yer tutucu yasağı ve 7b denetimi (18 Eki):** 7 bağımsız denetçi ajan + doğrulayıcı 47 bulgu çıkardı. Öne çıkanlar:
+- **Yer tutucu yasağı ve 7b denetimi (18 Eki):** 7 bağımsız denetçi + 2 doğrulayıcı + 1 eksiklik eleştirmeni (10 alt-ajan) 47 bulgu çıkardı. Öne çıkanlar:
   README'de doldurulmamış abonelik ücreti; `docs/SUNUM.md`'de yazıldığı sırayla oynanınca **hiçbir şey göstermeyen**
   bir demo adımı (sunumda "var" denip çalışmayan an = 0 puan riski); müşteri sayfası taramayı çalıştırmadığı için süresi
   dolmuş çözülmüş talebin müşteri yanıtıyla yeniden açılabilmesi; öncelik ileri-geri değişince ikinci "SLA ihlali" kaydı;

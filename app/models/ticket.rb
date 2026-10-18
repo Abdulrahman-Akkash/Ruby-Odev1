@@ -115,10 +115,10 @@ class Ticket < ApplicationRecord
 
   def reply_as_customer!(body:, now: Time.current)
     # Tarama henüz çalışmamış olsa bile süresi dolan çözülmüş talep önce kapanır.
-    transition_to!("closed", reason: auto_close_reason, now:) if auto_close_due?(now)
-    raise InvalidTransition, "Bu talep kapandı. Lütfen yeni bir talep oluşturun." if status == "closed"
+    close_if_due!(now)
+    with_lock do # satırı kilitleyip yeniden okur: eşzamanlı tarama ile çift geçiş olmaz
+      raise InvalidTransition, "Bu talep kapandı. Lütfen yeni bir talep oluşturun." if status == "closed"
 
-    transaction do
       comments.create!(body:)
       log!("customer_replied", "#{requester_name} yanıt yazdı")
       transition_to!("open", reason: "müşteri yanıtı", now:) if status.in?(%w[pending solved])
@@ -172,6 +172,10 @@ class Ticket < ApplicationRecord
     "#{AUTO_CLOSE_AFTER.in_days.to_i} gün içinde yeniden açılmadı"
   end
 
+  def close_if_due!(now = Time.current)
+    with_lock { transition_to!("closed", reason: auto_close_reason, now:) if auto_close_due?(now) }
+  end
+
   # Zaman kuralı tarayıcıları (Sweeper çağırır) ----------------------------
 
   # Bir kayıt, yalnızca o anki eşikten SONRA yazıldıysa geçerlidir; öncelik
@@ -195,9 +199,8 @@ class Ticket < ApplicationRecord
   end
 
   def self.close_stale_solved!(now: Time.current)
-    where(status: "solved").where(solved_at: ..(now - AUTO_CLOSE_AFTER)).find_each.map do |ticket|
-      ticket.transition_to!("closed", reason: ticket.auto_close_reason, now:)
-      ticket
+    where(status: "solved").where(solved_at: ..(now - AUTO_CLOSE_AFTER)).find_each.select do |ticket|
+      ticket.close_if_due!(now)
     end
   end
 

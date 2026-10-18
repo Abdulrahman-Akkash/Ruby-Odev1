@@ -11,7 +11,7 @@ ve gerçek kullanıcı yorumlarından gelen bir acıyı çözer: **vardiyası bi
 
 | | |
 |---|---|
-| **Canlı URL** | _Render deploy'undan sonra buraya eklenecek_ (adımlar: [Deploy](#deploy-render)) |
+| **Canlı URL** | **Henüz yok** — Render'a deploy bekliyor (Blueprint hazır; adımlar: [Deploy](#deploy-render), durum: [Yapamadıklarım](#yapamadıklarım)) |
 | **Demo ajanları** | `ayse@asist.dev`, `mehmet@asist.dev`, `zeynep@asist.dev` — şifre `asist2026` |
 | **Müşteri formu** | `/` (giriş gerekmez) |
 | **Ajan paneli** | `/agent` |
@@ -43,9 +43,9 @@ Fortune 500, ABD şirketlerinin **gelire** göre sıralamasıdır. 2025 listesin
 
 | Soru | Yaklaşık cevap | Kaynak |
 |---|---|---|
-| **a. Değerleme aralığı** (piyasa değeri) | **~20 milyon $ → ~5 trilyon $**. En büyük: Nvidia ≈ 5,0 trilyon $ (Ağu 2026). En küçük: QVC Group (eski Qurate Retail) ≈ **19 milyon $** (Fortune profili, 31 Mar 2026; 2026 listesinde 433. sırada, geliri ≈ 9,5 milyar $, Chapter 11 sürecinde); 2025 listesinde (416.) değeri ≈ 119 milyon $ idi (7 Eki 2025). Sağlıklı şirketler arasında da alt uç ~1 milyar $ civarındadır: Kohl's ≈ 1 milyar $'ın hemen üstü (Mart 2025; 2025 listesinde 261., geliri ≈ 16,2 milyar $). Halka açık olmayan F500 şirketlerinin (karşılıklı sigortacılar, özel şirketler) piyasa değeri yoktur. | [Motley Fool — en büyük şirketler](https://www.fool.com/research/largest-companies-by-market-cap/) · [Fortune — QVC Group profili](https://fortune.com/company/qurate-retail/fortune500/) · [QVC Group 2026 F500 sırası](https://vista.today/2026/06/qvc-group-fortune-500-2026/) · [TipRanks — QVC Group piyasa değeri](https://www.tipranks.com/stocks/qvcga/market-cap) · [Motley Fool — Kohl's](https://www.fool.com/investing/2025/03/11/why-kohls-stock-is-plummeting-today/) · [Kohl's geliri (D&B/Morningstar)](https://www.dnb.com/business-directory/company-profiles.kohls_corporation.7133d85a919295a89bdc716ce739df50.html) |
+| **a. Değerleme aralığı** (piyasa değeri) | **~20 milyon $ → ~5 trilyon $**. En büyük: Nvidia ≈ 5,0 trilyon $ (Ağu 2026). Bulabildiğim en küçük: QVC Group (eski Qurate Retail) ≈ **19 milyon $** (Fortune profili, 31 Mar 2026; 2026 listesinde 433. sırada, geliri ≈ 9,5 milyar $; 2026'da Chapter 11 sürecinden geçti). TipRanks'e göre 7 Eki 2025'te ≈ 119 milyon $ idi. Zor durumda olmayan şirketler arasında da alt uç ~1 milyar $ civarındadır: Kohl's ≈ 1 milyar $'ın hemen üstü (Mart 2025; geliri ≈ 16,2 milyar $; 2026 listesinde 289.). Uçların tarihleri farklıdır (Nvidia Ağu 2026, QVC Mar 2026); piyasa değeri günlük değişir. Halka açık olmayan F500 şirketlerinin (karşılıklı sigortacılar, özel şirketler) piyasa değeri yoktur. | [Motley Fool — en büyük şirketler](https://www.fool.com/research/largest-companies-by-market-cap/) · [Fortune — QVC Group profili](https://fortune.com/company/qurate-retail/fortune500/) · [QVC Group 2026 F500 sırası](https://vista.today/2026/06/qvc-group-fortune-500-2026/) · [TipRanks — QVC Group piyasa değeri](https://www.tipranks.com/stocks/qvcga/market-cap) · [Motley Fool — Kohl's](https://www.fool.com/investing/2025/03/11/why-kohls-stock-is-plummeting-today/) · [Kohl's geliri (D&B/Morningstar)](https://www.dnb.com/business-directory/company-profiles.kohls_corporation.7133d85a919295a89bdc716ce739df50.html) · [Fortune 2026 — Kohl's 289.](https://fortune.com/2026/06/18/fortune-500-power-moves-june-12-18/) |
 | **b. Çalışan sayısı aralığı** | **~500 → ~2,1 milyon**. En büyük: Walmart ≈ 2,1 milyon. En küçükler: 8 şirket 2.000'in altında; ör. Welltower 685, A-Mark Precious Metals ≈ 486. | [Walmart 10-K FY2025 (SEC)](https://www.sec.gov/Archives/edgar/data/104169/000010416925000021/wmt-20250131.htm) · [Fortune — "8 Fortune 500 companies with high revenue, low headcount"](https://fortune.com/2025/06/02/fortune-500-employees-headcount-workforce-largest-smallest/) · [Yahoo Finance kopyası](https://finance.yahoo.com/news/largest-fortune-500-company-2-094500793.html) · [Welltower proxy (SEC)](https://www.sec.gov/Archives/edgar/data/766704/000076670425000013/well-20250410.htm) |
-| **c. Bir firmanın kullandığı SaaS ürünü sayısı** | **~650–700 uygulama**. Zylo: 10.000+ çalışanlı kurumlar ortalama **660** SaaS uygulaması (2025), 2026 endeksinde "yaklaşık 700". Fortune 500 şirketi ortalama ~61.000 çalışanlıdır (30,5 milyon / 500, Fortune 2026) ve yalnızca 8'inin 2.000'den az çalışanı var (b satırı); yani tipik F500 şirketi bu 10.000+ sınıfındadır. | [Zylo — SaaS istatistikleri](https://zylo.com/blog/saas-statistics) · [Zylo 2025 SaaS Management Index](https://zylo.com/news/2025-saas-management-index) |
+| **c. Bir firmanın kullandığı SaaS ürünü sayısı** | **~650–700 uygulama**. Zylo: 10.000+ çalışanlı kurumlar ortalama **660** SaaS uygulaması (2025), 2026 endeksinde "yaklaşık 700". Fortune 500 şirketlerinde ortalama ~61.000 çalışan var (30,5 milyon / 500, Fortune 2026) ve 2025 listesinde yalnızca 8'inin 2.000'den az çalışanı vardı (b satırı); bu yüzden F500 şirketlerinin büyük çoğunluğunun bu 10.000+ sınıfında olduğunu varsayıyorum (kaba çıkarım: medyan çalışan sayısı için kaynak bulamadım). | [Zylo — SaaS istatistikleri](https://zylo.com/blog/saas-statistics) · [Zylo 2025 SaaS Management Index](https://zylo.com/news/2025-saas-management-index) |
 | **d. SaaS aboneliklerine yıllık ödenen para** | **~250–300 milyon $ / yıl** (ortalama). Zylo 2025: büyük kurumlarda ortalama **284 milyon $**; 2026: ortalama ≈ **245 milyon $**, aralık **123,5–375,5 milyon $**. Çalışan başına ≈ **4.830 $** (2025). | [Zylo — SaaS istatistikleri](https://zylo.com/blog/saas-statistics) · [Zylo 2025 SaaS Management Index](https://zylo.com/news/2025-saas-management-index) · [PRWeb duyurusu](https://www.prweb.com/releases/2025-saas-management-index-reveals-first-increase-in-average-saas-spend-in-three-years-amid-rising-vendor-costs-and-rapid-ai-adoption-302351642.html) |
 
 **Okuma:** tipik bir Fortune 500 firması yüzlerce SaaS ürününe yılda yüz milyonlarca dolar öder. Bunların her biri "çekirdeği kopyalanabilir" bir ürün; asıl değer, kullanıcının o üründe her gün yaşadığı acıyı çözen "tam ayağına pas"tadır.
@@ -109,8 +109,8 @@ Karşılaştırma: tek bir Fortune 500 firmasının yıllık SaaS faturası ~250
 | Araç | Claude Code (claude.ai/code bulut oturumu) |
 | Abonelik | **Claude Pro — 20 $/ay.** Bu ödev için ayrıca API/token faturası **ödenmedi**; ödevin ek maliyeti 0 $ (aylık ücretin tamamı sayılırsa 20 $). |
 | İlk sürüm | 12 Eki 2026, tek oturum, ~40 dk (ilk komut 13:36 UTC, ilk sürüm commit'i 13:59 UTC, push 14:13 UTC): araştırma + uygulama + testler + doküman |
-| Teslim öncesi denetim | 18 Eki 2026: 10 alt-ajanlı denetim workflow'u (**1,59 M token**, Claude Code raporu) + kaynak araştırması workflow'u (**0,56 M token** ilk koşu) + düzeltmeler. Pro planının oturum limitine bir kez takıldı (birkaç saat bekleme). |
-| Üretilen kod | ~1.500 satır uygulama + ~600 satır test (`cloc app lib/tasks db/migrate …` / `cloc test`) |
+| Teslim öncesi denetim | 18 Eki 2026: denetim workflow'u — 7 denetçi + 2 doğrulayıcı + 1 eksiklik eleştirmeni = 10 alt-ajan (**1,59 M token**, Claude Code raporu); kaynak araştırması workflow'u (**0,56 M + 0,52 M token**, iki koşu); son fark incelemesi (4 alt-ajan, **0,63 M token**); düzeltmeler. Pro planının oturum limitine bir kez takıldı (birkaç saat bekleme). |
+| Üretilen kod | ~1.400 satır uygulama (`cloc app lib/tasks db/migrate`) + ~620 satır test (`cloc test`) |
 | Barındırma | Render ücretsiz plan: 0 $ |
 
 **Tahmin ile gerçeğin karşılaştırması:** aort dilimi (~2 bin satır) bir öğleden sonradan kısa sürdü ve sabit abonelik içinde kaldı; tahmin tablosundaki 300 bin satırlık çekirdek bunun ~150 katı. Asıl zaman, yazmaktan çok **doğrulamaya** gitti (denetim workflow'u 47 bulgu çıkardı; bkz. `AGENT.md` → "Neden bu kurallar?").
@@ -149,11 +149,11 @@ Tablo dışı her geçiş `Ticket::InvalidTransition` fırlatır ve kullanıcıy
 ### Zaman kuralları
 1. **İlk yanıt SLA'sı** — önceliğe göre hedef: Acil 1 sa · Yüksek 4 sa · Normal 8 sa · Düşük 24 sa ([`app/models/sla_policy.rb:6-11`](app/models/sla_policy.rb#L6)).
    Durum zamanla değişir: `on_track → at_risk (son %25) → breached` ([`ticket.rb:144`](app/models/ticket.rb#L144)).
-2. **SLA hatırlatma ve ihlal kaydı** — risk bölgesine girildiği ve hedef aşıldığı an birer kez olay yazılır ([`ticket.rb:179`](app/models/ticket.rb#L179), [`ticket.rb:188`](app/models/ticket.rb#L188)); öncelik değişip eşik kayarsa yeniden değerlendirilir, geri dönerse çoğalmaz.
-3. **Otomatik kapanış** — çözülen talep 4 gün içinde yeniden açılmazsa `closed` olur ([`ticket.rb:35`](app/models/ticket.rb#L35), [`ticket.rb:197`](app/models/ticket.rb#L197)). Tarama henüz çalışmamış olsa bile müşteri, süresi dolmuş talebe yazınca talep önce kapanır ([`ticket.rb:118`](app/models/ticket.rb#L118)).
+2. **SLA hatırlatma ve ihlal kaydı** — risk bölgesine girildiği ve hedef aşıldığı an birer kez olay yazılır ([`ticket.rb:183`](app/models/ticket.rb#L183), [`ticket.rb:192`](app/models/ticket.rb#L192)); öncelik değişip eşik kayarsa yeniden değerlendirilir, geri dönerse çoğalmaz.
+3. **Otomatik kapanış** — çözülen talep 4 gün içinde yeniden açılmazsa `closed` olur ([`ticket.rb:35`](app/models/ticket.rb#L35), [`ticket.rb:201`](app/models/ticket.rb#L201)). Tarama henüz çalışmamış olsa bile müşteri, süresi dolmuş talebe yazınca talep önce kapanır ([`ticket.rb:118`](app/models/ticket.rb#L118)).
 4. **Vardiya bitişi** — ajanın `on_shift_until` anı geçince Otomatik Pas devreye girer (aşağıda).
 
-Zaman kurallarını tek yerden işleten sınıf: [`app/models/sweeper.rb`](app/models/sweeper.rb). Dört yoldan çağrılır: her ajan isteği, müşterinin talep sayfası, kuyruk ekranının 30 sn'lik otomatik yenilemesi ve sunucu içi zamanlayıcı (`SWEEP_INTERVAL`). Elle: `bin/rails asist:sweep`.
+Zaman kurallarını tek yerden işleten sınıf: [`app/models/sweeper.rb`](app/models/sweeper.rb). Üç yoldan çağrılır: her ajan isteği, kuyruk ekranının 30 sn'lik otomatik yenilemesi ve sunucu içi zamanlayıcı (`SWEEP_INTERVAL`). Elle: `bin/rails asist:sweep`. Müşterinin talep sayfası global taramayı değil, yalnız kendi talebinin kapanma kuralını işletir (`Ticket#close_if_due!`).
 
 ---
 
@@ -186,6 +186,8 @@ Zaman kurallarını tek yerden işleten sınıf: [`app/models/sweeper.rb`](app/m
 > Eksiler: *"Need alerts and reminders to follow up on open/pending support cases"*
 > — TrustRadius yorumu, "Zendesk: A User's Perspective" (2023): [trustradius.com/reviews/zendesk-support-suite-2023-09-29-15-35-05](https://www.trustradius.com/reviews/zendesk-support-suite-2023-09-29-15-35-05)
 
+*Kapsam notu:* Asist bu ikinci grubun **ilk yanıt SLA'sı** kısmını çözer (dakika hassasiyetinde risk/ihlal kaydı, hatırlatma bandı, sahipsiz riskli talebin pas edilmesi). Çözülene kadar 30 dakikada bir kontrol ya da beklemedeki talepler için takip hatırlatması yoktur; bkz. [Yapamadıklarım](#yapamadıklarım).
+
 ### Zendesk bugün ne yapıyor, Asist'in farkı
 
 | | Zendesk (bugün) | Asist |
@@ -206,7 +208,7 @@ Zendesk'in yeni özellikleri boşluğu kısmen kapatıyor; Asist'in katkısı bu
 5. Kimse vardiyada değilse talepler yerinde kalır; **vardiyaya ilk giren ajana** bekleyen işler pas edilir.
 6. Her pasın *kime ve neden* yapıldığı **Pas akışı** ekranında (`/agent/passes`) görünür.
 
-**Tek cümle (sunum için):** *"Zendesk yöneticilerinin kendi topluluk forumundaki resmî 'Out of Office' özellik isteğinde yazdığı 'izne çıkan ajanın talepleri gruba geri atılıyor, birileri dağınıklığı toplamak zorunda; izin süresini planlayabilelim' ve 'SLA uyarısı en erken bir saat kala geliyor' acısını, Asist'te vardiya bitiş saati gelince ajanın taleplerini ve SLA'sı riske giren sahipsiz talepleri dakikalar içinde vardiyadaki en az yüklü ajana kendiliğinden pas eden 'Otomatik Pas' ile çözdüm."*
+**Tek cümle (sunum için, ~20 sn):** *"Zendesk yöneticileri kendi topluluk forumunda, izindeki ajanın taleplerini elle toplamaktan ve bir saatten yakın SLA uyarısı kuramamaktan yakınıyor; Asist'in Otomatik Pas'ı bu talepleri vardiya bitince ve SLA riski başlayınca dakikalar içinde vardiyadaki en az yüklü ajana kendiliğinden devrediyor."* (Kaynaklar: yukarıdaki iki ayrı forum başlığı.)
 
 ---
 
@@ -219,17 +221,17 @@ Sunumdaki kod yeri sorusu için. Satır numaraları `main`'deki son commit'e gö
 | **SLA hafta sonunu saymasın** / mesai 09–18 / resmî tatil | [`sla_policy.rb:21-23`](app/models/sla_policy.rb#L21) `first_reply_due_at`: `from + target` yerine iş takvimiyle ileri sar. **Ve** [`sla_policy.rb:26-28`](app/models/sla_policy.rb#L26) `warning_at`: risk anı da aynı takvimle geri sarılmalı (yoksa risk penceresi hafta sonuna düşer). Takvim saat dilimi: [`config/application.rb`](config/application.rb) `time_zone = "Istanbul"` | `ticket_sla_test.rb`'ye Cuma 17:00 → Pazartesi `travel_to` çifti |
 | Acil SLA 30 dk olsun | [`sla_policy.rb:7`](app/models/sla_policy.rb#L7) `"urgent" => 1.hour` | `ticket_sla_test.rb:7`, `sweeper_test.rb`, `auto_pass_flow_test.rb` (SLA hatırlatma bandı testi) |
 | Risk eşiği %25 değil %50 | [`sla_policy.rb:15`](app/models/sla_policy.rb#L15) `AT_RISK_RATIO` | Risk anı talepte saklı (`first_reply_risk_at`); mevcut talepler için demo sıfırlanmalı |
-| `pending`'de SLA dursun | [`ticket.rb:147`](app/models/ticket.rb#L147) `sla_state`'e `pending` → `:paused`; [`ticket.rb:59`](app/models/ticket.rb#L59) `at_risk` ve [`ticket.rb:188`](app/models/ticket.rb#L188) ihlal sorgusunda `unsolved` yerine `active`; gerçek durdur-devam için `transition_to!` ([`ticket.rb:67`](app/models/ticket.rb#L67)) içinde bekleme süresini hedefe eklemek + migration | `application_helper.rb` `sla_badge` |
+| `pending`'de SLA dursun | [`ticket.rb:147`](app/models/ticket.rb#L147) `sla_state`'e `pending` → `:paused`; [`ticket.rb:59`](app/models/ticket.rb#L59) `at_risk` ve [`ticket.rb:192`](app/models/ticket.rb#L192) ihlal sorgusunda `unsolved` yerine `active`; gerçek durdur-devam için `transition_to!` ([`ticket.rb:67`](app/models/ticket.rb#L67)) içinde bekleme süresini hedefe eklemek + migration | `application_helper.rb` `sla_badge` |
 | Çözülen talep 7 günde kapansın | [`ticket.rb:35`](app/models/ticket.rb#L35) `AUTO_CLOSE_AFTER` | Demo ve testler sabiti kullanır; yalnız `ticket_sla_test.rb`'deki "4 gün" adlı testlerin adı |
 | Beklemedeki talep doğrudan kapanabilsin | [`ticket.rb:25`](app/models/ticket.rb#L25) `"pending" => %w[open solved closed]` | `ticket_status_test.rb` yasak geçiş testi |
 | Atama yeni talebi açık yapmasın | [`ticket.rb:98`](app/models/ticket.rb#L98) | `ticket_status_test.rb`, `aort_flow_test.rb` |
 | Müşteri yanıtı çözülmüş talebi yeniden açmasın | [`ticket.rb:124`](app/models/ticket.rb#L124) `%w[pending solved]` → `%w[pending]` | `ticket_status_test.rb`, `aort_flow_test.rb` |
-| Kapalı talebe yazan müşteriye yeni talep açılsın | [`ticket.rb:119`](app/models/ticket.rb#L119) `raise` yerine yeni talep oluştur; [`requests_controller.rb:27`](app/controllers/requests_controller.rb#L27) `reply` | `requests/show.html.erb` kapalı uyarısı |
+| Kapalı talebe yazan müşteriye yeni talep açılsın | [`ticket.rb:120`](app/models/ticket.rb#L120) `raise` yerine yeni talep oluştur; [`requests_controller.rb:28`](app/controllers/requests_controller.rb#L28) `reply` | `requests/show.html.erb` kapalı uyarısı |
 | Yeni talep 15 dk içinde atanmazsa pas/eskalasyon | [`auto_pass.rb:43`](app/models/auto_pass.rb#L43) kural 2'ye `.or(Ticket.where(created_at: ..@now - 15.minutes))` | `auto_pass_test.rb`'ye `travel_to` çifti |
 | Beklemedeki talepler de vardiya bitince pas edilsin | [`ticket.rb:31`](app/models/ticket.rb#L31) `ACTIVE_STATUSES` (yük hesabını da değiştirir) veya yalnız [`auto_pass.rb:38`](app/models/auto_pass.rb#L38) | `auto_pass_test.rb` "beklemedeki talep sahibinde kalır" |
 | Pas en az yüklüye değil sırayla (round robin) | [`auto_pass.rb:61-63`](app/models/auto_pass.rb#L61) `pick_receiver` | `auto_pass_test.rb` yük dengesi testleri |
 | Vardiya dışındaki ajana elle atama yapılamasın | [`ticket.rb:91`](app/models/ticket.rb#L91) `assign_to!` başında `raise unless user.on_shift?` | `demo.rb` Zeynep ataması, `ticket_status_test.rb` |
-| Riskli talepte öncelik otomatik yükselsin | [`ticket.rb:179`](app/models/ticket.rb#L179) `notify_sla_risks!` içinde `change_priority!` | `ticket_sla_test.rb` |
+| Riskli talepte öncelik otomatik yükselsin | [`ticket.rb:183`](app/models/ticket.rb#L183) `notify_sla_risks!` içinde `change_priority!` | `ticket_sla_test.rb` |
 | Kurallar 30 sn değil 10 sn'de bir işlesin | Sunucu: [`render.yaml`](render.yaml) `SWEEP_INTERVAL` + [`sweeper_ticker.rb:5`](config/initializers/sweeper_ticker.rb#L5). Tarayıcı: [`tickets/index.html.erb:3`](app/views/agent/tickets/index.html.erb#L3) `30000`, [`autorefresh_controller.js:6`](app/javascript/controllers/autorefresh_controller.js#L6); alt bilgi metni [`layouts/agent.html.erb:40`](app/views/layouts/agent.html.erb#L40) | — |
 | Vardiya seçenekleri değişsin | [`user.rb:2-6`](app/models/user.rb#L2) `SHIFT_LENGTHS` | `auto_pass_flow_test.rb` "2 dakika (demo)" |
 | Müşteri aciliyet seçemesin | [`requests_controller.rb`](app/controllers/requests_controller.rb) `ticket_params`'tan `:priority` çıkar; [`requests/new.html.erb`](app/views/requests/new.html.erb) seçim alanı | `aort_flow_test.rb` (form `priority: "high"` gönderiyor) |
@@ -239,17 +241,17 @@ Sunumdaki kod yeri sorusu için. Satır numaraları `main`'deki son commit'e gö
 ## Testler ve CI
 
 ```bash
-bin/rails test        # 51 test, 203 doğrulama (yerelde son koşu: 0 failure, 0 error)
+bin/rails test        # 53 test, 207 doğrulama (yerelde son koşu: 0 failure, 0 error)
 ```
 
 | Dosya | Ne test ediyor |
 |---|---|
-| [`test/models/ticket_sla_test.rb`](test/models/ticket_sla_test.rb) | **Zaman kuralları** (`travel_to`) — SLA'nın `on_track → at_risk → breached` olması (5:59'da değil, 6:00'da risk), geç yanıt, iç notun yanıt sayılmaması, öncelik değişince hedefin yeniden hesaplanması, hatırlatma/ihlalin bir kez yazılması (öncelik ileri-geri değişince çoğalmaması), **zamanla gelen durum geçişi** `solved → closed` (4 gün − 1 dk'da kapanmayıp 4. günde kapanma), süresi dolmuş talebe müşterinin yazamaması |
+| [`test/models/ticket_sla_test.rb`](test/models/ticket_sla_test.rb) | **Zaman kuralları** (`travel_to`) — SLA'nın `on_track → at_risk → breached` olması (5:59'da değil, 6:00'da risk), geç yanıt, iç notun yanıt sayılmaması, öncelik değişince hedefin yeniden hesaplanması, hatırlatma/ihlalin bir kez yazılması (öncelik ileri-geri değişince çoğalmaması), **zamanla gelen durum geçişi** `solved → closed` (4 gün − 1 dk'da kapanmayıp 4. günde kapanma), süresi dolmuş talebe müşterinin yazamaması, tarama ile müşteri yanıtının aynı talebi iki kez kapatmaması |
 | [`test/models/ticket_status_test.rb`](test/models/ticket_status_test.rb) | **Durum geçişleri** (saat `travel_to` ile sabit) — izinli zincir, yasak geçişler, her geçişin kendi anının zaman damgasını bırakması (`new→open→solved→open→solved→closed`), atamanın `new→open` yapması, `pending/solved` gönderimi, müşteri yanıtının yeniden açması, kapalı talebe yazılamaması |
 | [`test/models/auto_pass_test.rb`](test/models/auto_pass_test.rb) | **Otomatik Pas** — vardiya bitiminden 1 dk önce pas yok / bitiminde var, risk bölgesinde pas, yük dengesi, kimse yoksa bekleme, müşteri yanıtında anında pas |
 | [`test/models/sweeper_test.rb`](test/models/sweeper_test.rb) | Tüm kuralların birlikte ve tekrar çalıştırıldığında çoğaltmadan işlemesi |
 | [`test/integration/aort_flow_test.rb`](test/integration/aort_flow_test.rb) | **Uçtan uca HTTP akışı** — form → giriş → üstüne alma → yanıt → müşteri yanıtı → çözme → `travel_to` + 4 gün → kapanış; müşteri sayfasının da zaman kuralını işletmesi |
-| [`test/integration/auto_pass_flow_test.rb`](test/integration/auto_pass_flow_test.rb) | "Vardiyayı bitir" düğmesi, son ajanın vardiyayı bitirmesi (talepler kalır, bildirim söyler), 2 dakikalık demo vardiyasının kendiliğinden bitmesi, SLA hatırlatma bandı ("kaldı" / "gecikti") |
+| [`test/integration/auto_pass_flow_test.rb`](test/integration/auto_pass_flow_test.rb) | "Vardiyayı bitir" düğmesi, son ajanın vardiyayı bitirmesi (talepler kalır, bildirim söyler), tarama kilidi meşgulken doğru bildirim, 2 dakikalık demo vardiyasının kendiliğinden bitmesi, SLA hatırlatma bandı ("kaldı" / "gecikti") |
 
 GitHub Actions ([`.github/workflows/ci.yml`](.github/workflows/ci.yml)) her push ve PR'da şunları çalıştırır: Brakeman, bundler-audit, importmap audit, RuboCop ve PostgreSQL 17 servisiyle testler (runner `ubuntu-24.04`'e sabit). Rozet README'nin başında ve `main` dalının durumunu gösterir.
 
@@ -286,6 +288,10 @@ Repo bir **Render Blueprint** içerir ([`render.yaml`](render.yaml)): ücretsiz 
 
 Gizlemek yerine açıkça yazıyorum:
 
+- **Canlı URL henüz yok.** Render Blueprint (`render.yaml`) ve build betiği hazır, production modunda yerelde prova edildi (`/up` 200, sunucu içi zamanlayıcı çalışıyor). Deploy öğrencinin Render hesabıyla yapılacak; URL o zaman README'nin başına yazılacak.
+- **İleri tarihli izin/vardiya planlama yok.** Vardiya yalnız "şimdi" başlar, bitişi planlanır (2 dk / 4 sa / 8 sa); izinden dönen ajan elle "Vardiyaya başla"ya basar.
+- **Takip hatırlatması yok.** Hatırlatma ve risk yalnız ilk yanıt SLA'sı için; beklemedeki/açık talepler için takip hatırlatması ve çözülene kadar periyodik kontrol üretilmez.
+
 - **E-posta yok.** Müşteriye bildirim gitmez; müşteri talebini gizli bağlantıdan (`/t/:token`) takip eder ve oradan yanıtlar. Gelen e-postadan talep açma da yok.
 - **Mesai takvimi yok.** SLA takvim saatleriyle sayılır (hafta sonu/tatil/mesai dışı dahil). Değişikliğin yeri: [`sla_policy.rb:21`](app/models/sla_policy.rb#L21).
 - **Yalnızca ilk yanıt SLA'sı var.** "Sonraki yanıt" ve "çözüm süresi" SLA'ları, `pending`'de duraklayan sayaçlar yok.
@@ -293,7 +299,7 @@ Gizlemek yerine açıkça yazıyorum:
 - **Demo şifresi herkese açık.** Giriş sayfası demo hesaplarını ve şifreyi gösterir (sunum ve değerlendirme kolaylığı için). Canlı URL'yi bilen herkes ajan olarak girip **Demo verisini sıfırla** ile veriyi silebilir; gerçek bir kurulumda bu düğme ve şifre olmaz.
 - **Zaman kuralları sürekli bir arka plan işçisiyle değil, web süreci içinde çalışır** (her ajan/müşteri isteği + 30 sn'lik sayfa yenileme + Puma içinde 30 sn'lik zamanlayıcı). Render ücretsiz planda servis uyurken kural işlemez; uyanınca geriye dönük işler ve olay saati *işlendiği an* olarak yazılır. Gerçek kurulumda Solid Queue/cron ile dakikada bir çalışmalı.
 - **Kanallar yok:** canlı sohbet, telefon, sosyal medya, yardım merkezi/bilgi bankası, raporlama panoları, makrolar, tetikleyici editörü yok.
-- **Araştırma kaynağı notu:** Ajanın çalıştığı bulut ortamı G2/Capterra/Zendesk/Fortune sayfalarını doğrudan açamadı (ağ politikası). Her alıntı ve rakam, en az bir **bağımsız** web aramasında metin ve link birlikte görülerek doğrulandı. İlk sürümde kullanılan bir G2 yorumu (AWS Marketplace'teki sayfalı kopyası) bu şekilde yeniden doğrulanamadığı için çıkarıldı ve yerine kalıcı linkli kaynaklar kondu. Linkler sunum öncesi tarayıcıda tek tek açılmalıdır.
+- **Araştırma kaynağı notu:** Ajanın çalıştığı bulut ortamı G2/Capterra/Zendesk/Fortune sayfalarını doğrudan açamadı (ağ politikası). Kullanıcı alıntılarının her biri ve kilit rakamlar en az bir **bağımsız** web aramasında metin ve link birlikte görülerek doğrulandı; diğer rakamlar arama örneklemiyle kontrol edildi. İlk sürümde kullanılan bir G2 yorumu (AWS Marketplace'teki sayfalı kopyası) bu şekilde yeniden doğrulanamadığı için çıkarıldı ve yerine kalıcı linkli kaynaklar kondu. Linkler sunum öncesi tarayıcıda tek tek açılmalıdır.
 - **Render ücretsiz PostgreSQL 30 gün sonra sona erer**; sunumdan sonra veri kalıcı değildir.
 - **Hata sayfaları statik.** `public/*.html` Türkçe ve Asist markalı ama dinamik değil (ör. hangi talebin bulunamadığını söylemez).
 
