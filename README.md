@@ -39,13 +39,13 @@ ve gerçek kullanıcı yorumlarından gelen bir acıyı çözer: **vardiyası bi
 
 ## Faz 1 — Fortune 500 ve SaaS: genel tablo
 
-Fortune 500, ABD şirketlerinin **gelire** göre sıralamasıdır; 2025 listesine girme eşiği **7,4 milyar $ gelir**, 500 şirketin toplam piyasa değeri **~46 trilyon $**, toplam çalışan sayısı **~31 milyon** kişidir ([Fortune / PR Newswire, 2025](https://www.prnewswire.com/news-releases/fortune-announces-2025-fortune-500-list-302470158.html)).
+Fortune 500, ABD şirketlerinin **gelire** göre sıralamasıdır. 2025 listesine girme eşiği **7,4 milyar $ gelir**, 500 şirketin toplam piyasa değeri **~46 trilyon $**, toplam çalışan sayısı **~31 milyon** kişidir ([Fortune / PR Newswire, 2025](https://www.prnewswire.com/news-releases/fortune-announces-2025-fortune-500-list-302470158.html)). Haziran 2026'da yayımlanan listede toplam piyasa değeri **~55 trilyon $** ([Fortune, 2026](https://fortune.com/2026/06/03/fortune-500-2026-takeaways-nvidia-amazon-walmart/)), toplam çalışan **~30,5 milyon** ([Fortune, 2026](https://fortune.com/2026/06/19/fortune-500-employment-profits-revenue-hiring-jobs-ai/)).
 
 | Soru | Yaklaşık cevap | Kaynak |
 |---|---|---|
-| **a. Değerleme aralığı** (piyasa değeri) | **~1 milyar $ → ~5 trilyon $**. En büyük: Nvidia ≈ 5,0 trilyon $ (Ağu 2026). En küçüklerden: Kohl's ≈ 1 milyar $'ın hemen üstü (Mart 2025; Kohl's 2025 Fortune 500'de, geliri ≈ 16,2 milyar $). Halka açık olmayan F500 şirketlerinin (karşılıklı sigortacılar, özel şirketler) piyasa değeri yoktur. | [Motley Fool — en büyük şirketler](https://www.fool.com/research/largest-companies-by-market-cap/) · [Motley Fool — Kohl's](https://www.fool.com/investing/2025/03/11/why-kohls-stock-is-plummeting-today/) · [Kohl's geliri (D&B/Morningstar)](https://www.dnb.com/business-directory/company-profiles.kohls_corporation.7133d85a919295a89bdc716ce739df50.html) |
+| **a. Değerleme aralığı** (piyasa değeri) | **~20 milyon $ → ~5 trilyon $**. En büyük: Nvidia ≈ 5,0 trilyon $ (Ağu 2026). En küçük: QVC Group (eski Qurate Retail) ≈ **19 milyon $** (Fortune profili, 31 Mar 2026; 2026 listesinde 433. sırada, geliri ≈ 9,5 milyar $, Chapter 11 sürecinde); 2025 listesinde (416.) değeri ≈ 119 milyon $ idi (7 Eki 2025). Sağlıklı şirketler arasında da alt uç ~1 milyar $ civarındadır: Kohl's ≈ 1 milyar $'ın hemen üstü (Mart 2025; 2025 listesinde 261., geliri ≈ 16,2 milyar $). Halka açık olmayan F500 şirketlerinin (karşılıklı sigortacılar, özel şirketler) piyasa değeri yoktur. | [Motley Fool — en büyük şirketler](https://www.fool.com/research/largest-companies-by-market-cap/) · [Fortune — QVC Group profili](https://fortune.com/company/qurate-retail/fortune500/) · [QVC Group 2026 F500 sırası](https://vista.today/2026/06/qvc-group-fortune-500-2026/) · [TipRanks — QVC Group piyasa değeri](https://www.tipranks.com/stocks/qvcga/market-cap) · [Motley Fool — Kohl's](https://www.fool.com/investing/2025/03/11/why-kohls-stock-is-plummeting-today/) · [Kohl's geliri (D&B/Morningstar)](https://www.dnb.com/business-directory/company-profiles.kohls_corporation.7133d85a919295a89bdc716ce739df50.html) |
 | **b. Çalışan sayısı aralığı** | **~500 → ~2,1 milyon**. En büyük: Walmart ≈ 2,1 milyon. En küçükler: 8 şirket 2.000'in altında; ör. Welltower 685, A-Mark Precious Metals ≈ 486. | [Walmart 10-K FY2025 (SEC)](https://www.sec.gov/Archives/edgar/data/104169/000010416925000021/wmt-20250131.htm) · [Fortune — "8 Fortune 500 companies with high revenue, low headcount"](https://fortune.com/2025/06/02/fortune-500-employees-headcount-workforce-largest-smallest/) · [Yahoo Finance kopyası](https://finance.yahoo.com/news/largest-fortune-500-company-2-094500793.html) · [Welltower proxy (SEC)](https://www.sec.gov/Archives/edgar/data/766704/000076670425000013/well-20250410.htm) |
-| **c. Bir firmanın kullandığı SaaS ürünü sayısı** | **~650–700 uygulama**. Zylo: 10.000+ çalışanlı kurumlar ortalama **660** SaaS uygulaması (2025), 2026 endeksinde "yaklaşık 700". (Fortune 500 şirketlerinin neredeyse tamamı bu sınıfta.) | [Zylo — SaaS istatistikleri](https://zylo.com/blog/saas-statistics) · [Zylo 2025 SaaS Management Index](https://zylo.com/news/2025-saas-management-index) |
+| **c. Bir firmanın kullandığı SaaS ürünü sayısı** | **~650–700 uygulama**. Zylo: 10.000+ çalışanlı kurumlar ortalama **660** SaaS uygulaması (2025), 2026 endeksinde "yaklaşık 700". Fortune 500 şirketi ortalama ~61.000 çalışanlıdır (30,5 milyon / 500, Fortune 2026) ve yalnızca 8'inin 2.000'den az çalışanı var (b satırı); yani tipik F500 şirketi bu 10.000+ sınıfındadır. | [Zylo — SaaS istatistikleri](https://zylo.com/blog/saas-statistics) · [Zylo 2025 SaaS Management Index](https://zylo.com/news/2025-saas-management-index) |
 | **d. SaaS aboneliklerine yıllık ödenen para** | **~250–300 milyon $ / yıl** (ortalama). Zylo 2025: büyük kurumlarda ortalama **284 milyon $**; 2026: ortalama ≈ **245 milyon $**, aralık **123,5–375,5 milyon $**. Çalışan başına ≈ **4.830 $** (2025). | [Zylo — SaaS istatistikleri](https://zylo.com/blog/saas-statistics) · [Zylo 2025 SaaS Management Index](https://zylo.com/news/2025-saas-management-index) · [PRWeb duyurusu](https://www.prweb.com/releases/2025-saas-management-index-reveals-first-increase-in-average-saas-spend-in-three-years-amid-rising-vendor-costs-and-rapid-ai-adoption-302351642.html) |
 
 **Okuma:** tipik bir Fortune 500 firması yüzlerce SaaS ürününe yılda yüz milyonlarca dolar öder. Bunların her biri "çekirdeği kopyalanabilir" bir ürün; asıl değer, kullanıcının o üründe her gün yaşadığı acıyı çözen "tam ayağına pas"tadır.
@@ -61,7 +61,7 @@ Fortune 500 müşterileri (kanıt):
 | Firma | Fortune 500 | Zendesk kullanımı |
 |---|---|---|
 | **Uber** | 2026 listesinde, gelir 52 milyar $ ([Fortune profili](https://fortune.com/company/uber-technologies/fortune500/)) | 2010'dan beri Zendesk Support; 1.000+ ajan, 10+ dil, sohbet ilk yanıt SLA'sı < 30 sn ([Zendesk — Uber müşteri hikâyesi](https://www.zendesk.com/customer/uber/)) |
-| **Stanley Black & Decker** | Fortune 500, gelir ≈ 15,1 milyar $ ([Fortune profili](https://fortune.com/company/stanley-black-decker/fortune500/)) | 550 global ajan, **1 saatlik ilk yanıt SLA'sına %100 uyum** iddiası ([Zendesk — Stanley Black & Decker](https://www.zendesk.co.uk/customer/stanley-black-decker)) |
+| **Stanley Black & Decker** | Fortune 500, gelir ≈ 15,1 milyar $ ([Fortune profili](https://fortune.com/company/stanley-black-decker/fortune500/)) | Ayda ~10.000 talep, **1 saatlik ilk yanıt SLA'sına %100 uyum** iddiası ([Zendesk — Stanley Black & Decker](https://www.zendesk.co.uk/customer/stanley-black-decker)) |
 | Adı verilmeyen F500 finans/sigorta kuruluşu | Fortune 500 | Forrester TEI çalışması: ajan verimliliğinde %43 artış ([Zendesk blog](https://www.zendesk.com/blog/fortune-500-company-tei-spotlight/)) |
 
 Zendesk kendi sayfasında "birçok Fortune 100 ve Fortune 500 şirketi" tarafından kullanıldığını ve Uber, Stanley Black & Decker, Tesco, Siemens gibi müşterilerini listeler ([Zendesk reviews sayfası](https://www.zendesk.com/service/comparison/zendesk-reviews/)).
@@ -83,7 +83,7 @@ Zendesk'in kaynak kodu kapalı. Tahmini **aynı kategorideki iki açık kaynak R
 | [Chatwoot](https://github.com/chatwoot/chatwoot) | `5974756` | **~488.000** | Ruby 205K · Vue 149K · JS 124K |
 
 **Tahminim:** Zendesk Support'un yalnızca ticketing çekirdeği (talep, SLA, tetikleyici/otomasyon, görünümler, makrolar, ajan arayüzü, web formu, API) **≈ 400–800 bin satır**;
-Suite'in tamamı (Guide, Messaging, Talk, Explore, WFM, QA, AI ajanları, Marketplace) **birkaç milyon satır**dır. Ödevin "~300 bin satırlık kurumsal ürün" ölçeğinin rahatça üstünde.
+Suite'in tamamı (Guide, Messaging, Talk, Explore, WFM, QA, AI ajanları, Marketplace) için ölçüm yapılamadı; ürün sayısına bakarak **birkaç milyon satır** olduğunu tahmin ediyorum (ölçüm değil). Ödevin "~300 bin satırlık kurumsal ürün" ölçeğinin rahatça üstünde.
 
 ### Çekirdeği bugünün coding agent'larıyla üretmek ne tutar?
 
@@ -161,14 +161,40 @@ Zaman kurallarını tek yerden işleten sınıf: [`app/models/sweeper.rb`](app/m
 
 ### Kimin acısı, hangi yorumdan?
 
-> *"I really miss a feature **automatically reassigning tickets from agents not on shift** as well as **reminding agents of SLAs on their tickets**."*
-> — Zendesk Support Suite, G2 yorumu (2021, takım lideri), AWS Marketplace'te yayımlanan kopyası:
-> [aws.amazon.com/marketplace/reviews/reviews-list/B096T4WRF1?page=397](https://aws.amazon.com/marketplace/reviews/reviews-list/B096T4WRF1?page=397)
+**Zendesk yöneticileri ve destek ekip liderleri.** Kaynaklar gerçek kullanıcıların kalıcı linkli gönderileri; her alıntı bağımsız bir web aramasında metin ve link birlikte görülerek doğrulandı.
 
-Aynı boşluğu doğrulayan kaynaklar:
-- Zendesk'in kendi yardım merkezi: *"Tickets already assigned to an agent stay assigned when that agent is marked out of office"* — izne çıkan ajanın açık talepleri yerinde kalır, toplu elle atama önerilir ([Zendesk Help](https://support.zendesk.com/hc/en-us/articles/7974013029146-What-happens-to-tickets-when-an-agent-is-out-of-office), [manuel yeniden atama](https://support.zendesk.com/hc/en-us/articles/4408881839642-When-an-agent-is-out-of-office-how-can-I-reassign-their-open-tickets)).
-- Zendesk otomasyonları **saatte bir** çalışır; SLA uyarısı ihlalden *bir saat önce veya bir saat sonra* gelebilir ([Zendesk Help — SLA ihlaline yaklaşan talepler](https://support.zendesk.com/hc/en-us/articles/4408820131994-Workflow-How-to-alert-your-team-to-tickets-nearing-an-SLA-breach)).
-- Topluluk başlığı: *"Is there any way I can easily reassign tickets when an agent is off sick or on holiday?"* ([Zendesk Community](https://support.zendesk.com/hc/en-us/articles/227175047)).
+**1. İzne çıkan / vardiyası biten ajanın talepleri** — Zendesk Topluluğu, *"Out of Office app – official feature request thread"* (Eylül 2020'den beri, 55 yanıt):
+
+> *"Please add the ability to schedule an agents out of office duration."*
+> — [community.zendesk.com/ideas/out-of-office-app-official-feature-request-thread-16291](https://community.zendesk.com/ideas/out-of-office-app-official-feature-request-thread-16291)
+
+> *"…all tickets are thrown back to the standard group and someone has to clean up the mess"* (ajanı tekrar "müsait" yapmayı unutunca)
+> *"…none of the triggers related to the app unassigning tickets will work properly"* (izindeki 17 ajanın ~1.100 talebi etiketsiz kalınca)
+> — [support.zendesk.com/…/4409217178522-Out-of-Office-app-official-feature-request-thread](https://support.zendesk.com/hc/en-us/community/posts/4409217178522-Out-of-Office-app-official-feature-request-thread)
+
+> *"…even if an Agent is set as Unavailable via the app (so that no new tickets can be assigned to them), Routing still assigns tickets to them."*
+> — [community.zendesk.com/ideas/give-admins-the-ability-to-change-agent-status-in-omnichannel-3600](https://community.zendesk.com/ideas/give-admins-the-ability-to-change-agent-status-in-omnichannel-3600)
+
+**2. SLA'sı dolmak üzere olan talep için zamanında uyarı** — Zendesk Topluluğu fikirleri:
+
+> *"…the smallest breach you can set up to be alerted is coming up, is an hour"*
+> — [support.zendesk.com/…/4409217598490-SLA-Alerting-in-Minutes](https://support.zendesk.com/hc/en-us/community/posts/4409217598490-SLA-Alerting-in-Minutes)
+
+> *"For our Severity 1 situations, we have a contractual obligation to do checks every 30 minutes until resolution which, as it stands, we can't automate like we can for everything else."*
+> — [support.zendesk.com/…/4408860757274-Automation-Conditions-Based-on-Minutes-not-Hours](https://support.zendesk.com/hc/en-us/community/posts/4408860757274-Automation-Conditions-Based-on-Minutes-not-Hours)
+
+> Eksiler: *"Need alerts and reminders to follow up on open/pending support cases"*
+> — TrustRadius yorumu, "Zendesk: A User's Perspective" (2023): [trustradius.com/reviews/zendesk-support-suite-2023-09-29-15-35-05](https://www.trustradius.com/reviews/zendesk-support-suite-2023-09-29-15-35-05)
+
+### Zendesk bugün ne yapıyor, Asist'in farkı
+
+| | Zendesk (bugün) | Asist |
+|---|---|---|
+| Ajan müsait değilken açık talepleri | Out of Office uygulamasında **"Force unassign tickets"** (varsayılan kapalı): ajanın durumu *elle* "unavailable" yapılınca açık talepleri gruba geri bırakır ([Zendesk Help](https://support.zendesk.com/hc/en-us/articles/4408828358682-Installing-and-using-the-Out-of-Office-app)). Omnichannel routing: durum değişince en fazla **50** açık **e-posta/messaging** talebini 1 dk gecikmeyle yeniden atar ([Zendesk Help](https://support.zendesk.com/hc/en-us/articles/4828787357210-Managing-your-omnichannel-routing-configuration)) | Vardiyanın **bitiş saati planlanır**; saat gelince kimsenin bir şey yapmasına gerek kalmadan ajanın tüm yeni/açık talepleri vardiyadaki **en az yüklü ajana** pas edilir (gruba bırakılmaz, adet ve kanal sınırı yok) |
+| SLA riskine yaklaşan talep | Otomasyonlar **saatte bir** çalışır; uyarı ihlalden bir saat önce veya sonra gelebilir ([Zendesk Help](https://support.zendesk.com/hc/en-us/articles/4408820131994-Workflow-How-to-alert-your-team-to-tickets-nearing-an-SLA-breach)) | Risk ve ihlal anları **dakikalar içinde** talep geçmişine yazılır, ajana hatırlatma bandı çıkar; **sahipsiz** riskli talep kendiliğinden pas edilir |
+| Pas/atamanın izi | Tetikleyici ve uygulama kayıtları ayrı yerlerde | Her pas *kime ve neden* bilgisiyle **Pas akışı** ekranında |
+
+Zendesk'in yeni özellikleri boşluğu kısmen kapatıyor; Asist'in katkısı bunu **elle durum değişikliği beklemeden, vardiya saatine bağlı ve dakika hassasiyetinde** yapması.
 
 ### Asist'in çözümü — Otomatik Pas
 [`app/models/auto_pass.rb`](app/models/auto_pass.rb)
@@ -180,7 +206,7 @@ Aynı boşluğu doğrulayan kaynaklar:
 5. Kimse vardiyada değilse talepler yerinde kalır; **vardiyaya ilk giren ajana** bekleyen işler pas edilir.
 6. Her pasın *kime ve neden* yapıldığı **Pas akışı** ekranında (`/agent/passes`) görünür.
 
-**Tek cümle (sunum için):** *"Zendesk kullanan destek ekibi liderinin G2 yorumundaki 'vardiyada olmayan ajanın taleplerini otomatik yeniden atayan ve SLA'yı hatırlatan özellik yok' acısını, Asist'te vardiyası biten ajanın ve SLA'sı riske giren sahipsiz talepleri dakikalar içinde vardiyadaki en az yüklü ajana otomatik pas eden 'Otomatik Pas' ile çözdüm."*
+**Tek cümle (sunum için):** *"Zendesk yöneticilerinin kendi topluluk forumundaki resmî 'Out of Office' özellik isteğinde yazdığı 'izne çıkan ajanın talepleri gruba geri atılıyor, birileri dağınıklığı toplamak zorunda; izin süresini planlayabilelim' ve 'SLA uyarısı en erken bir saat kala geliyor' acısını, Asist'te vardiya bitiş saati gelince ajanın taleplerini ve SLA'sı riske giren sahipsiz talepleri dakikalar içinde vardiyadaki en az yüklü ajana kendiliğinden pas eden 'Otomatik Pas' ile çözdüm."*
 
 ---
 
@@ -199,9 +225,9 @@ Sunumdaki kod yeri sorusu için. Satır numaraları `main`'deki son commit'e gö
 | Atama yeni talebi açık yapmasın | [`ticket.rb:98`](app/models/ticket.rb#L98) | `ticket_status_test.rb`, `aort_flow_test.rb` |
 | Müşteri yanıtı çözülmüş talebi yeniden açmasın | [`ticket.rb:124`](app/models/ticket.rb#L124) `%w[pending solved]` → `%w[pending]` | `ticket_status_test.rb`, `aort_flow_test.rb` |
 | Kapalı talebe yazan müşteriye yeni talep açılsın | [`ticket.rb:119`](app/models/ticket.rb#L119) `raise` yerine yeni talep oluştur; [`requests_controller.rb:27`](app/controllers/requests_controller.rb#L27) `reply` | `requests/show.html.erb` kapalı uyarısı |
-| Yeni talep 15 dk içinde atanmazsa pas/eskalasyon | [`auto_pass.rb:41`](app/models/auto_pass.rb#L41) kural 2'ye `.or(Ticket.where(created_at: ..@now - 15.minutes))` | `auto_pass_test.rb`'ye `travel_to` çifti |
-| Beklemedeki talepler de vardiya bitince pas edilsin | [`ticket.rb:31`](app/models/ticket.rb#L31) `ACTIVE_STATUSES` (yük hesabını da değiştirir) veya yalnız [`auto_pass.rb:36`](app/models/auto_pass.rb#L36) | `auto_pass_test.rb` "beklemedeki talep sahibinde kalır" |
-| Pas en az yüklüye değil sırayla (round robin) | [`auto_pass.rb:59-61`](app/models/auto_pass.rb#L59) `pick_receiver` | `auto_pass_test.rb` yük dengesi testleri |
+| Yeni talep 15 dk içinde atanmazsa pas/eskalasyon | [`auto_pass.rb:43`](app/models/auto_pass.rb#L43) kural 2'ye `.or(Ticket.where(created_at: ..@now - 15.minutes))` | `auto_pass_test.rb`'ye `travel_to` çifti |
+| Beklemedeki talepler de vardiya bitince pas edilsin | [`ticket.rb:31`](app/models/ticket.rb#L31) `ACTIVE_STATUSES` (yük hesabını da değiştirir) veya yalnız [`auto_pass.rb:38`](app/models/auto_pass.rb#L38) | `auto_pass_test.rb` "beklemedeki talep sahibinde kalır" |
+| Pas en az yüklüye değil sırayla (round robin) | [`auto_pass.rb:61-63`](app/models/auto_pass.rb#L61) `pick_receiver` | `auto_pass_test.rb` yük dengesi testleri |
 | Vardiya dışındaki ajana elle atama yapılamasın | [`ticket.rb:91`](app/models/ticket.rb#L91) `assign_to!` başında `raise unless user.on_shift?` | `demo.rb` Zeynep ataması, `ticket_status_test.rb` |
 | Riskli talepte öncelik otomatik yükselsin | [`ticket.rb:179`](app/models/ticket.rb#L179) `notify_sla_risks!` içinde `change_priority!` | `ticket_sla_test.rb` |
 | Kurallar 30 sn değil 10 sn'de bir işlesin | Sunucu: [`render.yaml`](render.yaml) `SWEEP_INTERVAL` + [`sweeper_ticker.rb:5`](config/initializers/sweeper_ticker.rb#L5). Tarayıcı: [`tickets/index.html.erb:3`](app/views/agent/tickets/index.html.erb#L3) `30000`, [`autorefresh_controller.js:6`](app/javascript/controllers/autorefresh_controller.js#L6); alt bilgi metni [`layouts/agent.html.erb:40`](app/views/layouts/agent.html.erb#L40) | — |
@@ -252,7 +278,7 @@ Repo bir **Render Blueprint** içerir ([`render.yaml`](render.yaml)): ücretsiz 
 5. URL'yi bu README'nin başındaki **Canlı URL** satırına yaz, commit edip `main`'e push et (Render aynı commit'i yeniden deploy eder; servis 1–2 dk yeniden başlar).
 6. Sunumdan hemen önce: giriş yap → **Ekip → Demo verisini sıfırla** → tekrar giriş (SLA saatleri "şimdi"ye göre yeniden kurulur).
 
-Ücretsiz planda servis 15 dk istek gelmezse uyur; ilk istek ~1 dk sürebilir. Sunumdan birkaç dakika önce sayfayı açmak yeterli. Ücretsiz PostgreSQL oluşturulduktan 30 gün sonra erişilemez olur.
+Ücretsiz planda servis 15 dk istek gelmezse uyur; ilk istek ~1 dk sürebilir. Sunumdan birkaç dakika önce sayfayı açmak yeterli. Ücretsiz PostgreSQL oluşturulduktan **30 gün** sonra sona erer (14 gün ek süre, sonra silinir) ve hesap başına bir tane açılabilir ([Render — Free instances](https://render.com/docs/free)).
 
 ---
 
@@ -267,7 +293,7 @@ Gizlemek yerine açıkça yazıyorum:
 - **Demo şifresi herkese açık.** Giriş sayfası demo hesaplarını ve şifreyi gösterir (sunum ve değerlendirme kolaylığı için). Canlı URL'yi bilen herkes ajan olarak girip **Demo verisini sıfırla** ile veriyi silebilir; gerçek bir kurulumda bu düğme ve şifre olmaz.
 - **Zaman kuralları sürekli bir arka plan işçisiyle değil, web süreci içinde çalışır** (her ajan/müşteri isteği + 30 sn'lik sayfa yenileme + Puma içinde 30 sn'lik zamanlayıcı). Render ücretsiz planda servis uyurken kural işlemez; uyanınca geriye dönük işler ve olay saati *işlendiği an* olarak yazılır. Gerçek kurulumda Solid Queue/cron ile dakikada bir çalışmalı.
 - **Kanallar yok:** canlı sohbet, telefon, sosyal medya, yardım merkezi/bilgi bankası, raporlama panoları, makrolar, tetikleyici editörü yok.
-- **Araştırma kaynağı notu:** Ajanın çalıştığı bulut ortamı G2/Capterra/Zendesk sayfalarını doğrudan açamadı; alıntılar ve linkler web arama sonuçlarından derlendi (G2 yorumunun AWS Marketplace kopyası dahil). Linkler sunum öncesi tarayıcıda tek tek kontrol edilmelidir.
+- **Araştırma kaynağı notu:** Ajanın çalıştığı bulut ortamı G2/Capterra/Zendesk/Fortune sayfalarını doğrudan açamadı (ağ politikası). Her alıntı ve rakam, en az bir **bağımsız** web aramasında metin ve link birlikte görülerek doğrulandı. İlk sürümde kullanılan bir G2 yorumu (AWS Marketplace'teki sayfalı kopyası) bu şekilde yeniden doğrulanamadığı için çıkarıldı ve yerine kalıcı linkli kaynaklar kondu. Linkler sunum öncesi tarayıcıda tek tek açılmalıdır.
 - **Render ücretsiz PostgreSQL 30 gün sonra sona erer**; sunumdan sonra veri kalıcı değildir.
 - **Hata sayfaları statik.** `public/*.html` Türkçe ve Asist markalı ama dinamik değil (ör. hangi talebin bulunamadığını söylemez).
 

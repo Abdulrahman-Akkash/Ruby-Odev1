@@ -1,8 +1,10 @@
-# Otomatik Pas — kullanıcı yorumundaki acının çözümü.
+# Otomatik Pas — kullanıcı acısının çözümü.
 #
-# Kaynak (G2 yorumu, AWS Marketplace'te yayımlanan kopyası):
-#   "I really miss a feature automatically reassigning tickets from agents
-#    not on shift as well as reminding agents of SLAs on their tickets."
+# Kaynak (ilham alınan ürünün topluluk forumu, "Out of Office app - official feature request thread"):
+#   "Please add the ability to schedule an agents out of office duration."
+#   "...all tickets are thrown back to the standard group and someone has to clean up the mess"
+# ve "SLA Alerting in Minutes": "the smallest breach you can set up to be alerted is coming up, is an hour"
+# (linkler: README → Kullanıcı acısı ve çözümü)
 #
 # Kurallar:
 #   1. Vardiyası biten (on_shift_until geçmiş) ajanın yeni/açık talepleri,

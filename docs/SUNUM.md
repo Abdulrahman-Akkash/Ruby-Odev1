@@ -57,5 +57,5 @@ Tam liste README → **Kod haritası** (17 satır, yan etkileriyle). En olası s
 | Çözülen talep 7 günde kapansın | [`ticket.rb:35`](../app/models/ticket.rb#L35) `AUTO_CLOSE_AFTER` |
 | Beklemedeki talep doğrudan kapanabilsin | [`ticket.rb:25`](../app/models/ticket.rb#L25) `"pending"` satırına `closed` |
 | Müşteri yanıtı çözülmüş talebi açmasın | [`ticket.rb:124`](../app/models/ticket.rb#L124) |
-| Yeni talep 15 dk'da atanmazsa pas | [`auto_pass.rb:41`](../app/models/auto_pass.rb#L41) kural 2 |
-| Pas sırayla (round robin) dağıtılsın | [`auto_pass.rb:59-61`](../app/models/auto_pass.rb#L59) `pick_receiver` |
+| Yeni talep 15 dk'da atanmazsa pas | [`auto_pass.rb:43`](../app/models/auto_pass.rb#L43) kural 2 |
+| Pas sırayla (round robin) dağıtılsın | [`auto_pass.rb:61-63`](../app/models/auto_pass.rb#L61) `pick_receiver` |
