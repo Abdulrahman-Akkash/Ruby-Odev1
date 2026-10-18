@@ -16,10 +16,14 @@ module Agent
     end
 
     def destroy
+      own_ids = current_user.assigned_tickets.active.ids
       current_user.end_shift!
-      result = Sweeper.run
+      Sweeper.run
+      passed = Ticket.where(id: own_ids).where.not(assignee_id: current_user.id).count
+      kept = own_ids.size - passed
       notice = "Vardiyan bitti."
-      notice += " #{result.passes.size} talebin vardiyadaki ekip arkadaşlarına pas edildi." if result.passes.any?
+      notice += " #{passed} talebin vardiyadaki ekip arkadaşlarına pas edildi." if passed.positive?
+      notice += " Vardiyada kimse olmadığı için #{kept} talep sende kaldı; vardiyaya ilk giren ajana pas edilecek." if kept.positive?
       redirect_to agent_passes_path, notice:
     end
   end

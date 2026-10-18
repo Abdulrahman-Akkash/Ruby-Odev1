@@ -68,6 +68,7 @@ CI ([`.github/workflows/ci.yml`](.github/workflows/ci.yml)) bu kontrollerin heps
 3. Değişiklik arayüze dokunuyorsa sunucuyu açıp sayfayı gerçekten gez (curl veya tarayıcı); sadece testlere güvenme.
 4. README'deki **Kod haritası** satır numaraları hâlâ doğru mu? Değiştiyse güncelle.
 5. Yapamadığın veya yarım kalan her şeyi README → **Yapamadıklarım** bölümüne yaz. Eksik saklanmaz.
+   README'de yer tutucu (ör. "buraya eklenecek", "doldurulacak") bırakma; bilmediğin bir değeri uydurma, öğrenciye sor.
 6. Çalıştırmadığın bir komutun sonucunu, açmadığın bir sayfanın içeriğini **asla** "yaptım/gördüm" diye raporlama.
 
 ## 7. Kaynak ve araştırma kuralları
@@ -75,10 +76,21 @@ CI ([`.github/workflows/ci.yml`](.github/workflows/ci.yml)) bu kontrollerin heps
 - README'deki her rakamın yanında link olur; kaynaksız rakam yazılmaz.
 - Kaynağı doğrudan açamadıysan (ağ kısıtı vb.) bunu açıkça not et.
 - Kullanıcı yorumu alıntıları birebir kopyalanır, uydurulmaz ve linki verilir.
+- Alıntı linki **kalıcı** olmalı (tekil yorum / forum gönderisi). Sayfalı liste linki (`?page=397`) zamanla kayar; yalnız yedek kaynak olarak kullanılır.
+- Bir alıntı, onu bulan ajandan **bağımsız** bir aramayla (metin + URL aynı sonuçta) doğrulanmadan README'ye girmez.
+
+## 7b. Teslim öncesi denetim
+
+Teslimden önce bağımsız bir denetim yapılır (ajan workflow'u veya öğrencinin kendisi): ödevin her maddesi için kanıt
+(komut çıktısı, dosya:satır, ekran görüntüsü), ardından bulguları **çürütmeye çalışan** ikinci bir göz.
+`docs/SUNUM.md`'deki her demo adımı gerçek tarayıcıda, yazıldığı sırayla bir kez oynatılır.
 
 ## 8. Git
 
-- Geliştirme branch'i: `claude/fortune-500-saas-analysis-gymmw1`. `main`'e doğrudan push yok.
+- **Teslim dalı `main`.** Render `main`'den deploy eder (`render.yaml` → `branch: main`) ve README'deki CI rozeti `main`'in durumunu gösterir.
+- `main`'e yalnızca yerelde `bin/rails test`, `bin/rubocop` ve `bin/brakeman` temiz geçtikten sonra push edilir; push'tan sonra GitHub Actions sonucu kontrol edilir (kırmızıysa önce o düzeltilir).
+- Ajanın kendi denemeleri `claude/...` dallarında yapılabilir; teslimden önce `main`'e alınır.
+- Sunum günü (canlı demo sırasında) `main`'e push yapılmaz: Render yeniden deploy eder ve servis birkaç dakika kesilir.
 - Commit mesajları Türkçe, ne ve neden.
 
 ---
@@ -92,4 +104,10 @@ CI ([`.github/workflows/ci.yml`](.github/workflows/ci.yml)) bu kontrollerin heps
   istek başındaki tarama yüzünden o daha "vardiya dışı" görünürken başkasına pas ediliyordu.
   Çözüm: `Agent::ShiftsController` taramayı vardiya güncellendikten sonra çalıştırır. Bu tür sıralama hatalarını
   ancak HTTP seviyesindeki testler yakalar; bu yüzden 5. bölümdeki entegrasyon testi kuralı var.
+- **Yer tutucu yasağı ve 7b denetimi (18 Eki):** 7 bağımsız denetçi ajan + doğrulayıcı 47 bulgu çıkardı. Öne çıkanlar:
+  README'de doldurulmamış abonelik ücreti; `docs/SUNUM.md`'de yazıldığı sırayla oynanınca **hiçbir şey göstermeyen**
+  bir demo adımı (sunumda "var" denip çalışmayan an = 0 puan riski); müşteri sayfası taramayı çalıştırmadığı için süresi
+  dolmuş çözülmüş talebin müşteri yanıtıyla yeniden açılabilmesi; öncelik ileri-geri değişince ikinci "SLA ihlali" kaydı;
+  sayfalı ve doğrulanamayan bir yorum linki; değerleme aralığının alt sınırının yanlış olması. Kod hataları yeni
+  `travel_to` testleriyle, doküman hataları kaynaklarıyla düzeltildi.
 - **"Kendin gör" kuralı:** Ajanın "yaptım" demesi yetmez; ödev, gerçekte çalıştırılmamış sonuç raporunu 0 puanla cezalandırıyor.

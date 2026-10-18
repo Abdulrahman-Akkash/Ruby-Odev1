@@ -1,11 +1,15 @@
 require "test_helper"
 
 # Durum akışı: new > open > pending > solved > closed
+# Saat T0'a sabitlenir (travel_to); geçişlerin zaman damgaları da doğrulanır.
 class TicketStatusTest < ActiveSupport::TestCase
   setup do
+    travel_to T0
     @agent = users(:ayse)
     @ticket = create_ticket
   end
+
+  teardown { travel_back }
 
   test "yeni talep 'new' durumunda başlar" do
     assert_equal "new", @ticket.status
@@ -24,6 +28,24 @@ class TicketStatusTest < ActiveSupport::TestCase
     assert_equal "closed", @ticket.reload.status
     assert_equal %w[open pending open solved open solved closed],
                  @ticket.events.where(kind: "status_changed").map { |e| e.data["to"] }
+  end
+
+  test "her geçiş kendi anının zaman damgasını bırakır" do
+    travel_to(T0 + 10.minutes) { @ticket.assign_to!(@agent) }                     # new → open
+    travel_to(T0 + 1.hour)     { @ticket.transition_to!("solved") }               # open → solved
+    assert_equal T0 + 1.hour, @ticket.reload.solved_at
+
+    travel_to(T0 + 2.hours)    { @ticket.reply_as_customer!(body: "Olmadı") }     # solved → open
+    assert_nil @ticket.reload.solved_at
+
+    travel_to(T0 + 3.hours)    { @ticket.transition_to!("solved") }
+    travel_to(T0 + 3.hours + Ticket::AUTO_CLOSE_AFTER) { Ticket.close_stale_solved! } # solved → closed
+    assert_equal "closed", @ticket.reload.status
+    assert_equal T0 + 3.hours + Ticket::AUTO_CLOSE_AFTER, @ticket.closed_at
+
+    changes = @ticket.events.where(kind: "status_changed").map { |e| [ e.data["to"], e.created_at ] }
+    assert_equal [ [ "open", T0 + 10.minutes ], [ "solved", T0 + 1.hour ], [ "open", T0 + 2.hours ],
+                   [ "solved", T0 + 3.hours ], [ "closed", T0 + 3.hours + Ticket::AUTO_CLOSE_AFTER ] ], changes
   end
 
   test "izin verilmeyen geçişler hata verir" do

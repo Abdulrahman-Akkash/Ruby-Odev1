@@ -1,5 +1,8 @@
 source "https://rubygems.org"
 
+# Render, Ruby sürümünü öncelikle Gemfile.lock'taki RUBY VERSION satırından okur.
+ruby file: ".ruby-version"
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 8.1.4"
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]

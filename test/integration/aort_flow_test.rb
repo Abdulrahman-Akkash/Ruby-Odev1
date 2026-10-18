@@ -66,6 +66,17 @@ class AortFlowTest < ActionDispatch::IntegrationTest
     travel_back
   end
 
+  test "müşteri sayfası zaman kuralını işletir: süresi dolan çözülmüş talep Kapandı görünür" do
+    ticket = travel_to(T0) { create_ticket }
+    travel_to(T0 + 1.hour) { ticket.reply_as_agent!(users(:ayse), body: "Çözüldü", submit_as: "solved") }
+
+    travel_to(T0 + 1.hour + Ticket::AUTO_CLOSE_AFTER + 1.minute) do
+      get customer_ticket_path(ticket.access_token)
+      assert_select ".badge", "Kapandı"
+      assert_select "textarea", false
+    end
+  end
+
   test "dahili not müşteriye görünmez" do
     ticket = create_ticket
     sign_in_as users(:ayse)

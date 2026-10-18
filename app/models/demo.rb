@@ -53,10 +53,10 @@ module Demo
                        "Murat Çelik", "murat@ornek-musteri.com", assignee: ayse)
       reply(pending, ayse, now - 4.hours, "Merhaba Murat Bey, Raporlar > Dışa aktar menüsünden CSV seçebilirsiniz. İşinizi gördü mü?", "pending")
 
-      solved = ticket(now, 4.days + 3.hours, "API anahtarı nasıl yenilenir?", "normal",
+      solved = ticket(now, Ticket::AUTO_CLOSE_AFTER + 3.hours, "API anahtarı nasıl yenilenir?", "normal",
                       "Entegrasyon için API anahtarımızı yenilememiz gerekiyor.",
                       "Ece Yıldız", "ece@yazilim-ornek.com", assignee: mehmet)
-      reply(solved, mehmet, now - 4.days + 2.minutes, "Ayarlar > API > Yenile adımlarıyla anahtarınızı yenileyebilirsiniz. Talebi çözüldü olarak işaretliyorum.", "solved")
+      reply(solved, mehmet, now - Ticket::AUTO_CLOSE_AFTER + 2.minutes, "Ayarlar > API > Yenile adımlarıyla anahtarınızı yenileyebilirsiniz. Talebi çözüldü olarak işaretliyorum.", "solved")
     end
   end
 

@@ -3,6 +3,8 @@ class RequestsController < ApplicationController
   allow_unauthenticated_access
   rate_limit to: 20, within: 10.minutes, only: %i[ create reply ], with: -> { redirect_to root_path, alert: "Çok fazla istek. Biraz sonra tekrar deneyin." }
 
+  # Önce zaman kuralları: müşteri de güncel durumu görsün (ör. süresi dolan çözülmüş talep "Kapandı").
+  before_action -> { Sweeper.run }, only: %i[ show reply ]
   before_action :set_ticket, only: %i[ show reply ]
 
   def new

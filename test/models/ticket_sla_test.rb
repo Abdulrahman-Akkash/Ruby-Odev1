@@ -94,6 +94,38 @@ class TicketSlaTest < ActiveSupport::TestCase
     end
   end
 
+  test "süresi dolan çözülmüş talebe müşteri yazamaz (tarama hiç çalışmamış olsa bile)" do
+    ticket = travel_to(T0) { create_ticket }
+    travel_to(T0 + 1.hour) { ticket.reply_as_agent!(users(:ayse), body: "Çözüldü", submit_as: "solved") }
+
+    travel_to(T0 + 1.hour + 5.days) do
+      error = assert_raises(Ticket::InvalidTransition) { ticket.reply_as_customer!(body: "Bir sorum daha var") }
+      assert_match "kapandı", error.message
+      assert_equal "closed", ticket.reload.status
+      assert_equal T0 + 1.hour + 5.days, ticket.closed_at
+    end
+  end
+
+  test "öncelik ileri geri değişince aynı SLA ihlali ikinci kez yazılmaz" do
+    ticket = travel_to(T0) { create_ticket(priority: "urgent") }               # hedef 10:00
+    travel_to(T0 + 61.minutes) { assert_equal [ ticket ], Ticket.notify_sla_breaches! }
+
+    travel_to(T0 + 62.minutes) { ticket.change_priority!("high") }             # hedef 13:00
+    travel_to(T0 + 63.minutes) { ticket.change_priority!("urgent") }           # hedef yine 10:00
+    travel_to(T0 + 64.minutes) { assert_empty Ticket.notify_sla_breaches! }
+    assert_equal 1, ticket.events.where(kind: "sla_breached").count
+  end
+
+  test "öncelik düşürülüp yeni hedef de aşılınca ihlal yeniden yazılır" do
+    ticket = travel_to(T0) { create_ticket(priority: "urgent") }               # hedef 10:00
+    travel_to(T0 + 61.minutes) { Ticket.notify_sla_breaches! }
+    travel_to(T0 + 62.minutes) { ticket.change_priority!("high") }             # hedef 13:00
+
+    travel_to(T0 + 4.hours)              { assert_empty Ticket.notify_sla_breaches! }
+    travel_to(T0 + 4.hours + 1.minute)   { assert_equal [ ticket ], Ticket.notify_sla_breaches! }
+    assert_equal 2, ticket.events.where(kind: "sla_breached").count
+  end
+
   test "müşteri yanıtıyla yeniden açılan talebin kapanış sayacı sıfırlanır" do
     ticket = travel_to(T0) { create_ticket }
     travel_to(T0 + 1.hour) { ticket.reply_as_agent!(users(:ayse), body: "Çözüldü", submit_as: "solved") }

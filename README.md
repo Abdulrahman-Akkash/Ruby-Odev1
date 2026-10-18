@@ -17,8 +17,9 @@ ve gerçek kullanıcı yorumlarından gelen bir acıyı çözer: **vardiyası bi
 | **Ajan paneli** | `/agent` |
 | **Yığın** | Ruby 3.3.6 · Rails 8.1 · PostgreSQL · Hotwire (Turbo + Stimulus) · Propshaft · Minitest |
 
-> Uygulamada orijinal markanın adı ve logosu **yoktur**; ürün adı ve logo (iki oyuncu arasında kavisli pas) Asist'e aittir.
-> "Zendesk" adı yalnızca bu README'de ilham kaynağı olarak geçer.
+> Uygulamanın hiçbir ekranında, hata sayfasında veya dosyasında orijinal markanın adı ve logosu **yoktur**
+> (`grep -ri zendesk app config public db lib test` → boş). Ürün adı ve logo (iki oyuncu arasında kavisli pas) Asist'e aittir.
+> "Zendesk" adı yalnızca dokümanlarda (bu README, `AGENT.md`, `docs/SUNUM.md`) ilham kaynağı olarak geçer.
 
 ---
 
@@ -88,7 +89,7 @@ Suite'in tamamı (Guide, Messaging, Talk, Explore, WFM, QA, AI ajanları, Market
 
 Varsayımlar (tahmindir, ölçüm değildir):
 - Hedef: ~300.000 satırlık çekirdek (Zammad'ın yarısından az).
-- Bu ödevde gözlenen hız: ~2.000 satır (uygulama + test) ~40 dakikada, yani ≈ 3.000 satır/saat. Kurumsal ölçek için daha temkinli **2.000 satır/saat** ve karmaşıklık (entegrasyonlar, veri göçleri, yetkiler, performans, yeniden yazma) için **×4 rework** payı varsaydım.
+- Bu ödevde gözlenen hız: ilk sürümde ~2.000 satır (uygulama + test) ~40 dakikada, yani ≈ 3.000 satır/saat. Kurumsal ölçek için daha temkinli **2.000 satır/saat** ve karmaşıklık (entegrasyonlar, veri göçleri, yetkiler, performans, yeniden yazma) için **×4 rework** payı varsaydım.
 - Token: 1.000 nihai satır başına ≈ 3M girdi (%85'i cache okuması) + 80K çıktı token'ı. Fiyatlar Claude Opus 5.5 API: girdi 4 $/MTok, cache okuma 0,20 $/MTok, çıktı 20 $/MTok ([Claude API fiyatlandırma](https://platform.claude.com/docs/en/about-claude/pricing)).
 
 | Kalem | Hesap | Sonuç |
@@ -105,11 +106,14 @@ Karşılaştırma: tek bir Fortune 500 firmasının yıllık SaaS faturası ~250
 
 | Kalem | Değer |
 |---|---|
-| Araç | Claude Code (bulut oturumu) — ek API faturası yok, Claude aboneliği kapsamında |
-| Aylık abonelik ücretim | **[öğrenci dolduracak: Pro 20 $ / Max 100 $ / Max 200 $]** |
-| Ajan süresi | Araştırma + kod + test + doküman: tek oturum, ~40 dk (12 Eki 2026, 13:36–14:15 UTC; commit zamanlarından) |
-| Üretilen kod | ~1.460 satır uygulama + ~510 satır test (`cloc app lib/tasks db/migrate …` / `cloc test`) |
+| Araç | Claude Code (claude.ai/code bulut oturumu) |
+| Abonelik | **Claude Pro — 20 $/ay.** Bu ödev için ayrıca API/token faturası **ödenmedi**; ödevin ek maliyeti 0 $ (aylık ücretin tamamı sayılırsa 20 $). |
+| İlk sürüm | 12 Eki 2026, tek oturum, ~40 dk (ilk komut 13:36 UTC, ilk sürüm commit'i 13:59 UTC, push 14:13 UTC): araştırma + uygulama + testler + doküman |
+| Teslim öncesi denetim | 18 Eki 2026: 10 alt-ajanlı denetim workflow'u (**1,59 M token**, Claude Code raporu) + kaynak araştırması workflow'u (**0,56 M token** ilk koşu) + düzeltmeler. Pro planının oturum limitine bir kez takıldı (birkaç saat bekleme). |
+| Üretilen kod | ~1.500 satır uygulama + ~600 satır test (`cloc app lib/tasks db/migrate …` / `cloc test`) |
 | Barındırma | Render ücretsiz plan: 0 $ |
+
+**Tahmin ile gerçeğin karşılaştırması:** aort dilimi (~2 bin satır) bir öğleden sonradan kısa sürdü ve sabit abonelik içinde kaldı; tahmin tablosundaki 300 bin satırlık çekirdek bunun ~150 katı. Asıl zaman, yazmaktan çok **doğrulamaya** gitti (denetim workflow'u 47 bulgu çıkardı; bkz. `AGENT.md` → "Neden bu kurallar?").
 
 ---
 
@@ -143,13 +147,13 @@ Talep formu ──► [new] ──── atama / ilk yanıt ────► [ope
 Tablo dışı her geçiş `Ticket::InvalidTransition` fırlatır ve kullanıcıya hata olarak döner (ör. *"Yeni → Kapandı geçişi yapılamaz"*). Her geçiş talep geçmişine (`TicketEvent`) yazılır.
 
 ### Zaman kuralları
-1. **İlk yanıt SLA'sı** — önceliğe göre hedef: Acil 1 sa · Yüksek 4 sa · Normal 8 sa · Düşük 24 sa ([`app/models/sla_policy.rb:6`](app/models/sla_policy.rb#L6)).
+1. **İlk yanıt SLA'sı** — önceliğe göre hedef: Acil 1 sa · Yüksek 4 sa · Normal 8 sa · Düşük 24 sa ([`app/models/sla_policy.rb:6-11`](app/models/sla_policy.rb#L6)).
    Durum zamanla değişir: `on_track → at_risk (son %25) → breached` ([`ticket.rb:144`](app/models/ticket.rb#L144)).
-2. **SLA hatırlatma ve ihlal kaydı** — risk bölgesine girildiği ve hedef aşıldığı an birer kez olay yazılır ([`ticket.rb:169`](app/models/ticket.rb#L169)).
-3. **Otomatik kapanış** — çözülen talep 4 gün içinde yeniden açılmazsa `closed` olur ([`ticket.rb:35`](app/models/ticket.rb#L35), [`ticket.rb:185`](app/models/ticket.rb#L185)).
+2. **SLA hatırlatma ve ihlal kaydı** — risk bölgesine girildiği ve hedef aşıldığı an birer kez olay yazılır ([`ticket.rb:179`](app/models/ticket.rb#L179), [`ticket.rb:188`](app/models/ticket.rb#L188)); öncelik değişip eşik kayarsa yeniden değerlendirilir, geri dönerse çoğalmaz.
+3. **Otomatik kapanış** — çözülen talep 4 gün içinde yeniden açılmazsa `closed` olur ([`ticket.rb:35`](app/models/ticket.rb#L35), [`ticket.rb:197`](app/models/ticket.rb#L197)). Tarama henüz çalışmamış olsa bile müşteri, süresi dolmuş talebe yazınca talep önce kapanır ([`ticket.rb:118`](app/models/ticket.rb#L118)).
 4. **Vardiya bitişi** — ajanın `on_shift_until` anı geçince Otomatik Pas devreye girer (aşağıda).
 
-Zaman kurallarını tek yerden işleten sınıf: [`app/models/sweeper.rb`](app/models/sweeper.rb). Üç yoldan çağrılır: her ajan isteği, kuyruk ekranının 30 sn'lik otomatik yenilemesi ve sunucu içi zamanlayıcı (`SWEEP_INTERVAL`). Elle: `bin/rails asist:sweep`.
+Zaman kurallarını tek yerden işleten sınıf: [`app/models/sweeper.rb`](app/models/sweeper.rb). Dört yoldan çağrılır: her ajan isteği, müşterinin talep sayfası, kuyruk ekranının 30 sn'lik otomatik yenilemesi ve sunucu içi zamanlayıcı (`SWEEP_INTERVAL`). Elle: `bin/rails asist:sweep`.
 
 ---
 
@@ -182,38 +186,46 @@ Aynı boşluğu doğrulayan kaynaklar:
 
 ## Kod haritası — "bu kural nerede?"
 
-| Değişiklik isteği | Dokunulacak yer |
-|---|---|
-| "SLA hafta sonunu saymasın" / mesai saatleri | [`app/models/sla_policy.rb:21-22`](app/models/sla_policy.rb#L21) — `first_reply_due_at`: `from + target` yerine iş günü/saati takvimiyle ileri sarma. Risk anı da buradan türer (`warning_at`). |
-| "Acil SLA 30 dk olsun" | [`app/models/sla_policy.rb:6`](app/models/sla_policy.rb#L6) — `FIRST_REPLY_TARGETS` |
-| "Risk eşiği %25 değil %50 olsun" | [`app/models/sla_policy.rb:15`](app/models/sla_policy.rb#L15) — `AT_RISK_RATIO` |
-| "Çözülen talepler 7 gün sonra kapansın" | [`app/models/ticket.rb:35`](app/models/ticket.rb#L35) — `AUTO_CLOSE_AFTER` |
-| "Beklemedeki talep doğrudan kapanabilsin" | [`app/models/ticket.rb:22`](app/models/ticket.rb#L22) — `TRANSITIONS["pending"]` |
-| "Atama yeni talebi açık yapmasın" | [`app/models/ticket.rb:98`](app/models/ticket.rb#L98) |
-| "Müşteri yanıtı çözülmüş talebi yeniden açmasın" | [`app/models/ticket.rb:116`](app/models/ticket.rb#L116) — `reply_as_customer!` |
-| "Beklemedeki talepler de vardiya bitince pas edilsin" | [`app/models/ticket.rb:31`](app/models/ticket.rb#L31) — `ACTIVE_STATUSES` veya [`auto_pass.rb:36`](app/models/auto_pass.rb#L36) |
-| "Pas en az yüklüye değil sırayla (round robin) gitsin" | [`app/models/auto_pass.rb:59`](app/models/auto_pass.rb#L59) — `pick_receiver` |
-| "Kurallar 30 sn değil 10 sn'de bir işlesin" | `render.yaml` → `SWEEP_INTERVAL`, [`config/initializers/sweeper_ticker.rb`](config/initializers/sweeper_ticker.rb) |
-| "Vardiya seçenekleri değişsin" | [`app/models/user.rb:2`](app/models/user.rb#L2) — `SHIFT_LENGTHS` |
+Sunumdaki kod yeri sorusu için. Satır numaraları `main`'deki son commit'e göre; "Yan etki" sütunu, değişiklikle birlikte güncellenmesi gereken test/demo satırlarıdır.
+
+| Değişiklik isteği | Dokunulacak yer | Yan etki |
+|---|---|---|
+| **SLA hafta sonunu saymasın** / mesai 09–18 / resmî tatil | [`sla_policy.rb:21-23`](app/models/sla_policy.rb#L21) `first_reply_due_at`: `from + target` yerine iş takvimiyle ileri sar. **Ve** [`sla_policy.rb:26-28`](app/models/sla_policy.rb#L26) `warning_at`: risk anı da aynı takvimle geri sarılmalı (yoksa risk penceresi hafta sonuna düşer). Takvim saat dilimi: [`config/application.rb`](config/application.rb) `time_zone = "Istanbul"` | `ticket_sla_test.rb`'ye Cuma 17:00 → Pazartesi `travel_to` çifti |
+| Acil SLA 30 dk olsun | [`sla_policy.rb:7`](app/models/sla_policy.rb#L7) `"urgent" => 1.hour` | `ticket_sla_test.rb:7`, `sweeper_test.rb`, `auto_pass_flow_test.rb` (SLA hatırlatma bandı testi) |
+| Risk eşiği %25 değil %50 | [`sla_policy.rb:15`](app/models/sla_policy.rb#L15) `AT_RISK_RATIO` | Risk anı talepte saklı (`first_reply_risk_at`); mevcut talepler için demo sıfırlanmalı |
+| `pending`'de SLA dursun | [`ticket.rb:147`](app/models/ticket.rb#L147) `sla_state`'e `pending` → `:paused`; [`ticket.rb:59`](app/models/ticket.rb#L59) `at_risk` ve [`ticket.rb:188`](app/models/ticket.rb#L188) ihlal sorgusunda `unsolved` yerine `active`; gerçek durdur-devam için `transition_to!` ([`ticket.rb:67`](app/models/ticket.rb#L67)) içinde bekleme süresini hedefe eklemek + migration | `application_helper.rb` `sla_badge` |
+| Çözülen talep 7 günde kapansın | [`ticket.rb:35`](app/models/ticket.rb#L35) `AUTO_CLOSE_AFTER` | Demo ve testler sabiti kullanır; yalnız `ticket_sla_test.rb`'deki "4 gün" adlı testlerin adı |
+| Beklemedeki talep doğrudan kapanabilsin | [`ticket.rb:25`](app/models/ticket.rb#L25) `"pending" => %w[open solved closed]` | `ticket_status_test.rb` yasak geçiş testi |
+| Atama yeni talebi açık yapmasın | [`ticket.rb:98`](app/models/ticket.rb#L98) | `ticket_status_test.rb`, `aort_flow_test.rb` |
+| Müşteri yanıtı çözülmüş talebi yeniden açmasın | [`ticket.rb:124`](app/models/ticket.rb#L124) `%w[pending solved]` → `%w[pending]` | `ticket_status_test.rb`, `aort_flow_test.rb` |
+| Kapalı talebe yazan müşteriye yeni talep açılsın | [`ticket.rb:119`](app/models/ticket.rb#L119) `raise` yerine yeni talep oluştur; [`requests_controller.rb:27`](app/controllers/requests_controller.rb#L27) `reply` | `requests/show.html.erb` kapalı uyarısı |
+| Yeni talep 15 dk içinde atanmazsa pas/eskalasyon | [`auto_pass.rb:41`](app/models/auto_pass.rb#L41) kural 2'ye `.or(Ticket.where(created_at: ..@now - 15.minutes))` | `auto_pass_test.rb`'ye `travel_to` çifti |
+| Beklemedeki talepler de vardiya bitince pas edilsin | [`ticket.rb:31`](app/models/ticket.rb#L31) `ACTIVE_STATUSES` (yük hesabını da değiştirir) veya yalnız [`auto_pass.rb:36`](app/models/auto_pass.rb#L36) | `auto_pass_test.rb` "beklemedeki talep sahibinde kalır" |
+| Pas en az yüklüye değil sırayla (round robin) | [`auto_pass.rb:59-61`](app/models/auto_pass.rb#L59) `pick_receiver` | `auto_pass_test.rb` yük dengesi testleri |
+| Vardiya dışındaki ajana elle atama yapılamasın | [`ticket.rb:91`](app/models/ticket.rb#L91) `assign_to!` başında `raise unless user.on_shift?` | `demo.rb` Zeynep ataması, `ticket_status_test.rb` |
+| Riskli talepte öncelik otomatik yükselsin | [`ticket.rb:179`](app/models/ticket.rb#L179) `notify_sla_risks!` içinde `change_priority!` | `ticket_sla_test.rb` |
+| Kurallar 30 sn değil 10 sn'de bir işlesin | Sunucu: [`render.yaml`](render.yaml) `SWEEP_INTERVAL` + [`sweeper_ticker.rb:5`](config/initializers/sweeper_ticker.rb#L5). Tarayıcı: [`tickets/index.html.erb:3`](app/views/agent/tickets/index.html.erb#L3) `30000`, [`autorefresh_controller.js:6`](app/javascript/controllers/autorefresh_controller.js#L6); alt bilgi metni [`layouts/agent.html.erb:40`](app/views/layouts/agent.html.erb#L40) | — |
+| Vardiya seçenekleri değişsin | [`user.rb:2-6`](app/models/user.rb#L2) `SHIFT_LENGTHS` | `auto_pass_flow_test.rb` "2 dakika (demo)" |
+| Müşteri aciliyet seçemesin | [`requests_controller.rb`](app/controllers/requests_controller.rb) `ticket_params`'tan `:priority` çıkar; [`requests/new.html.erb`](app/views/requests/new.html.erb) seçim alanı | `aort_flow_test.rb` (form `priority: "high"` gönderiyor) |
 
 ---
 
 ## Testler ve CI
 
 ```bash
-bin/rails test        # 44 test, 178 doğrulama (yerelde son koşu: 0 failure, 0 error)
+bin/rails test        # 51 test, 203 doğrulama (yerelde son koşu: 0 failure, 0 error)
 ```
 
 | Dosya | Ne test ediyor |
 |---|---|
-| [`test/models/ticket_sla_test.rb`](test/models/ticket_sla_test.rb) | **Zaman kuralları** — `travel_to` ile SLA'nın `on_track → at_risk → breached` olması (5:59'da değil, 6:00'da risk), geç yanıt, iç notun yanıt sayılmaması, öncelik değişince hedefin yeniden hesaplanması, hatırlatma/ihlalin bir kez yazılması, 4 gün − 1 dk'da kapanmayıp 4. günde kapanma |
-| [`test/models/ticket_status_test.rb`](test/models/ticket_status_test.rb) | **Durum geçişleri** — izinli zincir, yasak geçişler, atamanın `new→open` yapması, `pending/solved` gönderimi, müşteri yanıtının yeniden açması, kapalı talebe yazılamaması |
+| [`test/models/ticket_sla_test.rb`](test/models/ticket_sla_test.rb) | **Zaman kuralları** (`travel_to`) — SLA'nın `on_track → at_risk → breached` olması (5:59'da değil, 6:00'da risk), geç yanıt, iç notun yanıt sayılmaması, öncelik değişince hedefin yeniden hesaplanması, hatırlatma/ihlalin bir kez yazılması (öncelik ileri-geri değişince çoğalmaması), **zamanla gelen durum geçişi** `solved → closed` (4 gün − 1 dk'da kapanmayıp 4. günde kapanma), süresi dolmuş talebe müşterinin yazamaması |
+| [`test/models/ticket_status_test.rb`](test/models/ticket_status_test.rb) | **Durum geçişleri** (saat `travel_to` ile sabit) — izinli zincir, yasak geçişler, her geçişin kendi anının zaman damgasını bırakması (`new→open→solved→open→solved→closed`), atamanın `new→open` yapması, `pending/solved` gönderimi, müşteri yanıtının yeniden açması, kapalı talebe yazılamaması |
 | [`test/models/auto_pass_test.rb`](test/models/auto_pass_test.rb) | **Otomatik Pas** — vardiya bitiminden 1 dk önce pas yok / bitiminde var, risk bölgesinde pas, yük dengesi, kimse yoksa bekleme, müşteri yanıtında anında pas |
 | [`test/models/sweeper_test.rb`](test/models/sweeper_test.rb) | Tüm kuralların birlikte ve tekrar çalıştırıldığında çoğaltmadan işlemesi |
-| [`test/integration/aort_flow_test.rb`](test/integration/aort_flow_test.rb) | **Uçtan uca HTTP akışı** — form → giriş → üstüne alma → yanıt → müşteri yanıtı → çözme → `travel_to` + 4 gün → kapanış |
-| [`test/integration/auto_pass_flow_test.rb`](test/integration/auto_pass_flow_test.rb) | "Vardiyayı bitir" düğmesi, 2 dakikalık demo vardiyasının kendiliğinden bitmesi, SLA hatırlatma bandı |
+| [`test/integration/aort_flow_test.rb`](test/integration/aort_flow_test.rb) | **Uçtan uca HTTP akışı** — form → giriş → üstüne alma → yanıt → müşteri yanıtı → çözme → `travel_to` + 4 gün → kapanış; müşteri sayfasının da zaman kuralını işletmesi |
+| [`test/integration/auto_pass_flow_test.rb`](test/integration/auto_pass_flow_test.rb) | "Vardiyayı bitir" düğmesi, son ajanın vardiyayı bitirmesi (talepler kalır, bildirim söyler), 2 dakikalık demo vardiyasının kendiliğinden bitmesi, SLA hatırlatma bandı ("kaldı" / "gecikti") |
 
-GitHub Actions ([`.github/workflows/ci.yml`](.github/workflows/ci.yml)) her push ve PR'da şunları çalıştırır: Brakeman, bundler-audit, importmap audit, RuboCop ve PostgreSQL servisiyle testler. Rozet README'nin başında.
+GitHub Actions ([`.github/workflows/ci.yml`](.github/workflows/ci.yml)) her push ve PR'da şunları çalıştırır: Brakeman, bundler-audit, importmap audit, RuboCop ve PostgreSQL 17 servisiyle testler (runner `ubuntu-24.04`'e sabit). Rozet README'nin başında ve `main` dalının durumunu gösterir.
 
 ---
 
@@ -231,14 +243,16 @@ bin/rails asist:sweep        # zaman kurallarını elle işlet
 
 ## Deploy (Render)
 
-Repo bir **Render Blueprint** içerir ([`render.yaml`](render.yaml)): ücretsiz bir Ruby web servisi + ücretsiz PostgreSQL.
+Repo bir **Render Blueprint** içerir ([`render.yaml`](render.yaml)): ücretsiz bir Ruby web servisi (`asist`) + ücretsiz PostgreSQL (`asist-db`), ikisi de Frankfurt bölgesinde, `main` dalından.
 
-1. [render.com](https://render.com)'da GitHub ile giriş yap → **New → Blueprint** → bu repoyu seç → **Apply**.
-2. Render veritabanını oluşturur, [`bin/render-build.sh`](bin/render-build.sh) ile `bundle install`, asset derleme, `db:migrate` ve (boşsa) demo seed'ini çalıştırır, `SECRET_KEY_BASE`'i kendisi üretir.
-3. Servis URL'si (`https://asist-….onrender.com`) bu README'nin başına yazılır.
-4. Sunumdan hemen önce: giriş yap → **Ekip → Demo verisini sıfırla** (SLA saatleri "şimdi"ye göre yeniden kurulur).
+1. [dashboard.render.com](https://dashboard.render.com)'a GitHub hesabıyla gir. Render GitHub App'ine **bu repoya** erişim ver (Render ilk bağlantıda sorar).
+2. **New → Blueprint** → bu repoyu seç → Render `render.yaml`'ı okur → **Apply**. (Çalışma alanında zaten bir ücretsiz Postgres varsa yenisi açılmaz; eskisini silmek gerekir. Render kart doğrulaması isteyebilir; ücretsiz planda ücret alınmaz.)
+3. İlk build ~3–5 dk sürer. Build logunda `Using Ruby version 3.3.6`, `Bundle complete`, migration satırları ve `Demo verisi` seed'i görünmeli. [`bin/render-build.sh`](bin/render-build.sh): `bundle install` → asset derleme → `db:migrate` → `db:seed` (yalnızca boş veritabanında). `SECRET_KEY_BASE`'i Render kendisi üretir.
+4. Servis "Live" olunca `https://<servis-adı>.onrender.com/up` **200** dönmeli; `/` müşteri formunu, `/session/new` demo hesaplarını göstermeli.
+5. URL'yi bu README'nin başındaki **Canlı URL** satırına yaz, commit edip `main`'e push et (Render aynı commit'i yeniden deploy eder; servis 1–2 dk yeniden başlar).
+6. Sunumdan hemen önce: giriş yap → **Ekip → Demo verisini sıfırla** → tekrar giriş (SLA saatleri "şimdi"ye göre yeniden kurulur).
 
-Ücretsiz planda servis 15 dk istek gelmezse uyur; ilk istek ~1 dk sürebilir. Sunumdan birkaç dakika önce sayfayı açmak yeterli.
+Ücretsiz planda servis 15 dk istek gelmezse uyur; ilk istek ~1 dk sürebilir. Sunumdan birkaç dakika önce sayfayı açmak yeterli. Ücretsiz PostgreSQL oluşturulduktan 30 gün sonra erişilemez olur.
 
 ---
 
@@ -250,10 +264,12 @@ Gizlemek yerine açıkça yazıyorum:
 - **Mesai takvimi yok.** SLA takvim saatleriyle sayılır (hafta sonu/tatil/mesai dışı dahil). Değişikliğin yeri: [`sla_policy.rb:21`](app/models/sla_policy.rb#L21).
 - **Yalnızca ilk yanıt SLA'sı var.** "Sonraki yanıt" ve "çözüm süresi" SLA'ları, `pending`'de duraklayan sayaçlar yok.
 - **Tek ekip, tek rol.** Grup/departman, yönetici rolü ve yetkilendirme yok; her ajan her talebi görür ve demo verisini sıfırlayabilir.
-- **Zaman kuralları sürekli bir arka plan işçisiyle değil, web süreci içinde çalışır** (her ajan isteği + 30 sn'lik sayfa yenileme + Puma içinde 30 sn'lik zamanlayıcı). Render ücretsiz planda servis uyurken kural işlemez; uyanınca geriye dönük işler ve olay saati *işlendiği an* olarak yazılır. Gerçek kurulumda Solid Queue/cron ile dakikada bir çalışmalı.
+- **Demo şifresi herkese açık.** Giriş sayfası demo hesaplarını ve şifreyi gösterir (sunum ve değerlendirme kolaylığı için). Canlı URL'yi bilen herkes ajan olarak girip **Demo verisini sıfırla** ile veriyi silebilir; gerçek bir kurulumda bu düğme ve şifre olmaz.
+- **Zaman kuralları sürekli bir arka plan işçisiyle değil, web süreci içinde çalışır** (her ajan/müşteri isteği + 30 sn'lik sayfa yenileme + Puma içinde 30 sn'lik zamanlayıcı). Render ücretsiz planda servis uyurken kural işlemez; uyanınca geriye dönük işler ve olay saati *işlendiği an* olarak yazılır. Gerçek kurulumda Solid Queue/cron ile dakikada bir çalışmalı.
 - **Kanallar yok:** canlı sohbet, telefon, sosyal medya, yardım merkezi/bilgi bankası, raporlama panoları, makrolar, tetikleyici editörü yok.
 - **Araştırma kaynağı notu:** Ajanın çalıştığı bulut ortamı G2/Capterra/Zendesk sayfalarını doğrudan açamadı; alıntılar ve linkler web arama sonuçlarından derlendi (G2 yorumunun AWS Marketplace kopyası dahil). Linkler sunum öncesi tarayıcıda tek tek kontrol edilmelidir.
 - **Render ücretsiz PostgreSQL 30 gün sonra sona erer**; sunumdan sonra veri kalıcı değildir.
+- **Hata sayfaları statik.** `public/*.html` Türkçe ve Asist markalı ama dinamik değil (ör. hangi talebin bulunamadığını söylemez).
 
 ---
 

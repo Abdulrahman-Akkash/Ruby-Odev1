@@ -1,0 +1,20 @@
+tr:
+  activerecord:
+    models:
+      ticket: Talep
+      comment: Yorum
+      user: Ajan
+    attributes:
+      ticket:
+        subject: Konu
+        description: Açıklama
+        requester_name: Adınız
+        requester_email: E-posta
+        priority: Aciliyet
+        status: Durum
+      comment:
+        body: Mesaj
+      user:
+        name: Ad
+        email_address: E-posta
+        password: Şifre

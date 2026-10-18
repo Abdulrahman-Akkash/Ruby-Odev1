@@ -23,6 +23,44 @@ class AutoPassFlowTest < ActionDispatch::IntegrationTest
     travel_back
   end
 
+  test "vardiyadaki son ajan vardiyayı bitirirse talepleri onda kalır ve bunu söyler" do
+    travel_to T0
+    ayse = users(:ayse)
+    ayse.start_shift!(8.hours)
+    ticket = create_ticket(assignee: ayse, status: "open")
+    create_ticket(priority: "urgent") # sahipsiz; vardiyada kimse kalmayacağı için pas edilemez
+
+    sign_in_as ayse
+    travel 50.minutes
+    delete agent_shift_path
+
+    assert_equal "Vardiyan bitti. Vardiyada kimse olmadığı için 1 talep sende kaldı; vardiyaya ilk giren ajana pas edilecek.", flash[:notice]
+    assert_equal ayse, ticket.reload.assignee
+
+    users(:mehmet).start_shift!(8.hours)
+    Sweeper.run
+    assert_equal users(:mehmet), ticket.reload.assignee
+  ensure
+    travel_back
+  end
+
+  test "pas bildirimi yalnız ajanın kendi taleplerini sayar" do
+    travel_to T0
+    users(:mehmet).start_shift!(8.hours)
+    ayse = users(:ayse)
+    ayse.start_shift!(8.hours)
+    create_ticket(assignee: ayse, status: "open")
+    create_ticket(priority: "urgent") # aynı taramada pas edilecek sahipsiz talep
+
+    sign_in_as ayse
+    travel 50.minutes
+    delete agent_shift_path
+
+    assert_equal "Vardiyan bitti. 1 talebin vardiyadaki ekip arkadaşlarına pas edildi.", flash[:notice]
+  ensure
+    travel_back
+  end
+
   test "2 dakikalık demo vardiyası bitince talepler kendiliğinden pas edilir" do
     travel_to T0
     users(:mehmet).start_shift!(8.hours)

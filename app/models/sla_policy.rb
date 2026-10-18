@@ -1,7 +1,7 @@
 # İlk yanıt SLA'sı. Tüm zaman hesapları buradan geçer.
 #
-# Örn. "SLA hafta sonunu saymasın" gibi bir kural değişikliği yalnızca
-# first_reply_due_at metoduna dokunur.
+# Örn. "SLA hafta sonunu saymasın" gibi bir kural değişikliği yalnızca bu
+# dosyaya dokunur: first_reply_due_at (hedef) ve warning_at (risk anı).
 class SlaPolicy
   FIRST_REPLY_TARGETS = {
     "urgent" => 1.hour,

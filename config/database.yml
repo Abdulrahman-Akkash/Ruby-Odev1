@@ -2,7 +2,8 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  max_connections: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  # +1: Puma istek thread'lerine ek olarak sunucu içi Sweeper thread'i (config/initializers/sweeper_ticker.rb)
+  max_connections: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 }.to_i + 1 %>
 
 development:
   <<: *default
