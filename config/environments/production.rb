@@ -24,6 +24,13 @@ Rails.application.configure do
   # Assume all access to the app is happening through a SSL-terminating reverse proxy.
   config.assume_ssl = true
 
+  # Render Blueprint SECRET_KEY_BASE'i kendisi üretir (render.yaml). Servis elle kurulup bu
+  # değişken eklenmediyse, gizli DATABASE_URL'den türetilen kararlı bir anahtar kullanılır;
+  # böylece uygulama açılır ve oturumlar yeniden başlatmalarda geçerli kalır.
+  if ENV["SECRET_KEY_BASE"].blank? && ENV["SECRET_KEY_BASE_DUMMY"].blank? && ENV["DATABASE_URL"].present?
+    config.secret_key_base = OpenSSL::Digest.hexdigest("SHA512", "asist-secret-key-base:#{ENV["DATABASE_URL"]}")
+  end
+
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   config.force_ssl = true
 
