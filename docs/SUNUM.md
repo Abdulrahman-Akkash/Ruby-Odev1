@@ -1,7 +1,7 @@
 # Sunum akışı (5 dakika, canlı URL üzerinden)
 
 **Hazırlık (sunumdan ~5 dk önce):**
-1. Canlı URL'yi aç (README'nin başındaki "Canlı URL" satırı; ücretsiz plan uyuyorsa ilk istek ~1 dk sürer).
+1. Canlı URL'yi aç: https://asist-dj8n.onrender.com (ücretsiz plan uyuyorsa ilk istek ~1 dk sürer).
 2. `ayse@asist.dev` / `asist2026` ile giriş → **Ekip → Demo verisini sıfırla** → tekrar giriş.
 3. En az 2 dk bekle; **Kuyruk → Çözülen / kapanan** sekmesinde *"API anahtarı nasıl yenilenir?"* talebi **Kapandı** görünmeli
    (4 gün kuralı sıfırlamadan 2 dk sonra kendiliğinden işler — zaman kuralının canlı kanıtı).

@@ -11,7 +11,7 @@ ve gerçek kullanıcı yorumlarından gelen bir acıyı çözer: **vardiyası bi
 
 | | |
 |---|---|
-| **Canlı URL** | **Henüz yok** — Render'a deploy bekliyor (Blueprint hazır; adımlar: [Deploy](#deploy-render), durum: [Yapamadıklarım](#yapamadıklarım)) |
+| **Canlı URL** | **https://asist-dj8n.onrender.com** (Render ücretsiz plan: 15 dk boşta kalınca uyur, ilk açılış ~1 dk sürebilir) |
 | **Demo ajanları** | `ayse@asist.dev`, `mehmet@asist.dev`, `zeynep@asist.dev` — şifre `asist2026` |
 | **Müşteri formu** | `/` (giriş gerekmez) |
 | **Ajan paneli** | `/agent` |
@@ -288,7 +288,7 @@ Repo bir **Render Blueprint** içerir ([`render.yaml`](render.yaml)): ücretsiz 
 
 Gizlemek yerine açıkça yazıyorum:
 
-- **Canlı URL henüz yok.** Render Blueprint (`render.yaml`) ve build betiği hazır, production modunda yerelde prova edildi (`/up` 200, sunucu içi zamanlayıcı çalışıyor). Deploy öğrencinin Render hesabıyla yapılacak; URL o zaman README'nin başına yazılacak.
+- **Canlı site ajan tarafından açılamadı.** Uygulama Render Blueprint (`render.yaml`) ile öğrencinin Render hesabından deploy edildi: https://asist-dj8n.onrender.com. Ajanın çalıştığı bulut ortamı `onrender.com`'a erişemediği için (ağ politikası) canlı sayfayı ajan değil öğrenci tarayıcıda kontrol eder; ajan aynı yapılandırmayı production modunda yerelde prova etti (`/up` 200, sunucu içi zamanlayıcı çalışıyor).
 - **İleri tarihli izin/vardiya planlama yok.** Vardiya yalnız "şimdi" başlar, bitişi planlanır (2 dk / 4 sa / 8 sa); izinden dönen ajan elle "Vardiyaya başla"ya basar.
 - **Takip hatırlatması yok.** Hatırlatma ve risk yalnız ilk yanıt SLA'sı için; beklemedeki/açık talepler için takip hatırlatması ve çözülene kadar periyodik kontrol üretilmez.
 
